@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tencent.trtc.thirdbeauty">
+
+    <application>
+        <activity android:name=".ThirdBeautyActivity"/>
+        <activity android:name=".ThirdBeautyEnterActivity"/>
+        <activity android:name=".ThirdBeautyByteDanceActivity"/>
+    </application>
+
+</manifest>
