@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -60,12 +61,12 @@ import com.tencent.trtc.thirdbeauty.ThirdBeautyEnterActivity;
  * - 第三方美颜{@link ThirdBeautyEnterActivity}
  */
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+        Log.e("AAAAA", "trtc github test 0308");
 
         new Handler().postDelayed(new Runnable() {
             @Override
