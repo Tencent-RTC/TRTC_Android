@@ -10,32 +10,24 @@
 
 ## 更新日志
 
-### Version 9.6 @ 2022.03.24
+## Version 9.7 @ 2022.04.06
 
-**重要更新：**
+**功能优化：** 
+- iOS & Android：优化 Music 音质的效果；
+  > Tips：全平台均可通过 API ： [TRTCCloud.startLocalAudio (TRTCAudioQualityMusic)](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a1dadf09b10a2d128e4cef11707934329) 开启Music 音质，下同）
+- Windows：优化 Music 音质下的采播效果，降低对音质的损伤；
+- Windows：提升部分专业声卡上的兼容性适配问题，有效提升音质；
+- Windows：第三方进程混音优化，让第三方进程混音功能可以适配更多的场景；
 
-- 全平台：优化 TRTC SDK 体积，详细数据见下表：
-
-|             | **优化前**               | **优化后**               |
-| ----------- | ------------------------ | ------------------------ |
-| **Android** | armv7: 6.95M arm64: 7.94M | armv7: 4.32M arm64: 4.85M |
-| **iOS**     | arm64: 3.23M             | arm64: 3.15M             |
-| **Windows** | Win32: 21.3M Win64: 26.9M | Win32: 15.0M Win64: 17.2M |
-| **Mac**     | x86_64：18.1M            | x86_64：15.8M            |
-
-- **全平台：完成三方库合规整改，符合国内、海外的合规要求；**
-
-**故障修复：**
-
-- 全平台：修复已知问题，提升稳定性；
-
-**功能优化：**
-
-- iOS：修复在补光灯下偶现的曝光过度问题；
-- Mac：优化纹理上传，提升性能；
-- Android：优化美颜等预处理流程，修复低端机器下的采集卡顿问题；
-- Windows：Live V1 升级到 V2 接口，提供更稳定的 Live 组件；
-- Windows：提升了低端机上的显卡兼容性；
+**缺陷修复：**
+- 全平台：修复 CDN 播放偶现视频画面花屏的问题；
+- iOS & Android：修复直播播放听筒扬声器切换无效的问题；
+- iOS & Android：修复通过 API 设置 Music 音质时实际音质不符合预期的问题；
+- iOS：修复软编码过程中偶现的内存泄露问题；
+- iOS：修复本地视频画面渲染，偶现无首帧回调的问题；
+- Windows：修复屏幕分享模式下鼠标采集偶现的异常崩溃；
+- Windows：修复 Music 音质下，扬声器播放声音异常问题；
+- Windows：修复部分摄像头 startCameraDeviceTest 无法正常打开的问题；
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 
