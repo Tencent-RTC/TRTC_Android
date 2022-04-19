@@ -1,5 +1,5 @@
 # TRTC API-Example 
-[中文](README.md) | English
+[简体中文](README.md) | English
 
 ## Background
 This open-source demo shows how to use some APIs of the [TRTC SDK](https://cloud.tencent.com/document/product/647/32689) to help you better understand the APIs and use them to implement some basic TRTC features. 

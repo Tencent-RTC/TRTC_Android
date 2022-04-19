@@ -1,5 +1,6 @@
 # 腾讯云实时音视频 TRTC SDK
 
+_[English](README.en.md) | 简体中文_
 ## 产品介绍
 
 腾讯实时音视频（Tencent Real-Time Communication，TRTC），将腾讯多年来在网络与音视频技术上的深度积累，以多人音视频通话和低延时互动直播两大场景化方案，通过腾讯云服务向开发者开放，致力于帮助开发者快速搭建低成本、低延时、高品质的音视频互动解决方案，[更多](https://cloud.tencent.com/document/product/647/16788)...
