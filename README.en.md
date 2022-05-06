@@ -10,24 +10,19 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 ## Changelog
 
-### Version 9.7 released on April 6, 2022
+### Version 9.9 @2022.05.06
 
-**Improvement:** 
-- iOS and Android: Optimized the effect of the Music sound quality.
-  > Note: The Music sound quality can be enabled with the [TRTCCloud.startLocalAudio (TRTCAudioQualityMusic)](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a1dadf09b10a2d128e4cef11707934329) API on all platforms.
-- Windows: Optimized the capturing and playing effects under the Music sound quality to reduce the damage to the sound quality.
-- Windows: Optimized the compatibility with certain professional sound cards to effectively improve the sound quality.
-- Windows: Optimized audio mixing for third-party processes to adapt this feature to more scenarios.
+**Feature Optimization:**
 
-**Bug fixes:**
-- All platforms: Fixed occasional blurred screens during CDN playback.
-- iOS and Android: Fixed the issue where switching between receiver and speaker didn't work during live playback.
-- iOS and Android: Fixed the issue where the actual sound quality didn't meet expectations when the Music sound quality was set through the API.
-- iOS: Fixed occasional memory leaks during software encoding.
-- iOS: Fixed the occasional issue where there was no first frame callback during local video rendering.
-- Windows: Fixed the occasional crashes of cursor capturing in screen sharing mode.
-- Windows: Fixed the issue where the speaker didn't work normally under the Music sound quality.
-- Windows: Fixed the issue where certain cameras couldn't be turned on normally with `startCameraDeviceTest`.
+- Windows: Optimize the video link to reduce performance overhead;
+- Windows: Optimize Systemloopback pre-capture processing to preserve the dual-channel effect;
+- Mac: Optimize the sound popping problem caused by excessive capture volume to improve the sound quality experience;
+- Mac: Improve the picture quality of screen sharing;
+- Android: Optimize the capture latency and improve the earphone monitor experience;
+
+**Bug Fixes:**
+
+- Android: Fixed the problem that room numbers do not support numbers above 2.1 billion;
 
 For the release notes of earlier versions, click [More](https://cloud.tencent.com/document/product/647/46907).
 
