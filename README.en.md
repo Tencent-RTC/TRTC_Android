@@ -10,19 +10,22 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 ## Changelog
 
-### Version 9.9 @2022.05.06
+## Version 10.0 @ 2022.05.17
 
-**Feature Optimization:**
+**Function optimization:**
 
-- Windows: Optimize the video link to reduce performance overhead;
-- Windows: Optimize Systemloopback pre-capture processing to preserve the dual-channel effect;
-- Mac: Optimize the sound popping problem caused by excessive capture volume to improve the sound quality experience;
-- Mac: Improve the picture quality of screen sharing;
-- Android: Optimize the capture latency and improve the earphone monitor experience;
+- All Platforms: Optimize the speed of the anchor entry and exit notificationcallbacks ([onRemoteUserEnterRoom](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudDelegate__ios.html#a390831928a4d2a7977c4c1572da8be58) / [onRemoteUserLeaveRoom](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudDelegate__ios.html#afa7d16e1e4c66d938fc2bc69f3e34c28));
 
-**Bug Fixes:**
+- Windows: Optimize the performance of screen sharing,doubling the performance when no filter window is set;
 
-- Android: Fixed the problem that room numbers do not support numbers above 2.1 billion;
+**Bug fixes:**
+
+- iOS&Mac: Fixan occasional problem that [onComplete](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXAudioEffectManager__ios.html#a08ab9a6d9100f133420e44ae5eb99ee6) callback error when starting to play BGM;
+
+- Android: Fix a crash caused by the network module;
+
+- All Platforms: Fixthe problem of SEI sending abnormally;
+
 
 For the release notes of earlier versions, click [More](https://cloud.tencent.com/document/product/647/46907).
 
