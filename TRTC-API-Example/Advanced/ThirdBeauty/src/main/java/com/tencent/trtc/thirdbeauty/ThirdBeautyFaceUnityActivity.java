@@ -52,20 +52,21 @@ import java.util.List;
  * </p>
  */
 
+
 /**
  * Third-Party Beauty Filters
- *
+ * <p>
  * The steps are detailed below:
  * - Download FaceUnity at https://github.com/Faceunity/FUTRTCDemoDroid and import it to your project.
  * You can modify `build.gradle` of the current module to specify SO architecture for the app:
  * android {
- *
+ * <p>
  * defaultConfig {
- *
+ * <p>
  * ndk {
  * abiFilters 'armeabi-v7a', 'arm64-v8a'
- *
- *
+ * <p>
+ * <p>
  * - Initialize the beauty filter module {@link FURenderer} as needed:
  * FURenderer.setup(getApplicationContext());
  * mFURenderer = new FURenderer.Builder(getApplicationContext())
@@ -76,9 +77,9 @@ import java.util.List;
  * - For how to set the callback using {@link TRTCCloud#setLocalVideoProcessListener}, see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}.
  * - For how to use third-party beauty filters to process video data in the {@link TRTCCloudListener.TRTCVideoFrameListener#onProcessVideoFrame} callback, see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}.
  */
-public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClickListener {
+public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String    TAG                 = "ThirdBeautyActivity";
+    private static final String TAG = "ThirdBeautyFaceUnityActivity";
 
     private ImageView              mImageBack;
     private TextView               mTextTitle;
@@ -90,9 +91,9 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
     private TXCloudVideoView       mTXCloudPreviewView;
     private List<TXCloudVideoView> mRemoteVideoList;
 
-    private TRTCCloud              mTRTCCloud;
-    private List<String>           mRemoteUserIdList;
-    private boolean                mStartPushFlag = false;
+    private TRTCCloud    mTRTCCloud;
+    private List<String> mRemoteUserIdList;
+    private boolean      mStartPushFlag = false;
 //    private FURenderer mFURenderer;
 
     @Override
@@ -110,7 +111,7 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
 //                .build();
 
         mTRTCCloud = TRTCCloud.sharedInstance(getApplicationContext());
-        mTRTCCloud.setListener(new TRTCCloudImplListener(ThirdBeautyActivity.this));
+        mTRTCCloud.setListener(new TRTCCloudImplListener(ThirdBeautyFaceUnityActivity.this));
         if (checkPermission()) {
             initView();
             initData();
@@ -152,13 +153,13 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
         mRemoteUserIdList = new ArrayList<>();
         mRemoteVideoList = new ArrayList<>();
 
-        mImageBack          = findViewById(R.id.iv_back);
-        mTextTitle          = findViewById(R.id.tv_room_number);
-        mButtonStartPush    = findViewById(R.id.btn_start_push);
-        mEditRoomId         = findViewById(R.id.et_room_id);
-        mEditUserId         = findViewById(R.id.et_user_id);
-        mSeekBlurLevel      = findViewById(R.id.sb_blur_level);
-        mTextBlurLevel      = findViewById(R.id.tv_blur_level);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEditUserId = findViewById(R.id.et_user_id);
+        mSeekBlurLevel = findViewById(R.id.sb_blur_level);
+        mTextBlurLevel = findViewById(R.id.tv_blur_level);
         mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
 
         mRemoteVideoList.add((TXCloudVideoView) findViewById(R.id.txcvv_video_remote1));
@@ -179,7 +180,8 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
 
     private void initData() {
 //                  1. 设置 TRTCVideoFrameListener 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
-//        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D, TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
+//        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
+//        TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
 //            @Override
 //            public void onGLContextCreated() {
 ////                  2. GLContext 创建
@@ -187,9 +189,11 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
 //            }
 //
 //            @Override
-//            public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame srcFrame, TRTCCloudDef.TRTCVideoFrame dstFrame) {
+//            public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame srcFrame,
+//            TRTCCloudDef.TRTCVideoFrame dstFrame) {
 ////                  3. 调用第三方美颜模块处理, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
-//               dstFrame.texture.textureId = mFURenderer.onDrawFrameSingleInput(srcFrame.texture.textureId, srcFrame.width, srcFrame.height);
+//               dstFrame.texture.textureId = mFURenderer
+//               .onDrawFrameSingleInput(srcFrame.texture.textureId, srcFrame.width, srcFrame.height);
 //                return 0;
 //            }
 //
@@ -236,7 +240,8 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
                     enterRoom(roomId, userId);
                     mStartPushFlag = true;
                 } else {
-                    Toast.makeText(ThirdBeautyActivity.this, getString(R.string.thirdbeauty_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThirdBeautyFaceUnityActivity.this,
+                            getString(R.string.thirdbeauty_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 mButtonStartPush.setText(R.string.thirdbeauty_start_push);
@@ -248,9 +253,9 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
 
     protected class TRTCCloudImplListener extends TRTCCloudListener {
 
-        private WeakReference<ThirdBeautyActivity> mContext;
+        private WeakReference<ThirdBeautyFaceUnityActivity> mContext;
 
-        public TRTCCloudImplListener(ThirdBeautyActivity activity) {
+        public TRTCCloudImplListener(ThirdBeautyFaceUnityActivity activity) {
             super();
             mContext = new WeakReference<>(activity);
         }
@@ -273,7 +278,8 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
                 for (int i = 0; i < mRemoteUserIdList.size() || i < 6; i++) {
                     if (i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))) {
                         mRemoteVideoList.get(i).setVisibility(View.VISIBLE);
-                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideoList.get(i));
+                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i),
+                                TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideoList.get(i));
                     } else {
                         mRemoteVideoList.get(i).setVisibility(View.GONE);
                     }
@@ -294,7 +300,7 @@ public class ThirdBeautyActivity extends TRTCBaseActivity implements View.OnClic
         @Override
         public void onError(int errCode, String errMsg, Bundle extraInfo) {
             Log.d(TAG, "sdk callback onError");
-            ThirdBeautyActivity activity = mContext.get();
+            ThirdBeautyFaceUnityActivity activity = mContext.get();
             if (activity != null) {
                 Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
