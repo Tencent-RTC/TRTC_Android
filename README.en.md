@@ -9,22 +9,41 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
+## Version 10.1 @ 2022.06.06
 
-## Version 10.0 @ 2022.05.17
+**New features:**
+
+- All platforms: Support smooth switching of roles, audio and video playback will not be interrupted briefly by role-switching.
+- iOS: Support stereo audio capture.
+- Android: Support capturing system playback audio on Android 10 and above (see: startSystemAudioLoopback for details).
+
 
 **Function optimization:**
 
-- All Platforms: Optimize the speed of the anchor entry and exit notificationcallbacks ([onRemoteUserEnterRoom](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudDelegate__ios.html#a390831928a4d2a7977c4c1572da8be58) / [onRemoteUserLeaveRoom](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudDelegate__ios.html#afa7d16e1e4c66d938fc2bc69f3e34c28));
-
-- Windows: Optimize the performance of screen sharing,doubling the performance when no filter window is set;
+- All platforms: Optimize the echo cancellation capability in music scenes for more natural sound quality effect.
+- All platforms: Optimize the sound quality and startup effect of switching roles + muteLocalAudio.
+- All platforms: Optimize bandwidth prediction onSpeedTest callbacks.
+- iOS:Optimize memory management to avoid memory buildup.
+- Android: Optimize the delay of the ear return on some models of mobile phones.
+- Windows: Optimize the performance of the video rendering link when video is downlink.
+- Windows: Optimize the stereo capture logic to effectively avoid the problem of echo leakage.
 
 **Bug fixes:**
 
-- iOS&Mac: Fixan occasional problem that [onComplete](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXAudioEffectManager__ios.html#a08ab9a6d9100f133420e44ae5eb99ee6) callback error when starting to play BGM;
-
-- Android: Fix a crash caused by the network module;
-
-- All Platforms: Fixthe problem of SEI sending abnormally;
+- All platforms: Fix the reason exception issue of the check-out callback (onExitRoom)
+- All platforms: Fix the black screen problem when sending upstream custom video with equal timestamp.
+- All platforms: Fix the crash problem when muteLocalAudio first and then startLocalAudio audio
+- All platforms: Fix the problem that turning on custom audio capture without manually setting 3A scene will open 3A.
+- All platforms: Fix the occasional noise issue in custom audio rendering.
+- iOS: Fixa memory leak when setting the log path (setLogDirPath) midway and the sandbox changes.
+- iOS & Mac: Fix the crash of BGM-continuous-play scenes when the system audio service is abnormal.
+- Android: Fix an occasional Bluetooth headset reconnection issue.
+- Android: Fixthe occasional silence issue on some phones.
+- Android: Fix the crash caused by repeatedly plugging and unpluggingheadphones on some models such as Redmi.
+- Windows & iOS: Fix the problem of screenshot failure.
+- Windows: Fix the crash when closing vod after turning on mirroring in VOD player.
+- Windows: Fix the problem that multiple playback of pts may cause the pts to fall back if the pts are not using generatedCustomPts.
+- Windows:  Fix the crash about muteLocalVideo api.
 
 
 For the release notes of earlier versions, click [More](https://cloud.tencent.com/document/product/647/46907).
