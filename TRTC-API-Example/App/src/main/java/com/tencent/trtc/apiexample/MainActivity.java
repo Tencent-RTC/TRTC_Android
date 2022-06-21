@@ -24,7 +24,6 @@ import com.tencent.trtc.seimessage.SendAndReceiveSEIMessageActivity;
 import com.tencent.trtc.speedtest.SpeedTestActivity;
 import com.tencent.trtc.stringroomid.StringRoomIdActivity;
 import com.tencent.trtc.switchroom.SwitchRoomActivity;
-import com.tencent.trtc.thirdbeauty.ThirdBeautyActivity;
 import com.tencent.trtc.videocall.VideoCallingEnterActivity;
 import com.tencent.trtc.videoquality.SetVideoQualityActivity;
 import com.tencent.trtc.voicechatoom.VoiceChatRoomEnterActivity;
