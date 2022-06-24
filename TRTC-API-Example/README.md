@@ -1,105 +1,105 @@
 # TRTC API-Example 
-_中文 | [English](README.en.md)_
+[简体中文](README-zh_CN.md) | English
 
-## 前言
-这个开源示例Demo主要演示了 [TRTC 实时音视频 SDK](https://cloud.tencent.com/document/product/647/32689) 部分API的使用示例，帮助开发者可以更好的理解 TRTC 实时音视频 SDK 的API，从而快速实现一些音视频场景的基本功能。 
+## Background
+This open-source demo shows how to use some APIs of the [TRTC SDK](https://cloud.tencent.com/document/product/647/32689) to help you better understand the APIs and use them to implement some basic TRTC features. 
 
-## 结构说明
-在这个示例项目中包含了以下场景:（带上对应的跳转目录，方便用户快速浏览感兴趣的功能）
+## Contents
+This demo covers the following features (click to view the details of a feature):
 
-- 基础功能
-  - [语音通话](./Basic/AudioCall)
-  - [视频通话](./Basic/VideoCall)
-  - [视频互动直播](./Basic/Live)
-  - [语音互动直播](./Basic/VoiceChatRoom)
-  - [录屏直播](./Basic/ScreenShare)
-- 进阶功能
-  - [字符串房间号](./Advanced/StringRoomId)
-  - [画质设定](./Advanced/SetVideoQuality)
-  - [音质设定](./Advanced/SetAudioQuality)
-  - [渲染控制](./Advanced/SetRenderParams)
-  - [网络测速](./Advanced/SpeedTest)
-  - [CDN发布](./Advanced/PushCDN)
-  - [自定义视频采集&渲染](./Advanced/CustomCamera)
-  - [设置音效](./Advanced/SetAudioEffect)
-  - [设置背景音乐](./Advanced/SetBackgroundMusic)
-  - [本地视频文件分享](./Advanced/LocalVideoShare)
-  - [本地视频录制](./Advanced/LocalRecord)
-  - [加入多个房间](./Advanced/JoinMultipleRoom)
-  - [收发SEI消息](./Advanced/SEIMessage)
-  - [快速切换房间](./Advanced/SwitchRoom)
-  - [跨房PK](./Advanced/RoomPk)
-  - [第三方美颜](./Advanced/ThirdBeauty)
+- Basic Features
+  - [Audio Call](./Basic/AudioCall)
+  - [Video Call](./Basic/VideoCall)
+  - [Interactive Live Video Streaming](./Basic/Live)
+  - [Interactive Live Audio Streaming](./Basic/VoiceChatRoom)
+  - [Screen Sharing Live Streaming](./Basic/ScreenShare)
+- Advanced Features
+  - [String-type Room IDs](./Advanced/StringRoomId)
+  - [Video Quality Setting](./Advanced/SetVideoQuality)
+  - [Audio Quality Setting](./Advanced/SetAudioQuality)
+  - [Rendering Control](./Advanced/SetRenderParams)
+  - [Network Speed Testing](./Advanced/SpeedTest)
+  - [CDN Publishing](./Advanced/PushCDN)
+  - [Custom Video Capturing & Rendering](./Advanced/CustomCamera)
+  - [Audio Effect Setting](./Advanced/SetAudioEffect)
+  - [Background Music Setting](./Advanced/SetBackgroundMusic)
+  - [Local Video Sharing](./Advanced/LocalVideoShare)
+  - [Local Video Recording](./Advanced/LocalRecord)
+  - [Multiple Room Entry](./Advanced/JoinMultipleRoom)
+  - [SEI Message Receiving/Sending](./Advanced/SEIMessage)
+  - [Room Switching](./Advanced/SwitchRoom)
+  - [Cross-Room Competition](./Advanced/RoomPk)
+  - [Third-Party Beauty Filters](./Advanced/ThirdBeauty)
   
->  说明：目前的工程结构跟标准的Android Studio工程在名称大小写上可能有略微的差异，主要目的是方便大家在网页上看到此工程时，名称意义更加清晰，如果您不喜欢，可以[点击此处](https://wj.qq.com/s2/8393434/418a/)反馈，我们尽快跟进！
+>  Note: for clarity purposes, the naming of folders in the project may differ slightly from a standard Android Studio project in terms of letter case. If you have a problem with this, please send us your feedback [here](https://wj.qq.com/s2/8393434/418a/).
 
 
-## 环境准备
-- 最低兼容 Android 4.1（SDK API Level 16），建议使用 Android 5.0 （SDK API Level 21）及以上版本
-- Android Studio 3.5及以上版本
-- App 要求 Android 5.0及以上设备
+## Environment Requirements
+- Android 4.1 (SDK API level 16) or above; Android 5.0 (SDK API level 21) or above is recommended
+- Android Studio 3.5 or above
+- Devices with Android 5.0 or above
  
 
-## 运行示例
+## Demo Run Example
 
-### 前提条件
-您已 [注册腾讯云](https://cloud.tencent.com/document/product/378/17985) 账号，并完成 [实名认证](https://cloud.tencent.com/document/product/378/3629)。
+#### Prerequisites
+You have [signed up for a Tencent Cloud account](https://intl.cloud.tencent.com/document/product/378/17985) and completed [identity verification](https://intl.cloud.tencent.com/document/product/378/3629).
 
 
-### 申请 SDKAPPID 和 SECRETKEY
-1. 登录实时音视频控制台，选择【开发辅助】>【[快速跑通Demo](https://console.cloud.tencent.com/trtc/quickstart)】。
-2. 单击【立即开始】，输入您的应用名称，例如`TestTRTC`，单击【创建应用】。
+### Obtaining `SDKAPPID` and `SECRETKEY`
+1. Log in to the TRTC console and select **Development Assistance** > **[Demo Quick Run](https://console.cloud.tencent.com/trtc/quickstart)**.
+2. Enter an application name such as `TestTRTC`, and click **Create**.
 
 ![ #900px](https://main.qcloudimg.com/raw/169391f6711857dca6ed8cfce7b391bd.png)
-3. 创建应用完成后，单击【我已下载，下一步】，可以查看 SDKAppID 和密钥信息。
+3. Click **Next** to view your `SDKAppID` and key.
 
 
-### 配置 Demo 工程文件
-1. 使用 Android Studio（3.5及以上的版本）打开源码工程`TRTC-API-Example`
-2. 找到并打开`TRTC-API-Example/Debug/src/main/java/com/tencent/trtc/debug/GenerateTestUserSig.java`文件。
-3. 设置`GenerateTestUserSig.java`文件中的相关参数：
-  - `SDKAPPID`：默认为 PLACEHOLDER ，请设置为实际的 SDKAppID；
-  - `SECRETKEY`：默认为空字符串，请设置为实际的密钥信息；
+### Configuring demo project files
+1. Open the demo project `TRTC-API-Example` with Android Studio (3.5 or above).
+2. Find and open `TRTC-API-Example/Debug/src/main/java/com/tencent/trtc/debug/GenerateTestUserSig.java`.
+3. Set parameters in `GenerateTestUserSig.java` as follows:
+  - `SDKAPPID`: `PLACEHOLDER` by default. Set it to the actual `SDKAppID`.
+  - `SECRETKEY`: left empty by default. Set it to the actual key.
  ![ #900px](https://main.qcloudimg.com/raw/8fb309ce8c378dd3ad2c0099c57795a5.png)
 
-4. 返回实时音视频控制台，单击【粘贴完成，下一步】。
-5. 单击【关闭指引，进入控制台管理应用】。
+4. Return to the TRTC console and click **Next**.
+5. Click **Return to Overview Page**.
 
->!本文提到的生成 UserSig 的方案是在客户端代码中配置 SECRETKEY，该方法中 SECRETKEY 很容易被反编译逆向破解，一旦您的密钥泄露，攻击者就可以盗用您的腾讯云流量，因此**该方法仅适合本地跑通 Demo 和功能调试**。
->正确的 UserSig 签发方式是将 UserSig 的计算代码集成到您的服务端，并提供面向 App 的接口，在需要 UserSig 时由您的 App 向业务服务器发起请求获取动态 UserSig。更多详情请参见 [服务端生成 UserSig](https://cloud.tencent.com/document/product/647/17275#Server)。
+>!The method for generating `UserSig` described in this document involves configuring `SECRETKEY` in client code. In this method, `SECRETKEY` may be easily decompiled and reversed, and if your key is disclosed, attackers can steal your Tencent Cloud traffic. Therefore, **this method is suitable only for the local execution and debugging of the demo**.
+>The correct `UserSig` distribution method is to integrate the calculation code of `UserSig` into your server and provide an application-oriented API. When `UserSig` is needed, your application can make a request to the business server for dynamic `UserSig`. For more information, please see [How to Calculate UserSig](https://cloud.tencent.com/document/product/647/17275#Server).
 
-### 配置CDN 相关（可选）
-如果您需要使用CDN相关业务，比如主播使用TRTC SDK互动连麦，观众端播放CDN流这样的方式，您还需要配置如下三个**直播**相关参数：
-- `BIZID`；
-- `APPID`；
-- `CDN_DOMAIN_NAME`;
+## Configuring CDN parameters (optional)
+To use CDN services, which are needed for co-anchoring, CDN playback, etc., you need to configure three **live streaming** parameters.
+- `BIZID`
+- `APPID`
+- `CDN_DOMAIN_NAME`
 
 ![ #900px](https://liteav.sdk.qcloud.com/doc/res/trtc/picture/bizid_appid_scree.png)
 
-详细操作可以参考 [实现 CDN 直播观看](https://cloud.tencent.com/document/product/647/16826#.E9.80.82.E7.94.A8.E5.9C.BA.E6.99.AF)
+For detailed instructions, see [CDN Relayed Live Streaming](https://cloud.tencent.com/document/product/647/16826#.E9.80.82.E7.94.A8.E5.9C.BA.E6.99.AF).
 
-### 集成 SDK
-您可以选择使用 JCenter 自动加载的方式，或者手动下载 aar 再将其导入到您当前的工程项目中，Demo默认采用方法一配置。
+### Integrating the SDK
+You can use JCenter for automatic loading or manually download the AAR file and import it to your project. The demo uses the first method by default.
 
 
-#### 方法一：自动加载（aar）
-实时音视频（TRTC） SDK 已经发布到 JCenter 库，您可以通过配置 gradle 自动下载更新。
-只需要用 Android Studio 打开需要集成 SDK 的工程，然后通过简单的三个步骤修改 app/build.gradle 文件，就可以完成 SDK 集成：
+#### Method 1: automatic loading (AAR)
+The TRTC SDK has been released to the JCenter repository. You can use Gradle to download and update it automatically.
+Use Android Studio to open your project and modify the `app/build.gradle` file in three simple steps to integrate the SDK into your project, as shown below:
 
-1. 在 dependencies 中添加 SDK 的依赖。
- - 若使用3.x版本的 com.android.tools.build:gradle 工具，请执行以下命令：
+1. Add the TRTC SDK dependencies to `dependencies`.
+ - Run the following command if you use the 3.x version of com.android.tools.build:gradle.
 ```
 dependencies {
     implementation 'com.tencent.liteav:LiteAVSDK_TRTC:latest.release'
 }
 ```
- - 若使用2.x版本的 com.android.tools.build:gradle 工具，请执行以下命令：
+ - Run the following command if you use the 2.x version of com.android.tools.build:gradle.
 ```
 dependencies {
     compile 'com.tencent.liteav:LiteAVSDK_TRTC:latest.release'
 }
 ```
-2. 在 defaultConfig 中，指定 App 使用的 CPU 架构。
+2. In `defaultConfig`, specify the CPU architecture to be used by the application.
 ```
 defaultConfig {
     ndk {
@@ -107,15 +107,15 @@ defaultConfig {
     }
 }
 ```
-3.单击【Sync Now】，自动下载 SDK 并集成到工程里。
+3. Click **Sync Now** to automatically download and integrate the SDK into your project.
 
 
-#### 方法二：手动下载（aar）
-如果您的网络连接 JCenter 有问题，您也可以手动下载 SDK 集成到工程里：
+#### Method 2: manual download (AAR)
+If you have difficulty accessing JCenter, you can manually download the SDK and integrate it into your project.
 
-1. 下载最新版本 [实时音视频 SDK](https://liteav.sdk.qcloud.com/download/latest/TXLiteAVSDK_TRTC_Android_latest.zip)。
-2. 将下载到的 aar 文件拷贝到工程的 **app/libs** 目录下。
-3. 在工程根目录下的 build.gradle 中，添加 **flatDir**，指定本地仓库路径。
+1. Download the latest version of the [TRTC SDK](https://liteav.sdk.qcloud.com/download/latest/TXLiteAVSDK_TRTC_Android_latest.zip).
+2. Copy the downloaded AAR file to the **app/libs** directory of your project.
+3. Add **flatDir** to `build.gradle` under the project’s root directory and specify a local path for the repository.
 ```
 ...
 allprojects {
@@ -130,16 +130,16 @@ allprojects {
 ...
 ```
 
-4. 在 app/build.gradle 中，添加引用 aar 包的代码。
+4. Add code in `app/build.gradle` to import the AAR file.
 ```
 dependencies {
     ...
-    compile(name: 'LiteAVSDK_TRTC_xxx', ext: 'aar') // xxx表示解压出来的SDK版本号
+    compile(name: 'LiteAVSDK_TRTC_xxx', ext: 'aar') // `xxx` is the version number of the decompressed SDK
     ...
 }
 ```
 
-5. 在 app/build.gradle的defaultConfig 中，指定 App 使用的 CPU 架构。
+5. In `defaultConfig` of `app/build.gradle`, specify the CPU architecture to be used by the application.
 ```
 defaultConfig {
     ndk {
@@ -147,16 +147,16 @@ defaultConfig {
     }
 }
 ```
-6. 单击【Sync Now】，完成 SDK 的集成工作。 
+6. Click **Sync Now** to complete the integration. 
 
 
-### 编译运行
-用 Android Studio 打开该项目，连上Android设备，编译并运行。
+### Compiling and running the project
+Open the project with Android Studio, connect to an Android device, and compile and run the project.
 
-# 联系我们
-- [常见问题](https://cloud.tencent.com/document/product/647/34399)
-- [官网文档](https://cloud.tencent.com/document/product/647/16788)（云+社区）
-- [API文档](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html)
-- [TRTCSDK issue 提交模板](https://github.com/tencentyun/TRTCSDK/issues/53)
+# Contact Us
+- [FAQs](https://cloud.tencent.com/document/product/647/34399)
+- [Documentation](https://cloud.tencent.com/document/product/647/16788)(Cloud+ Community)
+- [API document](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html)
+- [Template for issue reporting](https://github.com/tencentyun/TRTCSDK/issues/53)
 
-> 上述流程并没有解答您的疑问，你可以[点击此处](https://wj.qq.com/s2/8393513/f442/)反馈，我们的**工程师妹子**会尽快处理！
+> If the above does not solve your problem, [report](https://wj.qq.com/s2/8393513/f442/) it to our **engineer**.
