@@ -10,25 +10,23 @@ _[English](README.md) | 简体中文_
 
 
 ## 更新日志
-## Version 10.2 @ 2022.06.26
+### Version 10.3 @ 2022.07.06
 
 **新特性：**
-- 全平台：全新推出更加灵活，且功能强大的混流转推 API。详见：startPublishMediaStream；
-- 全平台：新增 3D 音频特效功能，详见：enable3DSpatialAudioEffect；
-- 全平台：新增人声检测功能，当 muteLoalAudio 和 setAudioCaptureVolume 为 0 时不会影响人声检测结果。详见 enableAudioVolumeEvaluation，Tips：方便提示用户开麦；
-- 全平台：切换角色时，增加支持权限校验的功能。详见：switchRole(TRTCRoleType role, const char* privateMapKey)；
-- iOS & Mac：自定义预处理的 C++ 接口，支持以纹理方式对接视频处理；
+
+- Windows：新增录制本地录制功能，可用于在本地录制互动直播或音视频通话完整内容。详见 ITXLiteAVLocalRecord；
+- Windows&Mac：新增参数支持在startMicDeviceTest 接口中开启/关闭 播放麦克风检测时麦克风采集到的声音。详见 startMicDeviceTest；
 
 **功能优化:**
-- Android：优化耳返效果，降低延迟；
-- Android：优化音频的采集链路，解决部分机型存在的杂音问题；
-- iOS：优化上行视频处理链路，节省CPU、GPU占用；
-- Windows & Mac：优化窗口分享时的编码性能，编码宽高不再受采集窗口大小的影响；
-- Windows：优化性能，减少内存碎片及其分配时造成性能开销；
+
+- 全平台：优化 Music 音质下的声音效果；
 
 **缺陷修复:**
-- 全平台：修复切换网络类型时，偶现的上行失败问题；
-- iOS：修复在部分iOS 14系统上，本地录制文件存在的杂音问题；
+
+- 全平台：修复房间用户列表偶现的回调异常问题；
+- Windows：修复视频播放过程偶现的画面卡住问题；
+- Windows：修复视频播放过程偶现的播放失败问题；
+- Windwos：修复音频自定义采集场景中出现回声的问题；
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 

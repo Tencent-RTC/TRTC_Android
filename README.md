@@ -10,29 +10,23 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-## Version 10.2 @ 2022.06.26
+### Version 10.3 @ 2022.07.06
 
 **New features:**
 
-- All platforms: A new, more flexible and powerful mixed-stream retweet API has been introduced. See: startPublishMediaStream;
-- All platforms: New 3D audio effect function, see: enable3DSpatialAudioEffect;
-- All platforms: Add vocal detection function. When muteLoalAudio and setAudioCaptureVolume are 0, it will not affect the vocal detection result. See enableAudioVolumeEvaluation for details, Tips: It is convenient to prompt the user to open the microphone;
-- All platforms: Add permission verification when switching roles. For details, see: switchRole(TRTCRoleType role, const char* privateMapKey).
-- iOS & Mac: Customize C++ interface for preprocessing, support video processing in texture mode;
+● Windows: Add local recording function, which can be used to record the full content of live or calls. See: ITXLiteAVLocalRecord;
+● Windows&Mac: Add parameter in the startMicDeviceTest interface to enable/disable play the sound collected by the microphone during microphone detection. See: startMicDeviceTest
 
 **Function optimization:**
 
-- Android: Optimize ear return effect and reduce latency;
-- Android: Optimize the audio capture link to solve the noise problem of some models;
-- iOS: Optimize the uplink video processing link to save CPU and GPU usage;
-- Windows & Mac: Optimize the encoding performance when sharing windows, the encoding width and height are no longer affected by the capture window size;
-- Windows: Optimize performance, reduce memory fragmentation and performance overhead caused by its allocation;
+● All platforms: Optimize the sound effect for Music quality;
 
-Bug fixes:
+**Bug fixes:**
 
-- All platforms: Fix occasional uplink failure when switching network types;
-- iOS: Fix the noise problem with locally recorded files on some iOS 14 systems;
-
+● All platforms: Fixed the occasional callback exception in the room user list;
+● Windows: Fixed the occasional screen freeze problem during video playback;
+● Windows: Fixed the occasional playback failure during video playback;
+● Windows: Fixed the problem of echo in custom audio capture scene;
 
 For the release notes of earlier versions, click [More](https://cloud.tencent.com/document/product/647/46907).
 
