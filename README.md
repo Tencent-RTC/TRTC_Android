@@ -14,20 +14,23 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 **New features:**
 
-● Windows: Add local recording function, which can be used to record the full content of live or calls. See: ITXLiteAVLocalRecord;
-● Windows&Mac: Add parameter in the startMicDeviceTest interface to enable/disable play the sound collected by the microphone during microphone detection. See: startMicDeviceTest
+- Windows: Add local recording function, which can be used to record the full content of live or calls. See: ITXLiteAVLocalRecord;
+
+- Windows&Mac: Add parameter in the startMicDeviceTest interface to enable/disable play the sound collected by the microphone during microphone detection. See: startMicDeviceTest
 
 **Function optimization:**
 
-● All platforms: Optimize the sound effect for Music quality;
+- All platforms: Optimize the sound effect for Music quality;
 
 **Bug fixes:**
 
-● All platforms: Fixed the occasional callback exception in the room user list;
-● Windows: Fixed the occasional screen freeze problem during video playback;
-● Windows: Fixed the occasional playback failure during video playback;
-● Windows: Fixed the problem of echo in custom audio capture scene;
+- All platforms: Fixed the occasional callback exception in the room user list;
 
+- Windows: Fixed the occasional screen freeze problem during video playback;
+
+- Windows: Fixed the occasional playback failure during video playback;
+
+- Windows: Fixed the problem of echo in custom audio capture scene;
 For the release notes of earlier versions, click [More](https://cloud.tencent.com/document/product/647/46907).
 
 
