@@ -10,27 +10,22 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 10.3 @ 2022.07.06
+### Version 10.4 @ 2022.07.21
 
 **New features:**
-
-- Windows: Add local recording function, which can be used to record the full content of live or calls. See: ITXLiteAVLocalRecord;
-
-- Windows&Mac: Add parameter in the startMicDeviceTest interface to enable/disable play the sound collected by the microphone during microphone detection. See: startMicDeviceTest
+- iOS & Android: Support RGBA32 format in custom video capture, see: sendCustomVideoData;
+- Windows & Mac: Support local preview when setting Watermark, see: setWaterMark;
 
 **Function optimization:**
-
-- All platforms: Optimize the sound effect for Music quality;
+- Android: Optimized the compatibility of low-latency in-ear return and binaural capture;
+- Android: Optimize the strategy of switching from hard decoding to soft decoding to improve decoding performance;
+- iOS: Optimized the problem of low volume for iPad acquisition;
 
 **Bug fixes:**
 
-- All platforms: Fixed the occasional callback exception in the room user list;
+- All platforms: Fixed the occasional check-in and check-out callback exception;
+- Windows: Fixed the problem that the content of the new window is clipped when switching the sharing window;
 
-- Windows: Fixed the occasional screen freeze problem during video playback;
-
-- Windows: Fixed the occasional playback failure during video playback;
-
-- Windows: Fixed the problem of echo in custom audio capture scene;
 For the release notes of earlier versions, click [More](https://cloud.tencent.com/document/product/647/46907).
 
 

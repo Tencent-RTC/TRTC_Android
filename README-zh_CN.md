@@ -10,23 +10,21 @@ _[English](README.md) | 简体中文_
 
 
 ## 更新日志
-### Version 10.3 @ 2022.07.06
+### Version 10.4 @ 2022.07.21
 
 **新特性：**
-
-- Windows：新增录制本地录制功能，可用于在本地录制互动直播或音视频通话完整内容。详见 ITXLiteAVLocalRecord；
-- Windows&Mac：新增参数支持在startMicDeviceTest 接口中开启/关闭 播放麦克风检测时麦克风采集到的声音。详见 startMicDeviceTest；
+- iOS & Android：自定义视频采集支持 RGBA32 格式，详见：sendCustomVideoData；
+- Windows & Mac：水印设置支持本地预览，详见：setWaterMark；
 
 **功能优化:**
-
-- 全平台：优化 Music 音质下的声音效果；
+- Android：优化低延迟耳返及双声道采集的兼容性；
+- Android：优化硬解码切软解码的策略，提升解码性能；
+- iOS：优化 iPad 采集音量小的问题；
 
 **缺陷修复:**
 
-- 全平台：修复房间用户列表偶现的回调异常问题；
-- Windows：修复视频播放过程偶现的画面卡住问题；
-- Windows：修复视频播放过程偶现的播放失败问题；
-- Windwos：修复音频自定义采集场景中出现回声的问题；
+- 全平台：修复偶现的进退房回调异常的问题；
+- Windows：修复切换分享窗口，新窗口的内容被剪裁的问题；
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 
