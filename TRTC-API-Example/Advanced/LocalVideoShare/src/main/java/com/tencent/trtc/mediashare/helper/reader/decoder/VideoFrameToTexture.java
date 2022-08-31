@@ -1,9 +1,13 @@
 package com.tencent.trtc.mediashare.helper.reader.decoder;
 
+import static com.tencent.trtc.mediashare.helper.render.opengl.OpenGlUtils.NO_TEXTURE;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import android.annotation.TargetApi;
 import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 import android.opengl.GLES20;
+import android.util.Log;
 
 import com.tencent.trtc.mediashare.helper.basic.Frame;
 import com.tencent.trtc.mediashare.helper.basic.FrameBuffer;
@@ -25,17 +29,16 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.List;
 
-import static com.tencent.trtc.mediashare.helper.render.opengl.OpenGlUtils.NO_TEXTURE;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-
 /**
  * 将解码出来的内容绘制到自己的FrameBuffer上，然后作为输出给到下一个节点
  */
 @TargetApi(17)
-public class VideoFrameToTexture extends ProvidedStage<TextureFrame> implements SurfaceTexture.OnFrameAvailableListener {
-    private final static int STATE_WAIT_INPUT   = 1;
-    private final static int STATE_WAIT_TEXTURE = 2;
-    private final static int STATE_WAIT_RENDER  = 3;
+public class VideoFrameToTexture extends ProvidedStage<TextureFrame>
+        implements SurfaceTexture.OnFrameAvailableListener {
+    private static final String TAG = "VideoFrameToTexture";
+    private static final int STATE_WAIT_INPUT   = 1;
+    private static final int STATE_WAIT_TEXTURE = 2;
+    private static final int STATE_WAIT_RENDER  = 3;
 
     private final int mWidth;
     private final int mHeight;
@@ -60,18 +63,18 @@ public class VideoFrameToTexture extends ProvidedStage<TextureFrame> implements 
         mWidth = width;
         mHeight = height;
 
-        mGLCubeBuffer = ByteBuffer.allocateDirect(OpenGlUtils.CUBE.length * 4)
-                .order(ByteOrder.nativeOrder()).asFloatBuffer();
+        mGLCubeBuffer =
+                ByteBuffer.allocateDirect(OpenGlUtils.CUBE.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         mGLCubeBuffer.put(OpenGlUtils.CUBE).position(0);
 
-        mGLTextureBuffer = ByteBuffer.allocateDirect(OpenGlUtils.TEXTURE.length * 4)
-                .order(ByteOrder.nativeOrder()).asFloatBuffer();
+        mGLTextureBuffer = ByteBuffer.allocateDirect(OpenGlUtils.TEXTURE.length * 4).order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
         mGLTextureBuffer.put(OpenGlUtils.TEXTURE).position(0);
     }
 
     public void setFrameProvider(String mVideoPath, long mLoopDurationMs) throws SetupException {
         SurfaceTexture surfaceTexture = getSurfaceTexture();
-        ExtractorAdvancer advancer  = new RangeExtractorAdvancer(MILLISECONDS.toMicros(mLoopDurationMs));
+        ExtractorAdvancer advancer = new RangeExtractorAdvancer(MILLISECONDS.toMicros(mLoopDurationMs));
         Extractor extractor = new Extractor(true, mVideoPath, advancer);
         mVideoDecoder = new Decoder(extractor, surfaceTexture);
         mVideoDecoder.setLooping(true);
@@ -129,6 +132,7 @@ public class VideoFrameToTexture extends ProvidedStage<TextureFrame> implements 
         mSurfaceTexture.updateTexImage();
         mSurfaceTexture.getTransformMatrix(mTextureTransform);
         long timestamp = mSurfaceTexture.getTimestamp() / 1000000;
+        Log.d(TAG, "renderOesToFrameBuffer time stamp : " + timestamp);
 
         mOesInputFilter.setTexutreTransform(mTextureTransform);
         mGpuImageFilterGroup.draw(mSurfaceTextureId, mFrameBuffer.getFrameBufferId(), mGLCubeBuffer, mGLTextureBuffer);

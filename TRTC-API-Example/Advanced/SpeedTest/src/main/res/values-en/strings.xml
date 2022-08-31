@@ -7,4 +7,5 @@
     <string name="speedtest_start">Start Test</string>
     <string name="speedtest_finish">Speed test finished</string>
     <string name="speedtest_fail">Speed test failed</string>
+    <string name="speedtest_running">Speed test running</string>
 </resources>

@@ -7,4 +7,5 @@
     <string name="speedtest_start">开始测速</string>
     <string name="speedtest_finish">完成测速</string>
     <string name="speedtest_fail">测试失败</string>
+    <string name="speedtest_running">正在测速中</string>
 </resources>

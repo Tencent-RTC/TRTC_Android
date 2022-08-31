@@ -18,22 +18,20 @@ import com.tencent.trtc.debug.Constant;
  *
  * - 以主播角色进入视频互动直播房间{@link LiveAnchorActivity}
  * - 以观众角色进入视频互动直播房间{@link LiveAudienceActivity}
- */
-
-/**
+ *
  * Entrance View of Interactive Live Video Streaming
  *
  * - Enter a room as an anchor: {@link LiveAnchorActivity}
  * - Enter a room as audience: {@link LiveAudienceActivity}
  */
-public class LiveEnterActivity extends AppCompatActivity{
+public class LiveEnterActivity extends AppCompatActivity {
 
-    private EditText    mEditInputUserId;
-    private EditText    mEditInputRoomId;
-    private Button      mBtnAnchor;
-    private Button      mBtnAudience;
+    private EditText mEditInputUserId;
+    private EditText mEditInputRoomId;
+    private Button   mBtnAnchor;
+    private Button   mBtnAudience;
 
-    private int         mRoleSelectFlag = 1;
+    private int mRoleSelectFlag = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +49,7 @@ public class LiveEnterActivity extends AppCompatActivity{
         mBtnAnchor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mRoleSelectFlag != 1){
+                if (mRoleSelectFlag != 1) {
                     mRoleSelectFlag = 1;
                     mBtnAnchor.setBackgroundColor(getResources().getColor(R.color.live_single_select_button_bg));
                     mBtnAudience.setBackgroundColor(getResources().getColor(R.color.live_single_select_button_bg_off));
@@ -62,7 +60,7 @@ public class LiveEnterActivity extends AppCompatActivity{
         mBtnAudience.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mRoleSelectFlag != 2){
+                if (mRoleSelectFlag != 2) {
                     mRoleSelectFlag = 2;
                     mBtnAnchor.setBackgroundColor(getResources().getColor(R.color.live_single_select_button_bg_off));
                     mBtnAudience.setBackgroundColor(getResources().getColor(R.color.live_single_select_button_bg));
@@ -95,23 +93,25 @@ public class LiveEnterActivity extends AppCompatActivity{
     }
 
     private void startEnterRoom() {
-        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim())
-                || TextUtils.isEmpty(mEditInputRoomId.getText().toString().trim())) {
-            Toast.makeText(LiveEnterActivity.this, getString(R.string.live_room_input_error_tip), Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim()) || TextUtils
+                .isEmpty(mEditInputRoomId.getText().toString().trim())) {
+            Toast.makeText(LiveEnterActivity.this, getString(R.string.live_room_input_error_tip), Toast.LENGTH_LONG)
+                    .show();
             return;
         }
-        if(mRoleSelectFlag == 1){
+        if (mRoleSelectFlag == 1) {
             Intent intent = new Intent(LiveEnterActivity.this, LiveAnchorActivity.class);
             intent.putExtra(Constant.ROOM_ID, mEditInputRoomId.getText().toString().trim());
             intent.putExtra(Constant.USER_ID, mEditInputUserId.getText().toString().trim());
             startActivity(intent);
-        }else if(mRoleSelectFlag == 2){
+        } else if (mRoleSelectFlag == 2) {
             Intent intent = new Intent(LiveEnterActivity.this, LiveAudienceActivity.class);
             intent.putExtra(Constant.ROOM_ID, mEditInputRoomId.getText().toString().trim());
             intent.putExtra(Constant.USER_ID, mEditInputUserId.getText().toString().trim());
             startActivity(intent);
-        }else{
-            Toast.makeText(LiveEnterActivity.this, getString(R.string.live_please_select_role), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(LiveEnterActivity.this, getString(R.string.live_please_select_role), Toast.LENGTH_SHORT)
+                    .show();
         }
 
     }

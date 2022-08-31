@@ -8,42 +8,27 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
 public class GpuImageI420Filter extends GPUImageFilter {
-    private static final String I420_RENDER_SHADE = ""
-            + "precision highp float;\n"
-            + "varying vec2 textureCoordinate;\n"
-            + "uniform sampler2D inputImageTexture;\n"
-            + "uniform sampler2D uTexture;\n"
-            + "uniform mat3 convertMatrix;\n"
-            + "uniform vec3 offset;\n"
-            + "\n"
-            + "void main()\n"
-            + "{\n"
-            + "    highp vec3 yuvColor;\n"
-            + "    highp vec3 rgbColor;\n"
-            + "\n"
-            + "    // Get the YUV values\n"
-            + "    yuvColor.x = texture2D(inputImageTexture, textureCoordinate).r;\n"
-            + "    yuvColor.y = texture2D(uTexture, vec2(textureCoordinate.x * 0.5, textureCoordinate.y * 0.5)).r;\n"
-            + "    yuvColor.z = texture2D(uTexture, vec2(textureCoordinate.x * 0.5, textureCoordinate.y * 0.5 + 0.5)).r;\n"
-            + "\n"
-            + "    // Do the color transform   \n"
-            + "    yuvColor += offset;\n"
-            + "    rgbColor = convertMatrix * yuvColor; \n"
-            + "\n"
-            + "    gl_FragColor = vec4(rgbColor, 1.0);\n"
-            + "}\n";
+    private static final String I420_RENDER_SHADE =
+            "" + "precision highp float;\n" + "varying vec2 textureCoordinate;\n"
+                    + "uniform sampler2D inputImageTexture;\n" + "uniform sampler2D uTexture;\n"
+                    + "uniform mat3 convertMatrix;\n" + "uniform vec3 offset;\n" + "\n" + "void main()\n" + "{\n"
+                    + "    highp vec3 yuvColor;\n" + "    highp vec3 rgbColor;\n" + "\n" + "    // Get the YUV values\n"
+                    + "    yuvColor.x = texture2D(inputImageTexture, textureCoordinate).r;\n"
+                    + "    yuvColor.y = texture2D(uTexture, vec2(textureCoordinate.x * 0.5, textureCoordinate.y * 0"
+                    + ".5)).r;\n"
+                    + "    yuvColor.z = texture2D(uTexture, vec2(textureCoordinate.x * 0.5, textureCoordinate.y * 0.5"
+                    + " + 0.5)).r;\n"
+                    + "\n" + "    // Do the color transform   \n" + "    yuvColor += offset;\n"
+                    + "    rgbColor = convertMatrix * yuvColor; \n" + "\n" + "    gl_FragColor = vec4(rgbColor, 1.0);\n"
+                    + "}\n";
 
     // YUV offset
     private static final float[] BT601_FULLRANGE_FFMPEG_OFFSET = {
-            0f, -0.501960814f, -0.501960814f
-    };
+            0f, -0.501960814f, -0.501960814f};
 
     // RGB coefficients
     private static final float[] BT601_FULLRAGE_FFMPEG_MATRIX = {
-            1f, 1f, 1f,
-            0f, -0.3441f, 1.772f,
-            1.402f, -0.7141f, 0f
-    };
+            1f, 1f, 1f, 0f, -0.3441f, 1.772f, 1.402f, -0.7141f, 0f};
 
     private int mGLUniformTextureUv;
     private int mConvertMatrixUniform;
@@ -67,6 +52,13 @@ public class GpuImageI420Filter extends GPUImageFilter {
         mConvertOffsetUniform = GLES20.glGetUniformLocation(mProgram.getProgramId(), "offset");
     }
 
+    /**
+     * 加载 YUV 数据到 Texture。
+     *
+     * @param yuvData
+     * @param width
+     * @param height
+     */
     public void loadYuvDataToTexture(byte[] yuvData, int width, int height) {
         // 纹理大小发生变化，需要重新创建纹理
         if (mTextureSize == null || mTextureSize.width != width || mTextureSize.height != height) {
@@ -83,7 +75,8 @@ public class GpuImageI420Filter extends GPUImageFilter {
         System.arraycopy(yuvData, 0, mYData, 0, mYData.length);
         System.arraycopy(yuvData, mYData.length, mUvData, 0, mUvData.length);
         mYTextureId = OpenGlUtils.loadTexture(GLES20.GL_LUMINANCE, ByteBuffer.wrap(mYData), width, height, mYTextureId);
-        mUvTextureId = OpenGlUtils.loadTexture(GLES20.GL_LUMINANCE, ByteBuffer.wrap(mUvData), width, height / 2, mUvTextureId);
+        mUvTextureId =
+                OpenGlUtils.loadTexture(GLES20.GL_LUMINANCE, ByteBuffer.wrap(mUvData), width, height / 2, mUvTextureId);
     }
 
     @Override

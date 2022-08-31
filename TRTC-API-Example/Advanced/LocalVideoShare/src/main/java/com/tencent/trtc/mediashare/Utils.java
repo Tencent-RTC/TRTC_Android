@@ -33,6 +33,13 @@ public class Utils {
         return mediaFormat;
     }
 
+    /**
+     * 从 uri 中获取路径。
+     *
+     * @param context
+     * @param uri
+     * @return
+     */
     public static String getPathFromUri(final Context context, final Uri uri) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -78,8 +85,8 @@ public class Utils {
                 if (id != null && id.startsWith("raw:")) {
                     return id.substring(4);
                 }
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                final Uri contentUri =
+                        ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                 return getDataColumn(context, contentUri, null, null);
             } else if (isMediaDocument(uri)) {
@@ -105,23 +112,22 @@ public class Utils {
         return null;
     }
 
-    private static String getDataColumn(Context context, Uri uri, String selection,
-                                        String[] selectionArgs) {
+    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
         final String[] projection = {column};
 
         try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
-                    null);
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
                 final int column_index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(column_index);
             }
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
+            }
         }
         return null;
     }

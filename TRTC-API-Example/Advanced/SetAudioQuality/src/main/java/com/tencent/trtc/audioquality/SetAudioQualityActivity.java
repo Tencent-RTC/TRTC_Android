@@ -28,43 +28,42 @@ import java.util.Random;
 
 /**
  * TRTC设置音频质量页面
- *
  * 包含如下简单功能：
  * - 设置音频质量{@link TRTCCloud#startLocalAudio(int)},其方法中参数为音频质量参数。
  * - 设置音频采集音量{@link TRTCCloud#setAudioCaptureVolume(int)}
  *
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a6af5e2c4819a683042f382688aff41e9}
- */
-
-/**
+ * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
+ * .html#a6af5e2c4819a683042f382688aff41e9}
+ *
  * Setting Audio Quality
  *
  * Features:
  * - Set audio quality: {@link TRTCCloud#startLocalAudio(int)}. The parameter in the API indicates audio quality.
  * - Set the audio capturing volume: {@link TRTCCloud#setAudioCaptureVolume(int)}
  *
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a6af5e2c4819a683042f382688aff41e9}.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a6af5e2c4819a683042f382688aff41e9}.
  */
 public class SetAudioQualityActivity extends TRTCBaseActivity implements View.OnClickListener {
-    private static final String     TAG = "SetAudioQualityActivity";
+    private static final String TAG = "SetAudioQualityActivity";
 
-    private ImageView               mImageBack;
-    private TextView                mTextTitle;
-    private SeekBar                 mSeekProgress;
-    private Button                  mButtonQualityDefault;
-    private Button                  mButtonQualitySpeech;
-    private Button                  mButtonQualityMusic;
-    private Button                  mButtonStartPush;
-    private EditText                mEditRoomId;
-    private EditText                mEdituserId;
-    private TXCloudVideoView        mTXCloudPreviewView;
-    private List<TXCloudVideoView>  mRemoteVideoList;
-    private TextView                mTextVolume;
+    private ImageView              mImageBack;
+    private TextView               mTextTitle;
+    private SeekBar                mSeekProgress;
+    private Button                 mButtonQualityDefault;
+    private Button                 mButtonQualitySpeech;
+    private Button                 mButtonQualityMusic;
+    private Button                 mButtonStartPush;
+    private EditText               mEditRoomId;
+    private EditText               mEdituserId;
+    private TXCloudVideoView       mTXCloudPreviewView;
+    private List<TXCloudVideoView> mRemoteVideoList;
+    private TextView               mTextVolume;
 
-    private TRTCCloud               mTRTCCloud;
-    private int                     mQualityFlag = TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT;
-    private List<String>            mRemoteUserIdList;
-    private boolean                 mStartPushFlag = false;
+    private TRTCCloud    mTRTCCloud;
+    private int          mQualityFlag   = TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT;
+    private List<String> mRemoteUserIdList;
+    private boolean      mStartPushFlag = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +76,7 @@ public class SetAudioQualityActivity extends TRTCBaseActivity implements View.On
         }
     }
 
-    private void enterRoom(String roomId,  String userId) {
+    private void enterRoom(String roomId, String userId) {
         mTRTCCloud = TRTCCloud.sharedInstance(getApplicationContext());
         mTRTCCloud.setListener(new TRTCCloudImplListener(SetAudioQualityActivity.this));
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
@@ -91,14 +90,15 @@ public class SetAudioQualityActivity extends TRTCBaseActivity implements View.On
         mTRTCCloud.startLocalAudio(TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT);
         mTRTCCloud.enterRoom(mTRTCParams, TRTCCloudDef.TRTC_APP_SCENE_LIVE);
     }
-    private void hideRemoteView(){
+
+    private void hideRemoteView() {
         mRemoteUserIdList.clear();
-        for(TXCloudVideoView videoView : mRemoteVideoList){
+        for (TXCloudVideoView videoView : mRemoteVideoList) {
             videoView.setVisibility(View.GONE);
         }
     }
 
-    private void exitRoom(){
+    private void exitRoom() {
         hideRemoteView();
         if (mTRTCCloud != null) {
             mTRTCCloud.stopAllRemoteView();
@@ -112,20 +112,20 @@ public class SetAudioQualityActivity extends TRTCBaseActivity implements View.On
     }
 
     private void initView() {
-        mRemoteUserIdList       = new ArrayList<>();
-        mRemoteVideoList        = new ArrayList<>();
+        mRemoteUserIdList = new ArrayList<>();
+        mRemoteVideoList = new ArrayList<>();
 
-        mImageBack              = findViewById(R.id.iv_back);
-        mTextTitle              = findViewById(R.id.tv_room_number);
-        mButtonQualityDefault   = findViewById(R.id.btn_quality_default);
-        mButtonQualitySpeech    = findViewById(R.id.btn_quality_speech);
-        mButtonQualityMusic     = findViewById(R.id.btn_quality_music);
-        mButtonStartPush        = findViewById(R.id.btn_start_push);
-        mEditRoomId             = findViewById(R.id.et_room_id);
-        mEdituserId             = findViewById(R.id.et_user_id);
-        mSeekProgress           = findViewById(R.id.sb_voice_volume);
-        mTXCloudPreviewView     = findViewById(R.id.txcvv_main_local);
-        mTextVolume             = findViewById(R.id.tv_volume);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mButtonQualityDefault = findViewById(R.id.btn_quality_default);
+        mButtonQualitySpeech = findViewById(R.id.btn_quality_speech);
+        mButtonQualityMusic = findViewById(R.id.btn_quality_music);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEdituserId = findViewById(R.id.et_user_id);
+        mSeekProgress = findViewById(R.id.sb_voice_volume);
+        mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
+        mTextVolume = findViewById(R.id.tv_volume);
 
         mRemoteVideoList.add((TXCloudVideoView) findViewById(R.id.txcvv_video_remote1));
         mRemoteVideoList.add((TXCloudVideoView) findViewById(R.id.txcvv_video_remote2));
@@ -152,7 +152,7 @@ public class SetAudioQualityActivity extends TRTCBaseActivity implements View.On
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Log.d("onStopTrackingTouch", "onStopTrackingTouch : progrsss = " + seekBar.getProgress());
-                if(!mStartPushFlag){
+                if (!mStartPushFlag) {
                     seekBar.setProgress(100);
                     return;
                 }
@@ -167,56 +167,61 @@ public class SetAudioQualityActivity extends TRTCBaseActivity implements View.On
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.iv_back){
+        if (view.getId() == R.id.iv_back) {
             finish();
-        }else if(view.getId() == R.id.btn_start_push){
+        } else if (view.getId() == R.id.btn_start_push) {
             String roomId = mEditRoomId.getText().toString();
             String userId = mEdituserId.getText().toString();
-            if(!mStartPushFlag){
-                if(!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)){
+            if (!mStartPushFlag) {
+                if (!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)) {
                     mButtonStartPush.setText(R.string.audioquality_stop_push);
                     enterRoom(roomId, userId);
                     mStartPushFlag = true;
-                }else{
-                    Toast.makeText(SetAudioQualityActivity.this, getString(R.string.audioquality_please_input_roomid_userid), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SetAudioQualityActivity.this,
+                            getString(R.string.audioquality_please_input_roomid_userid), Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 mButtonStartPush.setText(R.string.audioquality_start_push);
                 exitRoom();
                 mStartPushFlag = false;
             }
 
-        }else if(view.getId() == R.id.btn_quality_default){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_quality_default) {
+            if (!mStartPushFlag) {
                 return;
             }
-            if(mQualityFlag != TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT){
+            if (mQualityFlag != TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT) {
                 mQualityFlag = TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT;
                 mTRTCCloud.startLocalAudio(TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT);
                 mButtonQualityDefault.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select));
-                mButtonQualitySpeech.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
+                mButtonQualitySpeech
+                        .setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
                 mButtonQualityMusic.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
             }
-        }else if(view.getId() == R.id.btn_quality_speech){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_quality_speech) {
+            if (!mStartPushFlag) {
                 return;
             }
-            if(mQualityFlag != TRTCCloudDef.TRTC_AUDIO_QUALITY_SPEECH){
+            if (mQualityFlag != TRTCCloudDef.TRTC_AUDIO_QUALITY_SPEECH) {
                 mQualityFlag = TRTCCloudDef.TRTC_AUDIO_QUALITY_SPEECH;
                 mTRTCCloud.startLocalAudio(TRTCCloudDef.TRTC_AUDIO_QUALITY_SPEECH);
-                mButtonQualityDefault.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
+                mButtonQualityDefault
+                        .setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
                 mButtonQualitySpeech.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select));
                 mButtonQualityMusic.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
             }
-        }else if(view.getId() == R.id.btn_quality_music){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_quality_music) {
+            if (!mStartPushFlag) {
                 return;
             }
-            if(mQualityFlag != TRTCCloudDef.TRTC_AUDIO_QUALITY_MUSIC){
+            if (mQualityFlag != TRTCCloudDef.TRTC_AUDIO_QUALITY_MUSIC) {
                 mQualityFlag = TRTCCloudDef.TRTC_AUDIO_QUALITY_MUSIC;
                 mTRTCCloud.startLocalAudio(TRTCCloudDef.TRTC_AUDIO_QUALITY_MUSIC);
-                mButtonQualityDefault.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
-                mButtonQualitySpeech.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
+                mButtonQualityDefault
+                        .setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
+                mButtonQualitySpeech
+                        .setBackgroundColor(getResources().getColor(R.color.audioquality_button_select_off));
                 mButtonQualityMusic.setBackgroundColor(getResources().getColor(R.color.audioquality_button_select));
             }
         }
@@ -234,31 +239,32 @@ public class SetAudioQualityActivity extends TRTCBaseActivity implements View.On
 
         @Override
         public void onUserVideoAvailable(String userId, boolean available) {
-            if(available){
+            if (available) {
                 mRemoteUserIdList.add(userId);
-            }else{
-                if(mRemoteUserIdList.contains(userId)){
+            } else {
+                if (mRemoteUserIdList.contains(userId)) {
                     mRemoteUserIdList.remove(userId);
-                    mTRTCCloud.stopRemoteView(userId);
+                    mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 }
             }
             refreshRemoteVideo();
         }
 
         private void refreshRemoteVideo() {
-            if(mRemoteUserIdList.size() > 0){
-                for(int i =0 ; i < mRemoteUserIdList.size() || i < 6; i++){
-                    if(i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))){
+            if (mRemoteUserIdList.size() > 0) {
+                for (int i = 0; i < mRemoteUserIdList.size() || i < 6; i++) {
+                    if (i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))) {
                         mRemoteVideoList.get(i).setVisibility(View.VISIBLE);
-                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i),TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideoList.get(i));
-                    }else{
+                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                                mRemoteVideoList.get(i));
+                    } else {
                         mRemoteVideoList.get(i).setVisibility(View.GONE);
                     }
                 }
-            }else{
-                 for(int i = 0; i < 6; i++){
-                     mRemoteVideoList.get(i).setVisibility(View.GONE);
-                 }
+            } else {
+                for (int i = 0; i < 6; i++) {
+                    mRemoteVideoList.get(i).setVisibility(View.GONE);
+                }
             }
         }
 
@@ -267,7 +273,7 @@ public class SetAudioQualityActivity extends TRTCBaseActivity implements View.On
             Log.d(TAG, "sdk callback onError");
             SetAudioQualityActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }

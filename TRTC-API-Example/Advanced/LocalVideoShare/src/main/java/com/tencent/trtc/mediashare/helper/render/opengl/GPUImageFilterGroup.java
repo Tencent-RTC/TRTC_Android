@@ -1,5 +1,7 @@
 package com.tencent.trtc.mediashare.helper.render.opengl;
 
+import static com.tencent.trtc.mediashare.helper.render.opengl.OpenGlUtils.CUBE;
+
 import android.opengl.GLES20;
 
 import com.tencent.trtc.mediashare.helper.basic.FrameBuffer;
@@ -9,8 +11,6 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.tencent.trtc.mediashare.helper.render.opengl.OpenGlUtils.CUBE;
 
 
 public class GPUImageFilterGroup extends GPUImageFilter {
@@ -22,20 +22,16 @@ public class GPUImageFilterGroup extends GPUImageFilter {
     private final   FloatBuffer          mGLTextureFlipBuffer;
 
     public GPUImageFilterGroup() {
-        mGLCubeBuffer = ByteBuffer.allocateDirect(CUBE.length * 4)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer();
+        mGLCubeBuffer = ByteBuffer.allocateDirect(CUBE.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         mGLCubeBuffer.put(CUBE).position(0);
 
         mGLTextureBuffer = ByteBuffer.allocateDirect(TextureRotationUtils.TEXTURE_NO_ROTATION.length * 4)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer();
+                .order(ByteOrder.nativeOrder()).asFloatBuffer();
         mGLTextureBuffer.put(TextureRotationUtils.TEXTURE_NO_ROTATION).position(0);
 
         float[] flipTexture = TextureRotationUtils.getRotation(Rotation.NORMAL, false, true);
-        mGLTextureFlipBuffer = ByteBuffer.allocateDirect(flipTexture.length * 4)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer();
+        mGLTextureFlipBuffer =
+                ByteBuffer.allocateDirect(flipTexture.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         mGLTextureFlipBuffer.put(flipTexture).position(0);
 
         mFilters = new ArrayList<>();
@@ -54,6 +50,9 @@ public class GPUImageFilterGroup extends GPUImageFilter {
         return mMergedFilters;
     }
 
+    /**
+     * 更新 GPU 的图像过滤器。
+     */
     public void updateMergedFilters() {
         if (mFilters == null) {
             return;
@@ -107,7 +106,7 @@ public class GPUImageFilterGroup extends GPUImageFilter {
         destroyFramebuffers();
 
         List<GPUImageFilter> renderFilters = getRenderFilters();
-        int                  size          = renderFilters.size();
+        int size = renderFilters.size();
         for (int i = 0; i < size; i++) {
             renderFilters.get(i).onOutputSizeChanged(width, height);
         }
@@ -137,9 +136,7 @@ public class GPUImageFilterGroup extends GPUImageFilter {
      * @param cubeBuffer       绘制的矩阵
      * @param textureBuffer    需要使用图像输入的哪一部分
      */
-    public void draw(final int textureId,
-                     final int outFrameBufferId,
-                     final FloatBuffer cubeBuffer,
+    public void draw(final int textureId, final int outFrameBufferId, final FloatBuffer cubeBuffer,
                      final FloatBuffer textureBuffer) {
         runPendingOnDrawTasks();
         if (!isInitialized() || null == getRenderFilters()) {
@@ -150,12 +147,12 @@ public class GPUImageFilterGroup extends GPUImageFilter {
             return;
         }
 
-        List<GPUImageFilter> filters         = getRenderFilters();
-        int                  size            = filters.size();
-        int                  previousTexture = textureId;
+        List<GPUImageFilter> filters = getRenderFilters();
+        int size = filters.size();
+        int previousTexture = textureId;
         for (int i = 0; i < size; i++) {
-            GPUImageFilter filter    = filters.get(i);
-            boolean        isNotLast = i < size - 1;
+            GPUImageFilter filter = filters.get(i);
+            boolean isNotLast = i < size - 1;
             if (isNotLast) {
                 GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[i % 2].getFrameBufferId());
                 GLES20.glClearColor(0, 0, 0, 0);
@@ -167,7 +164,8 @@ public class GPUImageFilterGroup extends GPUImageFilter {
             if (i == 0) {
                 filter.onDraw(previousTexture, cubeBuffer, textureBuffer);
             } else if (i == size - 1) {
-                filter.onDraw(previousTexture, mGLCubeBuffer, (size % 2 == 0) ? mGLTextureFlipBuffer : mGLTextureBuffer);
+                filter.onDraw(previousTexture, mGLCubeBuffer,
+                        (size % 2 == 0) ? mGLTextureFlipBuffer : mGLTextureBuffer);
             } else {
                 filter.onDraw(previousTexture, mGLCubeBuffer, mGLTextureBuffer);
             }

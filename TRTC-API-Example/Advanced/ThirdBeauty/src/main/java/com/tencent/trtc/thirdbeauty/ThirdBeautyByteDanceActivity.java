@@ -41,19 +41,19 @@ import java.util.List;
  * }
  * }
  * 1.3、复制火山美颜提供的 License 文件到当前module的 assets/resouce 目录中
- * <p>
+ *
  * 第二步：添加火山美颜的封装好的调用代码
  * 2.1、拷贝 androidsample 项目中的 com.bytedance.labcv.core 模块到自己的工程中
  * 2.2、拷贝火山美颜中需要用到的辅助类，具体为 com.bytedance.labcv.core.sync 目录
  * 2.3、修改 com.bytedance.labcv.core.Config#LICENSE_NAME 为1.3提到的火山提供的美颜License 的文件名称
- * <p>
+ *
  * 第三步：在TRTC中使用火山美颜
  * 3.1、详见{@link ThirdBeautyByteDanceActivity#initData()} 中的注释说明
  *
  * 注意：火山美颜提供的 License 与 applicationId 一一对应的，测试过程中需要修改 applicationId 为 License对应的applicationId
  */
-public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements View.OnClickListener{
-//        UnzipTask.IUnzipViewCallback {
+public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements View.OnClickListener {
+    //        UnzipTask.IUnzipViewCallback {
 
     private static final String TAG = ThirdBeautyByteDanceActivity.class.getSimpleName();
 
@@ -70,7 +70,7 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
     private TRTCCloud              mTRTCCloud;
     private List<String>           mRemoteUserIdList;
     private boolean                mStartPushFlag = false;
-//    private EffectManager          mEffectManager;
+    //    private EffectManager          mEffectManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
         if (checkPermission()) {
             initView();
             initData();
-//            checkResourceReady();
+            //            checkResourceReady();
         }
     }
 
@@ -96,14 +96,14 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
         }
     }
 
-//    public void checkResourceReady() {
-//        int savedVersionCode = UserData.getInstance(this).getVersion();
-//        int currentVersionCode = getVersionCode();
-//        if (savedVersionCode < currentVersionCode) {
-//            UnzipTask task = new UnzipTask(this);
-//            task.execute(UnzipTask.DIR);
-//        }
-//    }
+    //    public void checkResourceReady() {
+    //        int savedVersionCode = UserData.getInstance(this).getVersion();
+    //        int currentVersionCode = getVersionCode();
+    //        if (savedVersionCode < currentVersionCode) {
+    //            UnzipTask task = new UnzipTask(this);
+    //            task.execute(UnzipTask.DIR);
+    //        }
+    //    }
 
     private void enterRoom(String roomId, String userId) {
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
@@ -173,48 +173,55 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
     }
 
     private void initData() {
-////                  1. 设置 TRTCVideoFrameListener 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
-//        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D, TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
-//            @Override
-//            public void onGLContextCreated() {
-////                  2. GLContext 创建，创建火山美颜的管理类
-//                mEffectManager = new EffectManager(ThirdBeautyByteDanceActivity.this, new EffectResourceHelper(ThirdBeautyByteDanceActivity.this));
-//                mEffectManager.setOnEffectListener(new EffectManager.OnEffectListener() {
-//                    @Override
-//                    public void onEffectInitialized() {
-//                        // 设置火山美颜的初始化效果，默认80% 的美白效果
-//                        boolean ret = mEffectManager.setComposeNodes(new String[]{"beauty_Android_live"});
-//                        boolean ret1 = mEffectManager.updateComposerNodeIntensity("beauty_Android_live", "whiten", 0.8f);
-//                        Log.d(TAG, "EffectManager.setComposeNodes() ret : " + ret);
-//                        Log.d(TAG, "EffectManager.updateComposerNodeIntensity() ret : " + ret1);
-//                    }
-//                });
-//                int ret = mEffectManager.init();
-//                Log.d(TAG, "EffectManager.init() ret : " + ret);
-//            }
-//
-//            @Override
-//            public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame srcFrame, TRTCCloudDef.TRTCVideoFrame dstFrame) {
-////                  3. 调用第三方美颜模块处理, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
-//                boolean ret = mEffectManager.process(srcFrame.texture.textureId, dstFrame.texture.textureId, srcFrame.width, srcFrame.height, BytedEffectConstants.Rotation.CLOCKWISE_ROTATE_0, System.currentTimeMillis());
-//                Log.d(TAG, "EffectManager.process() ret : " + ret);
-//                return 0;
-//            }
-//
-//            @Override
-//            public void onGLContextDestory() {
-////                   4. GLContext 销毁
-//                mEffectManager.destroy();
-//            }
-//        });
+        ////                  1. 设置 TRTCVideoFrameListener 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
+        //        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
+        //        TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
+        //            @Override
+        //            public void onGLContextCreated() {
+        ////                  2. GLContext 创建，创建火山美颜的管理类
+        //                mEffectManager = new EffectManager(ThirdBeautyByteDanceActivity.this, new
+        //                EffectResourceHelper(ThirdBeautyByteDanceActivity.this));
+        //                mEffectManager.setOnEffectListener(new EffectManager.OnEffectListener() {
+        //                    @Override
+        //                    public void onEffectInitialized() {
+        //                        // 设置火山美颜的初始化效果，默认80% 的美白效果
+        //                        boolean ret = mEffectManager.setComposeNodes(new String[]{"beauty_Android_live"});
+        //                        boolean ret1 = mEffectManager.updateComposerNodeIntensity("beauty_Android_live",
+        //                        "whiten", 0.8f);
+        //                        Log.d(TAG, "EffectManager.setComposeNodes() ret : " + ret);
+        //                        Log.d(TAG, "EffectManager.updateComposerNodeIntensity() ret : " + ret1);
+        //                    }
+        //                });
+        //                int ret = mEffectManager.init();
+        //                Log.d(TAG, "EffectManager.init() ret : " + ret);
+        //            }
+        //
+        //            @Override
+        //            public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame srcFrame, TRTCCloudDef
+        //            .TRTCVideoFrame dstFrame) {
+        ////                  3. 调用第三方美颜模块处理, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
+        //                boolean ret = mEffectManager.process(srcFrame.texture.textureId, dstFrame.texture
+        //                .textureId, srcFrame.width, srcFrame.height, BytedEffectConstants.Rotation
+        //                .CLOCKWISE_ROTATE_0, System.currentTimeMillis());
+        //                Log.d(TAG, "EffectManager.process() ret : " + ret);
+        //                return 0;
+        //            }
+        //
+        //            @Override
+        //            public void onGLContextDestory() {
+        ////                   4. GLContext 销毁
+        //                mEffectManager.destroy();
+        //            }
+        //        });
 
         mSeekBlurLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (mStartPushFlag && fromUser) {
-//                    5. 设置火山美颜的美白级别
-//                    boolean ret = mEffectManager.updateComposerNodeIntensity("beauty_Android_live", "whiten", (progress * 1.0f) / 100.0f);
-//                    Log.d(TAG, "updateComposerNodeIntensity beauty_Android_live:" + ret);
+                    //                    5. 设置火山美颜的美白级别
+                    //                    boolean ret = mEffectManager.updateComposerNodeIntensity
+                    //                    ("beauty_Android_live", "whiten", (progress * 1.0f) / 100.0f);
+                    //                    Log.d(TAG, "updateComposerNodeIntensity beauty_Android_live:" + ret);
                 }
                 mTextBlurLevel.setText(String.valueOf(progress));
             }
@@ -245,7 +252,8 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
                     enterRoom(roomId, userId);
                     mStartPushFlag = true;
                 } else {
-                    Toast.makeText(ThirdBeautyByteDanceActivity.this, getString(R.string.thirdbeauty_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThirdBeautyByteDanceActivity.this,
+                            getString(R.string.thirdbeauty_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 mButtonStartPush.setText(R.string.thirdbeauty_start_push);
@@ -255,28 +263,29 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
         }
     }
 
-//    @Override
-//    public Context getContext() {
-//        return getApplicationContext();
-//    }
-//
-//    @Override
-//    public void onStartTask() {
-//        mFrameMask.setVisibility(View.VISIBLE);
-//    }
-//
-//    @Override
-//    public void onEndTask(boolean result) {
-//        if (result) {
-//            UserData.getInstance(this)
-//                    .setVersion(getVersionCode());
-//        }
-//        if (!result) {
-//            Toast.makeText(ThirdBeautyByteDanceActivity.this, "fail to copy resource, check your resource and re-open", Toast.LENGTH_SHORT).show();
-//        } else {
-//            mFrameMask.setVisibility(View.GONE);
-//        }
-//    }
+    //    @Override
+    //    public Context getContext() {
+    //        return getApplicationContext();
+    //    }
+    //
+    //    @Override
+    //    public void onStartTask() {
+    //        mFrameMask.setVisibility(View.VISIBLE);
+    //    }
+    //
+    //    @Override
+    //    public void onEndTask(boolean result) {
+    //        if (result) {
+    //            UserData.getInstance(this)
+    //                    .setVersion(getVersionCode());
+    //        }
+    //        if (!result) {
+    //            Toast.makeText(ThirdBeautyByteDanceActivity.this, "fail to copy resource, check your resource and
+    //            re-open", Toast.LENGTH_SHORT).show();
+    //        } else {
+    //            mFrameMask.setVisibility(View.GONE);
+    //        }
+    //    }
 
     protected class TRTCCloudImplListener extends TRTCCloudListener {
 
@@ -294,7 +303,7 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
             } else {
                 if (mRemoteUserIdList.contains(userId)) {
                     mRemoteUserIdList.remove(userId);
-                    mTRTCCloud.stopRemoteView(userId);
+                    mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 }
             }
             refreshRemoteVideo();
@@ -305,7 +314,8 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
                 for (int i = 0; i < mRemoteUserIdList.size() || i < 6; i++) {
                     if (i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))) {
                         mRemoteVideoList.get(i).setVisibility(View.VISIBLE);
-                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideoList.get(i));
+                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                                mRemoteVideoList.get(i));
                     } else {
                         mRemoteVideoList.get(i).setVisibility(View.GONE);
                     }

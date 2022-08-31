@@ -22,15 +22,15 @@ import android.widget.PopupWindow;
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class FloatingView extends FrameLayout implements GestureDetector.OnGestureListener {
 
-    private Context                     mContext;
-    private WindowManager               mWindowManager;
-    private GestureDetector             mGestureDetector;
-    private WindowManager.LayoutParams  mLayoutParams;
-    private float                       mLastX;
-    private float                       mLastY;
-    private PopupWindow                 mPopupWindow;
-    private long                        mTapOutsideTime;
-    private boolean                     mIsShowing = false;
+    private Context                    mContext;
+    private WindowManager              mWindowManager;
+    private GestureDetector            mGestureDetector;
+    private WindowManager.LayoutParams mLayoutParams;
+    private float                      mLastX;
+    private float                      mLastY;
+    private PopupWindow                mPopupWindow;
+    private long                       mTapOutsideTime;
+    private boolean                    mIsShowing = false;
 
     public FloatingView(Context context) {
         super(context);
@@ -103,11 +103,10 @@ public class FloatingView extends FrameLayout implements GestureDetector.OnGestu
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        float nowX, nowY, tranX, tranY;
-        nowX = e2.getRawX();
-        nowY = e2.getRawY();
-        tranX = nowX - mLastX;
-        tranY = nowY - mLastY;
+        float nowX = e2.getRawX();
+        float nowY = e2.getRawY();
+        float tranX = nowX - mLastX;
+        float tranY = nowY - mLastY;
         mLayoutParams.x += tranX;
         mLayoutParams.y += tranY;
         mWindowManager.updateViewLayout(this, mLayoutParams);
@@ -125,6 +124,11 @@ public class FloatingView extends FrameLayout implements GestureDetector.OnGestu
         return false;
     }
 
+    /**
+     * 设置 PopupWindow，
+     *
+     * @param id
+     */
     public void setPopupWindow(int id) {
         mPopupWindow = new PopupWindow(this);
         mPopupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -152,9 +156,9 @@ public class FloatingView extends FrameLayout implements GestureDetector.OnGestu
     }
 
     public void setOnPopupItemClickListener(OnClickListener listener) {
-        if (mPopupWindow == null)
+        if (mPopupWindow == null) {
             return;
-
+        }
         ViewGroup layout = (ViewGroup) mPopupWindow.getContentView();
         for (int i = 0; i < layout.getChildCount(); i++) {
             layout.getChildAt(i).setOnClickListener(listener);
@@ -181,8 +185,9 @@ public class FloatingView extends FrameLayout implements GestureDetector.OnGestu
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        if (null != mPopupWindow)
+        if (null != mPopupWindow) {
             mPopupWindow.dismiss();
+        }
         if (!(System.currentTimeMillis() - mTapOutsideTime < 80)) {
             mPopupWindow.showAtLocation(this, Gravity.NO_GRAVITY, 100, 0);
         }

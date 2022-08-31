@@ -28,54 +28,52 @@ import java.util.Random;
 
 /**
  * TRTC设置音效页面
- *
  * 具体步骤如下：
  * - 1.获取音效管理类{@link TRTCCloud#getAudioEffectManager()} 返回对象{@link TXAudioEffectManager}
  * - 2.使用音效管理类设置音效{@link TXAudioEffectManager#setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType)}
  * - 3.使用音效管理类设置混响效果{@link TXAudioEffectManager#setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType)}
+ * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXAudioEffectManager__android
+ * .html#adad5c18fa6883bef2edae8bc343bcec2}
  *
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXAudioEffectManager__android.html#adad5c18fa6883bef2edae8bc343bcec2}
- */
-
-/**
  * Setting Audio Effects
-
  * The steps are detailed below:
  * - 1. Get the audio effect management class {@link TXAudioEffectManager}: {@link TRTCCloud#getAudioEffectManager()}
  * - 2. Set audio effects: {@link TXAudioEffectManager#setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType)}
  * - 3. Set reverb effects: {@link TXAudioEffectManager#setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType)}
-
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXAudioEffectManager__android.html#adad5c18fa6883bef2edae8bc343bcec2}.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TXAudioEffectManager__android.html#adad5c18fa6883bef2edae8bc343bcec2}.
  */
 public class SetAudioEffectActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String     TAG                     = "SetVideoQualityActivity";
+    private static final String TAG = "SetVideoQualityActivity";
 
-    private EditText                mEditRoomId;
-    private EditText                mEdituserId;
-    private TXCloudVideoView        mTXCloudPreviewView;
-    private List<TXCloudVideoView>  mRemoteVideoList;
-    private Button                  mButtonEffectDefault;
-    private Button                  mButtonEffectChild;
-    private Button                  mButtonEffectLolita;
-    private Button                  mButtonEffectMetal;
-    private Button                  mButtonEffectUncle;
-    private Button                  mButtonReverbDefault;
-    private Button                  mButtonReverbKTV;
-    private Button                  mButtonReverbSmall;
-    private Button                  mButtonReverbBig;
-    private Button                  mButtonReverbLow;
-    private Button                  mButtonStartPush;
-    private ImageView               mImageBack;
-    private TextView                mTextTitle;
+    private EditText               mEditRoomId;
+    private EditText               mEdituserId;
+    private TXCloudVideoView       mTXCloudPreviewView;
+    private List<TXCloudVideoView> mRemoteVideoList;
+    private Button                 mButtonEffectDefault;
+    private Button                 mButtonEffectChild;
+    private Button                 mButtonEffectLolita;
+    private Button                 mButtonEffectMetal;
+    private Button                 mButtonEffectUncle;
+    private Button                 mButtonReverbDefault;
+    private Button                 mButtonReverbKTV;
+    private Button                 mButtonReverbSmall;
+    private Button                 mButtonReverbBig;
+    private Button                 mButtonReverbLow;
+    private Button                 mButtonStartPush;
+    private ImageView              mImageBack;
+    private TextView               mTextTitle;
 
-    private TRTCCloud               mTRTCCloud;
-    private TXAudioEffectManager    mTXAudioEffectManager;
-    private List<String>            mRemoteUserIdList;
-    private boolean                 mStartPushFlag      = false;
+    private TRTCCloud            mTRTCCloud;
+    private TXAudioEffectManager mTXAudioEffectManager;
+    private List<String>         mRemoteUserIdList;
+    private boolean              mStartPushFlag = false;
 
-    private TXAudioEffectManager.TXVoiceChangerType mEffectFlag = TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_0;
-    private TXAudioEffectManager.TXVoiceReverbType  mReverbFlag = TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_0;
+    private TXAudioEffectManager.TXVoiceChangerType mEffectFlag =
+            TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_0;
+    private TXAudioEffectManager.TXVoiceReverbType  mReverbFlag =
+            TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,27 +87,27 @@ public class SetAudioEffectActivity extends TRTCBaseActivity implements View.OnC
     }
 
     private void initView() {
-        mRemoteUserIdList       = new ArrayList<>();
-        mRemoteVideoList        = new ArrayList<>();
+        mRemoteUserIdList = new ArrayList<>();
+        mRemoteVideoList = new ArrayList<>();
 
-        mEditRoomId             = findViewById(R.id.et_room_id);
-        mEdituserId             = findViewById(R.id.et_user_id);
-        mImageBack              = findViewById(R.id.iv_back);
-        mTextTitle              = findViewById(R.id.tv_room_number);
-        mTXCloudPreviewView     = findViewById(R.id.txcvv_main_local);
-        mButtonEffectDefault    = findViewById(R.id.btn_effect_default);
-        mButtonEffectChild      = findViewById(R.id.btn_effect_child);
-        mButtonEffectLolita     = findViewById(R.id.btn_effect_lolita);
-        mButtonEffectMetal      = findViewById(R.id.btn_effect_metal);
-        mButtonEffectUncle      = findViewById(R.id.btn_effect_uncle);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEdituserId = findViewById(R.id.et_user_id);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
+        mButtonEffectDefault = findViewById(R.id.btn_effect_default);
+        mButtonEffectChild = findViewById(R.id.btn_effect_child);
+        mButtonEffectLolita = findViewById(R.id.btn_effect_lolita);
+        mButtonEffectMetal = findViewById(R.id.btn_effect_metal);
+        mButtonEffectUncle = findViewById(R.id.btn_effect_uncle);
 
-        mButtonReverbDefault    = findViewById(R.id.btn_reverb_default);
-        mButtonReverbKTV        = findViewById(R.id.btn_reverb_ktv);
-        mButtonReverbSmall      = findViewById(R.id.btn_reverb_small);
-        mButtonReverbBig        = findViewById(R.id.btn_reverb_big);
-        mButtonReverbLow        = findViewById(R.id.btn_reverb_low);
+        mButtonReverbDefault = findViewById(R.id.btn_reverb_default);
+        mButtonReverbKTV = findViewById(R.id.btn_reverb_ktv);
+        mButtonReverbSmall = findViewById(R.id.btn_reverb_small);
+        mButtonReverbBig = findViewById(R.id.btn_reverb_big);
+        mButtonReverbLow = findViewById(R.id.btn_reverb_low);
 
-        mButtonStartPush        = findViewById(R.id.btn_start_push);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
 
         mRemoteVideoList.add((TXCloudVideoView) findViewById(R.id.txcvv_video_remote1));
         mRemoteVideoList.add((TXCloudVideoView) findViewById(R.id.txcvv_video_remote2));
@@ -136,7 +134,7 @@ public class SetAudioEffectActivity extends TRTCBaseActivity implements View.OnC
         mTextTitle.setText(getString(R.string.audioeffect_roomid) + ":" + mEditRoomId.getText().toString());
     }
 
-    private void enterRoom(String roomId,  String userId) {
+    private void enterRoom(String roomId, String userId) {
         mTRTCCloud = TRTCCloud.sharedInstance(getApplicationContext());
         mTRTCCloud.setListener(new TRTCCloudImplListener(SetAudioEffectActivity.this));
         mTXAudioEffectManager = mTRTCCloud.getAudioEffectManager();
@@ -152,14 +150,14 @@ public class SetAudioEffectActivity extends TRTCBaseActivity implements View.OnC
         mTRTCCloud.enterRoom(mTRTCParams, TRTCCloudDef.TRTC_APP_SCENE_LIVE);
     }
 
-    private void hideRemoteView(){
+    private void hideRemoteView() {
         mRemoteUserIdList.clear();
-        for(TXCloudVideoView videoView : mRemoteVideoList){
+        for (TXCloudVideoView videoView : mRemoteVideoList) {
             videoView.setVisibility(View.GONE);
         }
     }
 
-    private void exitRoom(){
+    private void exitRoom() {
         hideRemoteView();
         if (mTRTCCloud != null) {
             mTRTCCloud.stopAllRemoteView();
@@ -174,84 +172,85 @@ public class SetAudioEffectActivity extends TRTCBaseActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.iv_back){
+        if (view.getId() == R.id.iv_back) {
             finish();
-        }else if(view.getId() == R.id.btn_start_push){
+        } else if (view.getId() == R.id.btn_start_push) {
             String roomId = mEditRoomId.getText().toString();
             String userId = mEdituserId.getText().toString();
-            if(!mStartPushFlag){
-                if(!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)){
+            if (!mStartPushFlag) {
+                if (!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)) {
                     mButtonStartPush.setText(getString(R.string.audioeffect_stop_push));
                     enterRoom(roomId, userId);
                     mStartPushFlag = true;
-                }else{
-                    Toast.makeText(SetAudioEffectActivity.this, getString(R.string.audioeffect_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SetAudioEffectActivity.this,
+                            getString(R.string.audioeffect_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 mButtonStartPush.setText(getString(R.string.audioeffect_start_push));
                 exitRoom();
                 mStartPushFlag = false;
             }
 
-        }else if(view.getId() == R.id.btn_effect_default){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_effect_default) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mEffectFlag =  TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_0;
+            mEffectFlag = TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_0;
             mTXAudioEffectManager.setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_0);
-        }else if(view.getId() == R.id.btn_effect_child){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_effect_child) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mEffectFlag =  TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_1;
+            mEffectFlag = TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_1;
             mTXAudioEffectManager.setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_1);
-        }else if(view.getId() == R.id.btn_effect_lolita){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_effect_lolita) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mEffectFlag =  TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_2;
+            mEffectFlag = TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_2;
             mTXAudioEffectManager.setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_2);
-        }else if(view.getId() == R.id.btn_effect_metal){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_effect_metal) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mEffectFlag =  TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_4;
+            mEffectFlag = TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_4;
             mTXAudioEffectManager.setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_4);
-        }else if(view.getId() == R.id.btn_effect_uncle){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_effect_uncle) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mEffectFlag =  TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_3;
+            mEffectFlag = TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_3;
             mTXAudioEffectManager.setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType.TXLiveVoiceChangerType_3);
-        }else if(view.getId() == R.id.btn_reverb_default){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_reverb_default) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mReverbFlag =  TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_0;
+            mReverbFlag = TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_0;
             mTXAudioEffectManager.setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_0);
-        }else if(view.getId() == R.id.btn_reverb_ktv){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_reverb_ktv) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mReverbFlag =  TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_1;
+            mReverbFlag = TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_1;
             mTXAudioEffectManager.setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_1);
-        }else if(view.getId() == R.id.btn_reverb_small){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_reverb_small) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mReverbFlag =  TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_2;
+            mReverbFlag = TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_2;
             mTXAudioEffectManager.setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_2);
-        }else if(view.getId() == R.id.btn_reverb_big){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_reverb_big) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mReverbFlag =  TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_3;
+            mReverbFlag = TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_3;
             mTXAudioEffectManager.setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_3);
-        }else if(view.getId() == R.id.btn_reverb_low){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_reverb_low) {
+            if (!mStartPushFlag) {
                 return;
             }
-            mReverbFlag =  TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_4;
+            mReverbFlag = TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_4;
             mTXAudioEffectManager.setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType.TXLiveVoiceReverbType_4);
         }
 
@@ -268,29 +267,30 @@ public class SetAudioEffectActivity extends TRTCBaseActivity implements View.OnC
 
         @Override
         public void onUserVideoAvailable(String userId, boolean available) {
-            if(available){
+            if (available) {
                 mRemoteUserIdList.add(userId);
-            }else{
-                if(mRemoteUserIdList.contains(userId)){
+            } else {
+                if (mRemoteUserIdList.contains(userId)) {
                     mRemoteUserIdList.remove(userId);
-                    mTRTCCloud.stopRemoteView(userId);
+                    mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 }
             }
             refreshRemoteVideo();
         }
 
         private void refreshRemoteVideo() {
-            if(mRemoteUserIdList.size() > 0){
-                for(int i =0 ; i < mRemoteUserIdList.size() || i < 6; i++){
-                    if(i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))){
+            if (mRemoteUserIdList.size() > 0) {
+                for (int i = 0; i < mRemoteUserIdList.size() || i < 6; i++) {
+                    if (i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))) {
                         mRemoteVideoList.get(i).setVisibility(View.VISIBLE);
-                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideoList.get(i));
-                    }else{
+                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                                mRemoteVideoList.get(i));
+                    } else {
                         mRemoteVideoList.get(i).setVisibility(View.GONE);
                     }
                 }
-            }else{
-                for(int i = 0; i < 6; i++){
+            } else {
+                for (int i = 0; i < 6; i++) {
                     mRemoteVideoList.get(i).setVisibility(View.GONE);
                 }
             }
@@ -301,7 +301,7 @@ public class SetAudioEffectActivity extends TRTCBaseActivity implements View.OnC
             Log.d(TAG, "sdk callback onError");
             SetAudioEffectActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }

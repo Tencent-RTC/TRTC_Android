@@ -34,36 +34,36 @@ import java.util.Random;
  *
  * 包含如下简单功能：
  * - A主播跨房连麦B主播{@link TRTCCloud#ConnectOtherRoom(String)}
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#ac1ab7e4a017b99bb91d89ce1b0fac5fd}
- */
-
-/**
+ * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
+ * .html#ac1ab7e4a017b99bb91d89ce1b0fac5fd}
+ *
  * Cross-room Co-anchoring
  *
  * Features:
  * - Anchor A co-anchors with anchor B: {@link TRTCCloud#ConnectOtherRoom(String)}
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#ac1ab7e4a017b99bb91d89ce1b0fac5fd}.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#ac1ab7e4a017b99bb91d89ce1b0fac5fd}.
  *
  */
 public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String     TAG                     = "ConnectOtherRoom";
+    private static final String TAG = "ConnectOtherRoom";
 
-    private ImageView               mImageBack;
-    private TextView                mTextTitle;
-    private Button                  mButtonStartPush;
-    private Button                  mButtonStartPK;
-    private EditText                mEditRoomId;
-    private EditText                mEditUserId;
-    private EditText                mEditRemoteRoomId;
-    private EditText                mEditRemoteUserId;
-    private TXCloudVideoView        mTXCloudPreviewView;
-    private TXCloudVideoView        mTXCloudRemoteView;
+    private ImageView        mImageBack;
+    private TextView         mTextTitle;
+    private Button           mButtonStartPush;
+    private Button           mButtonStartPK;
+    private EditText         mEditRoomId;
+    private EditText         mEditUserId;
+    private EditText         mEditRemoteRoomId;
+    private EditText         mEditRemoteUserId;
+    private TXCloudVideoView mTXCloudPreviewView;
+    private TXCloudVideoView mTXCloudRemoteView;
 
 
-    private TRTCCloud               mTRTCCloud;
-    private boolean                 mStartPushFlag      = false;
-    private boolean                 mStartPKFlag        = false;
+    private TRTCCloud mTRTCCloud;
+    private boolean   mStartPushFlag = false;
+    private boolean   mStartPKFlag   = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,16 +77,16 @@ public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        mImageBack              = findViewById(R.id.iv_back);
-        mTextTitle              = findViewById(R.id.tv_room_number);
-        mButtonStartPush        = findViewById(R.id.btn_start_push);
-        mButtonStartPK          = findViewById(R.id.btn_start_pk);
-        mEditRoomId             = findViewById(R.id.et_room_id);
-        mEditUserId             = findViewById(R.id.et_user_id);
-        mEditRemoteRoomId       = findViewById(R.id.et_remote_room_id);
-        mEditRemoteUserId       = findViewById(R.id.et_remote_user_id);
-        mTXCloudPreviewView     = findViewById(R.id.txcvv_main_local);
-        mTXCloudRemoteView      = findViewById(R.id.txcvv_video_remote);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mButtonStartPK = findViewById(R.id.btn_start_pk);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEditUserId = findViewById(R.id.et_user_id);
+        mEditRemoteRoomId = findViewById(R.id.et_remote_room_id);
+        mEditRemoteUserId = findViewById(R.id.et_remote_user_id);
+        mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
+        mTXCloudRemoteView = findViewById(R.id.txcvv_video_remote);
 
         mImageBack.setOnClickListener(this);
         mButtonStartPush.setOnClickListener(this);
@@ -96,7 +96,7 @@ public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickList
         mTextTitle.setText(getString(R.string.connectotherroom_roomid) + ":" + mEditRoomId.getText().toString());
     }
 
-    private void enterRoom(String roomId,  String userId) {
+    private void enterRoom(String roomId, String userId) {
         mTRTCCloud = TRTCCloud.sharedInstance(getApplicationContext());
         mTRTCCloud.setListener(new TRTCCloudImplListener(RoomPKActivity.this));
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
@@ -111,7 +111,7 @@ public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickList
         mTRTCCloud.enterRoom(mTRTCParams, TRTCCloudDef.TRTC_APP_SCENE_LIVE);
     }
 
-    private void exitRoom(){
+    private void exitRoom() {
         if (mTRTCCloud != null) {
             mTRTCCloud.stopAllRemoteView();
             mTRTCCloud.stopLocalAudio();
@@ -127,37 +127,39 @@ public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickList
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.iv_back){
+        if (view.getId() == R.id.iv_back) {
             finish();
-        }else if(view.getId() == R.id.btn_start_push){
+        } else if (view.getId() == R.id.btn_start_push) {
             String roomId = mEditRoomId.getText().toString();
             String userId = mEditUserId.getText().toString();
-            if(!mStartPushFlag){
-                if(!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)){
+            if (!mStartPushFlag) {
+                if (!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)) {
                     mButtonStartPush.setText(getString(R.string.connectotherroom_stop_push));
                     enterRoom(roomId, userId);
                     mStartPushFlag = true;
-                }else{
-                    Toast.makeText(RoomPKActivity.this, getString(R.string.connectotherroom_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RoomPKActivity.this,
+                            getString(R.string.connectotherroom_please_input_roomid_and_userid), Toast.LENGTH_SHORT)
+                            .show();
                 }
-            }else{
+            } else {
                 mButtonStartPush.setText(getString(R.string.connectotherroom_start_push));
                 exitRoom();
                 mStartPushFlag = false;
             }
 
-        }else if(view.getId() == R.id.btn_start_pk){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_start_pk) {
+            if (!mStartPushFlag) {
                 return;
             }
             String roomId = mEditRemoteRoomId.getText().toString();
             String userId = mEditRemoteUserId.getText().toString();
-            if(!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)){
-                if(mStartPKFlag){
+            if (!TextUtils.isEmpty(roomId) && !TextUtils.isEmpty(userId)) {
+                if (mStartPKFlag) {
                     mButtonStartPK.setText(getString(R.string.connectotherroom_start_pk));
                     mTRTCCloud.DisconnectOtherRoom();
                     mStartPKFlag = false;
-                }else{
+                } else {
                     try {
                         JSONObject jsonObj = new JSONObject();
                         jsonObj.put("strRoomId", roomId);
@@ -169,8 +171,9 @@ public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickList
                         e.printStackTrace();
                     }
                 }
-            }else{
-                Toast.makeText(RoomPKActivity.this, getString(R.string.connectotherroom_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(RoomPKActivity.this, getString(R.string.connectotherroom_please_input_roomid_and_userid),
+                        Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -192,7 +195,7 @@ public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickList
 
         @Override
         public void onRemoteUserLeaveRoom(String s, int i) {
-            mTRTCCloud.stopRemoteView(s);
+            mTRTCCloud.stopRemoteView(s, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
             mStartPKFlag = false;
             mButtonStartPK.setText(R.string.connectotherroom_start_pk);
         }
@@ -212,7 +215,7 @@ public class RoomPKActivity extends TRTCBaseActivity implements View.OnClickList
             Log.d(TAG, "sdk callback onError");
             RoomPKActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }

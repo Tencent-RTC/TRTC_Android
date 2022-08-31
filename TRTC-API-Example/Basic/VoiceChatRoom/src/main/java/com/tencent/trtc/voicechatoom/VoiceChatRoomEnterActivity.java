@@ -21,26 +21,26 @@ import com.tencent.trtc.debug.Constant;
  * - 以主播角色进入房间{@link VoiceChatRoomAnchorActivity}
  * - 以观众角色进入房间{@link VoiceChatRoomAudienceActivity}
  *
- * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a915a4b3abca0e41f057022a4587faf66}
- */
-
-/**
+ * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
+ * .html#a915a4b3abca0e41f057022a4587faf66}
+ *
  * Interactive Live Audio Streaming Entrance (enter a room after specifying the room ID and selecting a role)
  *
  * - Enter a room as a room owner: {@link VoiceChatRoomAnchorActivity}
  * - Enter a room as a listener: {@link VoiceChatRoomAudienceActivity}
  *
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a915a4b3abca0e41f057022a4587faf66}.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a915a4b3abca0e41f057022a4587faf66}.
  */
 public class VoiceChatRoomEnterActivity extends AppCompatActivity {
-    private EditText    mEditInputUserId;
-    private EditText    mEditInputRoomId;
-    private Button      mButtonAnchor;
-    private Button      mButtonAudience;
-    private Button      mButtonEnterRoom;
-    private ImageView   mImageBack;
+    private EditText  mEditInputUserId;
+    private EditText  mEditInputRoomId;
+    private Button    mButtonAnchor;
+    private Button    mButtonAudience;
+    private Button    mButtonEnterRoom;
+    private ImageView mImageBack;
 
-    private int         mRoleSelectFlag = TRTCCloudDef.TRTCRoleAnchor;
+    private int mRoleSelectFlag = TRTCCloudDef.TRTCRoleAnchor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,10 +61,12 @@ public class VoiceChatRoomEnterActivity extends AppCompatActivity {
         mButtonAnchor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mRoleSelectFlag != TRTCCloudDef.TRTCRoleAnchor){
+                if (mRoleSelectFlag != TRTCCloudDef.TRTCRoleAnchor) {
                     mRoleSelectFlag = TRTCCloudDef.TRTCRoleAnchor;
-                    mButtonAnchor.setBackgroundColor(getResources().getColor(R.color.voicechatroom_single_select_button_bg));
-                    mButtonAudience.setBackgroundColor(getResources().getColor(R.color.voicechatroom_single_select_button_bg_off));
+                    mButtonAnchor
+                            .setBackgroundColor(getResources().getColor(R.color.voicechatroom_single_select_button_bg));
+                    mButtonAudience.setBackgroundColor(
+                            getResources().getColor(R.color.voicechatroom_single_select_button_bg_off));
                 }
             }
         });
@@ -72,10 +74,12 @@ public class VoiceChatRoomEnterActivity extends AppCompatActivity {
         mButtonAudience.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mRoleSelectFlag != TRTCCloudDef.TRTCRoleAudience){
+                if (mRoleSelectFlag != TRTCCloudDef.TRTCRoleAudience) {
                     mRoleSelectFlag = TRTCCloudDef.TRTCRoleAudience;
-                    mButtonAnchor.setBackgroundColor(getResources().getColor(R.color.voicechatroom_single_select_button_bg_off));
-                    mButtonAudience.setBackgroundColor(getResources().getColor(R.color.voicechatroom_single_select_button_bg));
+                    mButtonAnchor.setBackgroundColor(
+                            getResources().getColor(R.color.voicechatroom_single_select_button_bg_off));
+                    mButtonAudience
+                            .setBackgroundColor(getResources().getColor(R.color.voicechatroom_single_select_button_bg));
                 }
             }
         });
@@ -98,23 +102,25 @@ public class VoiceChatRoomEnterActivity extends AppCompatActivity {
     }
 
     private void startEnterRoom() {
-        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim())
-                || TextUtils.isEmpty(mEditInputRoomId.getText().toString().trim())) {
-            Toast.makeText(VoiceChatRoomEnterActivity.this, getString(R.string.voicechatroom_room_input_error_tip), Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim()) || TextUtils
+                .isEmpty(mEditInputRoomId.getText().toString().trim())) {
+            Toast.makeText(VoiceChatRoomEnterActivity.this, getString(R.string.voicechatroom_room_input_error_tip),
+                    Toast.LENGTH_LONG).show();
             return;
         }
-        if(mRoleSelectFlag == TRTCCloudDef.TRTCRoleAnchor){
+        if (mRoleSelectFlag == TRTCCloudDef.TRTCRoleAnchor) {
             Intent intent = new Intent(VoiceChatRoomEnterActivity.this, VoiceChatRoomAnchorActivity.class);
             intent.putExtra(Constant.ROOM_ID, mEditInputRoomId.getText().toString().trim());
             intent.putExtra(Constant.USER_ID, mEditInputUserId.getText().toString().trim());
             startActivity(intent);
-        }else if(mRoleSelectFlag == TRTCCloudDef.TRTCRoleAudience){
+        } else if (mRoleSelectFlag == TRTCCloudDef.TRTCRoleAudience) {
             Intent intent = new Intent(VoiceChatRoomEnterActivity.this, VoiceChatRoomAudienceActivity.class);
             intent.putExtra(Constant.ROOM_ID, mEditInputRoomId.getText().toString().trim());
             intent.putExtra(Constant.USER_ID, mEditInputUserId.getText().toString().trim());
             startActivity(intent);
-        }else{
-            Toast.makeText(VoiceChatRoomEnterActivity.this, getString(R.string.voicechatroom_please_select_role), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(VoiceChatRoomEnterActivity.this, getString(R.string.voicechatroom_please_select_role),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -32,31 +32,32 @@ import java.util.regex.Pattern;
  *
  * 包含如下简单功能：
  * - 切换房间{@link TRTCCloud#switchRoom(TRTCCloudDef.TRTCSwitchRoomConfig)} ,详见参数说明
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a09fbe471def0c1790357fc2b70149784}
- */
-
-/**
+ * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
+ * .html#a09fbe471def0c1790357fc2b70149784}
+ *
  * Room Switching
  *
  * Features:
- * - Switch rooms: {@link TRTCCloud#switchRoom(TRTCCloudDef.TRTCSwitchRoomConfig)}. For details, see the parameter description.
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a09fbe471def0c1790357fc2b70149784}.
+ * - Switch rooms: {@link TRTCCloud#switchRoom(TRTCCloudDef.TRTCSwitchRoomConfig)}. For details, see the parameter
+ * description.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a09fbe471def0c1790357fc2b70149784}.
  */
 public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String     TAG                     = "SwitchRoomActivity";
+    private static final String TAG = "SwitchRoomActivity";
 
-    private ImageView               mImageBack;
-    private Button                  mButtonStartPush;
-    private Button                  mButtonSwitchRoom;
-    private EditText                mEditRoomId;
-    private TXCloudVideoView        mTXCloudPreviewView;
-    private TextView                mTextTitle;
+    private ImageView        mImageBack;
+    private Button           mButtonStartPush;
+    private Button           mButtonSwitchRoom;
+    private EditText         mEditRoomId;
+    private TXCloudVideoView mTXCloudPreviewView;
+    private TextView         mTextTitle;
 
-    private TRTCCloud               mTRTCCloud;
-    private String                  mLocalUserId;
-    private boolean                 mStartPushFlag      = false;
-    private int                     mRemoteRoomId;
+    private TRTCCloud mTRTCCloud;
+    private String    mLocalUserId;
+    private boolean   mStartPushFlag = false;
+    private int       mRemoteRoomId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,12 +72,12 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
 
     private void initView() {
 
-        mTextTitle              = findViewById(R.id.tv_room_number);
-        mImageBack              = findViewById(R.id.iv_back);
-        mButtonStartPush        = findViewById(R.id.btn_start_push);
-        mEditRoomId             = findViewById(R.id.et_room_id);
-        mTXCloudPreviewView     = findViewById(R.id.txcvv_main_local);
-        mButtonSwitchRoom       = findViewById(R.id.btn_switch_room);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mImageBack = findViewById(R.id.iv_back);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
+        mButtonSwitchRoom = findViewById(R.id.btn_switch_room);
 
         mImageBack.setOnClickListener(this);
         mButtonStartPush.setOnClickListener(this);
@@ -86,7 +87,7 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
         mTextTitle.setText(getString(R.string.switchroom_roomid) + ":" + mEditRoomId.getText().toString());
     }
 
-    private void enterRoom(String roomId,  String userId) {
+    private void enterRoom(String roomId, String userId) {
         mTRTCCloud = TRTCCloud.sharedInstance(getApplicationContext());
         mTRTCCloud.setListener(new TRTCCloudImplListener(SwitchRoomActivity.this));
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
@@ -102,7 +103,7 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
         mTextTitle.setText(getString(R.string.switchroom_roomid) + ":" + roomId);
     }
 
-    private void exitRoom(){
+    private void exitRoom() {
         if (mTRTCCloud != null) {
             mTRTCCloud.stopAllRemoteView();
             mTRTCCloud.stopLocalAudio();
@@ -117,42 +118,44 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.iv_back){
+        if (view.getId() == R.id.iv_back) {
             finish();
-        }else if(view.getId() == R.id.btn_start_push){
+        } else if (view.getId() == R.id.btn_start_push) {
             String roomId = mEditRoomId.getText().toString();
-            if(!mStartPushFlag){
-                if(!TextUtils.isEmpty(roomId)){
+            if (!mStartPushFlag) {
+                if (!TextUtils.isEmpty(roomId)) {
                     mButtonSwitchRoom.setBackgroundColor(getResources().getColor(R.color.switchroom_button_select));
                     mButtonStartPush.setText(getString(R.string.switchroom_stop_push));
                     enterRoom(roomId, mLocalUserId);
                     mStartPushFlag = true;
-                }else{
-                    Toast.makeText(SwitchRoomActivity.this, getString(R.string.switchroom_please_input_roomid), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SwitchRoomActivity.this, getString(R.string.switchroom_please_input_roomid),
+                            Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 mButtonSwitchRoom.setBackgroundColor(getResources().getColor(R.color.switchroom_button_select_off));
                 mButtonStartPush.setText(getString(R.string.switchroom_start_push));
                 exitRoom();
                 mStartPushFlag = false;
             }
 
-        }else if(view.getId() == R.id.btn_switch_room){
+        } else if (view.getId() == R.id.btn_switch_room) {
             String roomId = mEditRoomId.getText().toString();
-            if(!mStartPushFlag){
+            if (!mStartPushFlag) {
                 return;
             }
-            if(isRoomNumber(roomId)){
+            if (isRoomNumber(roomId)) {
                 mRemoteRoomId = Integer.parseInt(roomId);
                 switchRoom(roomId);
-            }else{
-                Toast.makeText(SwitchRoomActivity.this, getString(R.string.switchroom_please_input_roomid), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(SwitchRoomActivity.this, getString(R.string.switchroom_please_input_roomid),
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public static boolean isRoomNumber(String roomId){
-        if(TextUtils.isEmpty(roomId)){
+    public static boolean isRoomNumber(String roomId) {
+        if (TextUtils.isEmpty(roomId)) {
             return false;
         }
         String regex = "[1-9]{1}[0-9]{7}";
@@ -179,11 +182,13 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
         @Override
         public void onSwitchRoom(int i, String s) {
             Log.d(TAG, "onSwitchRoom: i = " + i + " , s " + s);
-            if(i == 0){
-                Toast.makeText(SwitchRoomActivity.this,getString(R.string.switchroom_toast_switch_success), Toast.LENGTH_SHORT).show();
+            if (i == 0) {
+                Toast.makeText(SwitchRoomActivity.this, getString(R.string.switchroom_toast_switch_success),
+                        Toast.LENGTH_SHORT).show();
                 mTextTitle.setText(getString(R.string.switchroom_roomid) + ":" + mRemoteRoomId);
-            }else{
-                Toast.makeText(SwitchRoomActivity.this,getString(R.string.switchroom_toast_switch_failed), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(SwitchRoomActivity.this, getString(R.string.switchroom_toast_switch_failed),
+                        Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -192,7 +197,7 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
             Log.d(TAG, "sdk callback onError");
             SwitchRoomActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }
