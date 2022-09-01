@@ -68,6 +68,6 @@ _[English](README.md) | 简体中文_
 
 - 如果你想了解TRTC SDK在复杂场景下的应用，可以参考[更多场景案例](https://cloud.tencent.com/document/product/647/57486)；
 
-- 完整的 API 文档见 [SDK 的 API 文档](http://doc.qcloudtrtc.com/md_introduction_trtc_Android_%E6%A6%82%E8%A7%88.html)；
+- 完整的 API 文档见 [SDK 的 API 文档](https://cloud.tencent.com/document/product/647/32267)；
 - 如果需要售后技术支持, 你可以点击[这里](https://cloud.tencent.com/document/product/647/19906)；
 - 如果发现了示例代码的 bug，欢迎提交 issue；
