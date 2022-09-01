@@ -3,7 +3,7 @@
 _[简体中文](README-zh_CN.md) | English_
 ## Overview
 
-Leveraging Tencent's many years of experience in network and audio/video technologies, Tencent Real-Time Communication (TRTC) offers solutions for group audio/video calls and low-latency interactive live streaming. With TRTC, you can quickly develop cost-effective, low-latency, and high-quality interactive audio/video services. [Learn more](https://cloud.tencent.com/document/product/647/16788)...
+Leveraging Tencent's many years of experience in network and audio/video technologies, Tencent Real-Time Communication (TRTC) offers solutions for group audio/video calls and low-latency interactive live streaming. With TRTC, you can quickly develop cost-effective, low-latency, and high-quality interactive audio/video services. [Learn more](https://www.tencentcloud.com/document/product/647/35078)...
 
 > We offer SDKs for web, Android, iOS, Windows, Flutter, WeChat Mini Program, and [other mainstream platforms](https://github.com/LiteAVSDK?q=TRTC_&type=all&sort=).
 
@@ -26,7 +26,7 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 - All platforms: Fixed the occasional check-in and check-out callback exception;
 - Windows: Fixed the problem that the content of the new window is clipped when switching the sharing window;
 
-For the release notes of earlier versions, click [More](https://cloud.tencent.com/document/product/647/46907).
+For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 
 
 ## Contents
@@ -65,10 +65,15 @@ For the release notes of earlier versions, click [More](https://cloud.tencent.co
 
 
 ## Contact Us
-- If you have questions, see [FAQs](https://cloud.tencent.com/document/product/647/43018).
+- If you have questions, see [FAQs](https://www.tencentcloud.com/document/product/647/36057?lang=en&pg=).
 
-- To learn about how the TRTC SDK can be used in different scenarios, see [Sample Code](https://intl.cloud.tencent.com/document/product/647/42963).
+- To learn about how the TRTC SDK can be used in different scenarios, see [Sample Code](https://www.tencentcloud.com/document/product/647/42963).
 
-- For complete API documentation, see [SDK API Documentation](http://doc.qcloudtrtc.com/md_introduction_trtc_Android_%E6%A6%82%E8%A7%88.html).
-- [Contact us](https://intl.cloud.tencent.com/contact-us) for technical support.
-- To report bugs in our sample code, please create an issue.
+- For complete API documentation, see [SDK API Documentation](https://www.tencentcloud.com/document/product/647/35125).
+
+- Communication & Feedback   
+Welcome to join our Telegram Group to communicate with our professional engineers! We are more than happy to hear from you~
+Click to join: [https://t.me/+EPk6TMZEZMM5OGY1](https://t.me/+EPk6TMZEZMM5OGY1)   
+Or scan the QR code   
+  <img src="https://qcloudimg.tencent-cloud.cn/raw/79cbfd13877704ff6e17f30de09002dd.jpg" width="300px">    
+
