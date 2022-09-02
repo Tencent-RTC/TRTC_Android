@@ -2,7 +2,7 @@
 [简体中文](README-zh_CN.md) | English
 
 ## Background
-This open-source demo shows how to use some APIs of the [TRTC SDK](https://cloud.tencent.com/document/product/647/32689) to help you better understand the APIs and use them to implement some basic TRTC features. 
+This open-source demo shows how to use some APIs of the [TRTC SDK](https://www.tencentcloud.com/document/product/647/34615) to help you better understand the APIs and use them to implement some basic TRTC features. 
 
 ## Contents
 This demo covers the following features (click to view the details of a feature):
@@ -31,7 +31,7 @@ This demo covers the following features (click to view the details of a feature)
   - [Cross-Room Competition](./Advanced/RoomPk)
   - [Third-Party Beauty Filters](./Advanced/ThirdBeauty)
   
->  Note: for clarity purposes, the naming of folders in the project may differ slightly from a standard Android Studio project in terms of letter case. If you have a problem with this, please send us your feedback [here](https://wj.qq.com/s2/8393434/418a/).
+>  Note: for clarity purposes, the naming of folders in the project may differ slightly from a standard Android Studio project in terms of letter case. 
 
 
 ## Environment Requirements
@@ -47,11 +47,11 @@ You have [signed up for a Tencent Cloud account](https://intl.cloud.tencent.com/
 
 
 ### Obtaining `SDKAPPID` and `SECRETKEY`
-1. Log in to the TRTC console and select **Development Assistance** > **[Demo Quick Run](https://console.cloud.tencent.com/trtc/quickstart)**.
-2. Enter an application name such as `TestTRTC`, and click **Create**.
+1. Log in to the TRTC console and select **Application Management** > **[Demo Quick Run](https://console.tencentcloud.com/trtc/app/create)**.
+2. Enter an application name such as `TestTRTC`, and click **Next**.
 
-![ #900px](https://main.qcloudimg.com/raw/169391f6711857dca6ed8cfce7b391bd.png)
-3. Click **Next** to view your `SDKAppID` and key.
+![ #900px](https://qcloudimg.tencent-cloud.cn/raw/51c73a617e69a76ed26e6f74b0071ec9.png)
+3. Click **Next** to view your `SDKAppID` and `Secret key`.
 
 
 ### Configuring demo project files
@@ -60,23 +60,18 @@ You have [signed up for a Tencent Cloud account](https://intl.cloud.tencent.com/
 3. Set parameters in `GenerateTestUserSig.java` as follows:
   - `SDKAPPID`: `PLACEHOLDER` by default. Set it to the actual `SDKAppID`.
   - `SECRETKEY`: left empty by default. Set it to the actual key.
- ![ #900px](https://main.qcloudimg.com/raw/8fb309ce8c378dd3ad2c0099c57795a5.png)
+ ![ #900px](https://qcloudimg.tencent-cloud.cn/raw/429ae90ac533b37c0036bebdc38d0488/TRTC-create-application-sdkAppId.png)
 
 4. Return to the TRTC console and click **Next**.
 5. Click **Return to Overview Page**.
 
 >!The method for generating `UserSig` described in this document involves configuring `SECRETKEY` in client code. In this method, `SECRETKEY` may be easily decompiled and reversed, and if your key is disclosed, attackers can steal your Tencent Cloud traffic. Therefore, **this method is suitable only for the local execution and debugging of the demo**.
->The correct `UserSig` distribution method is to integrate the calculation code of `UserSig` into your server and provide an application-oriented API. When `UserSig` is needed, your application can make a request to the business server for dynamic `UserSig`. For more information, please see [How to Calculate UserSig](https://cloud.tencent.com/document/product/647/17275#Server).
+>The correct `UserSig` distribution method is to integrate the calculation code of `UserSig` into your server and provide an application-oriented API. When `UserSig` is needed, your application can make a request to the business server for dynamic `UserSig`. For more information, please see [How to Calculate UserSig](https://www.tencentcloud.com/document/product/647/35166).
 
 ## Configuring CDN parameters (optional)
 To use CDN services, which are needed for co-anchoring, CDN playback, etc., you need to configure three **live streaming** parameters.
-- `BIZID`
-- `APPID`
-- `CDN_DOMAIN_NAME`
 
-![ #900px](https://liteav.sdk.qcloud.com/doc/res/trtc/picture/bizid_appid_scree.png)
-
-For detailed instructions, see [CDN Relayed Live Streaming](https://cloud.tencent.com/document/product/647/16826#.E9.80.82.E7.94.A8.E5.9C.BA.E6.99.AF).
+For detailed instructions, see [CDN Relayed Live Streaming](https://www.tencentcloud.com/document/product/647/47858).
 
 ### Integrating the SDK
 You can use JCenter for automatic loading or manually download the AAR file and import it to your project. The demo uses the first method by default.
@@ -113,7 +108,7 @@ defaultConfig {
 #### Method 2: manual download (AAR)
 If you have difficulty accessing JCenter, you can manually download the SDK and integrate it into your project.
 
-1. Download the latest version of the [TRTC SDK](https://liteav.sdk.qcloud.com/download/latest/TXLiteAVSDK_TRTC_Android_latest.zip).
+1. Download the latest version of the [TRTC SDK](https://liteav.sdk.qcloud.com/download/latest/en/TXLiteAVSDK_TRTC_Android_en_latest.zip).
 2. Copy the downloaded AAR file to the **app/libs** directory of your project.
 3. Add **flatDir** to `build.gradle` under the project’s root directory and specify a local path for the repository.
 ```
@@ -153,10 +148,15 @@ defaultConfig {
 ### Compiling and running the project
 Open the project with Android Studio, connect to an Android device, and compile and run the project.
 
-# Contact Us
-- [FAQs](https://cloud.tencent.com/document/product/647/34399)
-- [Documentation](https://cloud.tencent.com/document/product/647/16788)(Cloud+ Community)
-- [API document](https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html)
-- [Template for issue reporting](https://github.com/tencentyun/TRTCSDK/issues/53)
+## Contact Us
+- If you have questions, see [FAQs](https://www.tencentcloud.com/document/product/647/36057).
 
-> If the above does not solve your problem, [report](https://wj.qq.com/s2/8393513/f442/) it to our **engineer**.
+- To learn about how the TRTC SDK can be used in different scenarios, see [Sample Code](https://www.tencentcloud.com/document/product/647/42963).
+
+- For complete API documentation, see [SDK API Documentation](https://www.tencentcloud.com/document/product/647/35125).
+
+- Communication & Feedback   
+Welcome to join our Telegram Group to communicate with our professional engineers! We are more than happy to hear from you~
+Click to join: [https://t.me/+EPk6TMZEZMM5OGY1](https://t.me/+EPk6TMZEZMM5OGY1)   
+Or scan the QR code   
+  <img src="https://qcloudimg.tencent-cloud.cn/raw/79cbfd13877704ff6e17f30de09002dd.jpg" width="300px">    
