@@ -76,13 +76,25 @@
 
                 <Button
                     android:id="@+id/screen_btn_mute_audio"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:padding="5dp"
                     android:text="@string/screenshare_mute_audio"
                     android:textColor="@android:color/white"
                     android:background="@drawable/common_button_bg" />
+
+                <Button
+                    android:id="@+id/screen_btn_share_system_audio"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:text="@string/screenshare_start_share_system_audio"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/common_button_bg" />
+
             </LinearLayout>
 
 

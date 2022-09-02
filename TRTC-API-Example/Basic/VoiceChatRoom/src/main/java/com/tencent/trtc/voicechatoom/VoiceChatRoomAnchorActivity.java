@@ -1,5 +1,7 @@
 package com.tencent.trtc.voicechatoom;
 
+import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_VOICE_CHATROOM;
+
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -23,8 +25,6 @@ import com.tencent.trtc.debug.Constant;
 import com.tencent.trtc.debug.GenerateTestUserSig;
 
 import java.lang.ref.WeakReference;
-
-import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_VOICE_CHATROOM;
 /**
  * TRTC 语音互动聊天模块主播角色页面
  *
@@ -32,32 +32,33 @@ import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_VOICE_CHATROOM;
  * - 静音{@link VoiceChatRoomAnchorActivity#muteAudio()}
  * - 上麦/下麦{@link VoiceChatRoomAudienceActivity#upDownMic()}
  *
- * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a915a4b3abca0e41f057022a4587faf66}
- */
-
-/**
+ * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
+ * .html#a915a4b3abca0e41f057022a4587faf66}
+ *
  * Interactive Live Audio Streaming View for Room Owner
  *
  * Features:
  * - Mute: {@link VoiceChatRoomAnchorActivity#muteAudio()}
  * - Become speaker/listener: {@link VoiceChatRoomAudienceActivity#upDownMic()}
  *
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a915a4b3abca0e41f057022a4587faf66}
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a915a4b3abca0e41f057022a4587faf66}
  */
+
 public class VoiceChatRoomAnchorActivity extends TRTCBaseActivity {
-    private static final String             TAG                             = "VoiceChatRoomAnchor";
+    private static final String TAG = "VoiceChatRoomAnchor";
 
-    private Button                          mButtonMuteAudio;
-    private Button                          mButtonDownMic;
-    private TextView                        mTextTitle;
-    private ImageView                       mImageBack;
+    private Button    mButtonMuteAudio;
+    private Button    mButtonDownMic;
+    private TextView  mTextTitle;
+    private ImageView mImageBack;
 
-    private TRTCCloud                       mTRTCCloud;                     // SDK 核心类
-    private String                          mRoomId;                        // 房间Id
-    private String                          mUserId;                        // 用户Id
-    private boolean                         mMuteAudioFlag = true;          // 默认不静音
-    private boolean                         mUpMicFlag = true;              // 默认上麦（主播角色）
-    private String                          mRemoteUserId;
+    private TRTCCloud mTRTCCloud;                     // SDK 核心类
+    private String    mRoomId;                        // 房间Id
+    private String    mUserId;                        // 用户Id
+    private boolean   mMuteAudioFlag = true;          // 默认不静音
+    private boolean   mUpMicFlag     = true;              // 默认上麦（主播角色）
+    private String    mRemoteUserId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,10 +93,10 @@ public class VoiceChatRoomAnchorActivity extends TRTCBaseActivity {
     }
 
     private void initView() {
-        mButtonMuteAudio    = findViewById(R.id.btn_mute_audio);
-        mButtonDownMic      = findViewById(R.id.btn_down_mic);
-        mTextTitle          = findViewById(R.id.tv_room_number);
-        mImageBack          = findViewById(R.id.iv_back);
+        mButtonMuteAudio = findViewById(R.id.btn_mute_audio);
+        mButtonDownMic = findViewById(R.id.btn_down_mic);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mImageBack = findViewById(R.id.iv_back);
 
         mTextTitle.setText(getString(R.string.voicechatroom_roomid) + mRoomId);
 
@@ -122,28 +123,28 @@ public class VoiceChatRoomAnchorActivity extends TRTCBaseActivity {
     }
 
     private void upDownMic() {
-        if(mUpMicFlag){
+        if (mUpMicFlag) {
             mUpMicFlag = false;
             mTRTCCloud.switchRole(TRTCCloudDef.TRTCRoleAudience);
             mTRTCCloud.stopLocalAudio();
-            mButtonDownMic.setText( getString(R.string.voicechatroom_up_mic));
-        }else{
+            mButtonDownMic.setText(getString(R.string.voicechatroom_up_mic));
+        } else {
             mUpMicFlag = true;
             mTRTCCloud.switchRole(TRTCCloudDef.TRTCRoleAnchor);
             mTRTCCloud.startLocalAudio(TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT);
-            mButtonDownMic.setText( getString(R.string.voicechatroom_down_mic));
+            mButtonDownMic.setText(getString(R.string.voicechatroom_down_mic));
         }
     }
 
     private void muteAudio() {
-        if(mMuteAudioFlag){
+        if (mMuteAudioFlag) {
             mMuteAudioFlag = false;
             mTRTCCloud.muteRemoteAudio(mRemoteUserId, true);
-            mButtonMuteAudio.setText( getString(R.string.voicechatroom_stop_mute_audio));
-        }else {
+            mButtonMuteAudio.setText(getString(R.string.voicechatroom_stop_mute_audio));
+        } else {
             mMuteAudioFlag = true;
             mTRTCCloud.muteRemoteAudio(mRemoteUserId, false);
-            mButtonMuteAudio.setText( getString(R.string.voicechatroom_mute_audio));
+            mButtonMuteAudio.setText(getString(R.string.voicechatroom_mute_audio));
         }
     }
 
@@ -188,7 +189,7 @@ public class VoiceChatRoomAnchorActivity extends TRTCBaseActivity {
             Log.d(TAG, "sdk callback onError");
             VoiceChatRoomAnchorActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }

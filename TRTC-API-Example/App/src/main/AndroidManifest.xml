@@ -33,6 +33,11 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name="com.tencent.liteav.utils.ToolKitService"
+            android:foregroundServiceType="mediaProjection"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

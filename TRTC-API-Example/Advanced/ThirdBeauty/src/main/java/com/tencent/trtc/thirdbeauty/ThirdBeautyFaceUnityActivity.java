@@ -26,8 +26,6 @@ import java.util.List;
 
 /**
  * TRTC 第三方美颜页面
- *
- * <p>
  * 接入步骤如下：
  * - 下载 https://github.com/Faceunity/FUTRTCDemoDroid 工程，将 faceunity 模块添加到工程中；
  * - 如需指定应用的 so 架构，可以修改当前模块 build.gradle：
@@ -47,26 +45,18 @@ import java.util.List;
  * .setInputTextureType(0)    //TRTC 这里用的0 TEXTURE_2D
  * .setCreateFaceBeauty(true)
  * .build();
- * - TRTC 设置 {@link TRTCCloud#setLocalVideoProcessListener} 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
- * - 在 {@link TRTCCloudListener.TRTCVideoFrameListener#onProcessVideoFrame} 回调方法中使用第三方美颜处理视频数据，详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
- * </p>
- */
-
-
-/**
+ * - TRTC 设置 {@link TRTCCloud#setLocalVideoProcessListener} 回调, 详见API说明文档 {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
+ * - 在 {@link TRTCCloudListener.TRTCVideoFrameListener#onProcessVideoFrame} 回调方法中使用第三方美颜处理视频数据，详见API说明文档 {https
+ * ://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
  * Third-Party Beauty Filters
- * <p>
  * The steps are detailed below:
  * - Download FaceUnity at https://github.com/Faceunity/FUTRTCDemoDroid and import it to your project.
  * You can modify `build.gradle` of the current module to specify SO architecture for the app:
  * android {
- * <p>
  * defaultConfig {
- * <p>
  * ndk {
  * abiFilters 'armeabi-v7a', 'arm64-v8a'
- * <p>
- * <p>
  * - Initialize the beauty filter module {@link FURenderer} as needed:
  * FURenderer.setup(getApplicationContext());
  * mFURenderer = new FURenderer.Builder(getApplicationContext())
@@ -74,8 +64,11 @@ import java.util.List;
  * .setInputTextureType(0)    // In TRTC, the parameter is `0` (TEXTURE_2D)
  * .setCreateFaceBeauty(true)
  * .build();
- * - For how to set the callback using {@link TRTCCloud#setLocalVideoProcessListener}, see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}.
- * - For how to use third-party beauty filters to process video data in the {@link TRTCCloudListener.TRTCVideoFrameListener#onProcessVideoFrame} callback, see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}.
+ * - For how to set the callback using {@link TRTCCloud#setLocalVideoProcessListener}, see the API document {https
+ * ://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}.
+ * - For how to use third-party beauty filters to process video data in the
+ * {@link TRTCCloudListener.TRTCVideoFrameListener#onProcessVideoFrame} callback, see the API document {https
+ * ://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}.
  */
 public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements View.OnClickListener {
 
@@ -94,7 +87,7 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
     private TRTCCloud    mTRTCCloud;
     private List<String> mRemoteUserIdList;
     private boolean      mStartPushFlag = false;
-//    private FURenderer mFURenderer;
+    //    private FURenderer mFURenderer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,12 +96,12 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
 
         getSupportActionBar().hide();
 
-//        FURenderer.setup(getApplicationContext());
-//        mFURenderer = new FURenderer.Builder(getApplicationContext())
-//                .setCreateEglContext(false)
-//                .setInputTextureType(0)   /* TRTC 这里用的0 TEXTURE_2D*/
-//                .setCreateFaceBeauty(true)
-//                .build();
+        //        FURenderer.setup(getApplicationContext());
+        //        mFURenderer = new FURenderer.Builder(getApplicationContext())
+        //                .setCreateEglContext(false)
+        //                .setInputTextureType(0)   /* TRTC 这里用的0 TEXTURE_2D*/
+        //                .setCreateFaceBeauty(true)
+        //                .build();
 
         mTRTCCloud = TRTCCloud.sharedInstance(getApplicationContext());
         mTRTCCloud.setListener(new TRTCCloudImplListener(ThirdBeautyFaceUnityActivity.this));
@@ -179,51 +172,51 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
     }
 
     private void initData() {
-//                  1. 设置 TRTCVideoFrameListener 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
-//        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
-//        TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
-//            @Override
-//            public void onGLContextCreated() {
-////                  2. GLContext 创建
-//               mFURenderer.onSurfaceCreated();
-//            }
-//
-//            @Override
-//            public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame srcFrame,
-//            TRTCCloudDef.TRTCVideoFrame dstFrame) {
-////                  3. 调用第三方美颜模块处理, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
-//               dstFrame.texture.textureId = mFURenderer
-//               .onDrawFrameSingleInput(srcFrame.texture.textureId, srcFrame.width, srcFrame.height);
-//                return 0;
-//            }
-//
-//            @Override
-//            public void onGLContextDestory() {
-////                   4. GLContext 销毁
-//                mFURenderer.onSurfaceDestroyed();
-//            }
-//        });
-//
-//        mSeekBlurLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                if (mStartPushFlag && fromUser) {
-////                    5. 设置磨皮级别
-//                    mFURenderer.getFaceBeautyModule().setBlurLevel(seekBar.getProgress() / 9f);
-//                }
-//                mTextBlurLevel.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
+        //                  1. 设置 TRTCVideoFrameListener 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
+        //        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
+        //        TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
+        //            @Override
+        //            public void onGLContextCreated() {
+        ////                  2. GLContext 创建
+        //               mFURenderer.onSurfaceCreated();
+        //            }
+        //
+        //            @Override
+        //            public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame srcFrame,
+        //            TRTCCloudDef.TRTCVideoFrame dstFrame) {
+        ////                  3. 调用第三方美颜模块处理, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
+        //               dstFrame.texture.textureId = mFURenderer
+        //               .onDrawFrameSingleInput(srcFrame.texture.textureId, srcFrame.width, srcFrame.height);
+        //                return 0;
+        //            }
+        //
+        //            @Override
+        //            public void onGLContextDestory() {
+        ////                   4. GLContext 销毁
+        //                mFURenderer.onSurfaceDestroyed();
+        //            }
+        //        });
+        //
+        //        mSeekBlurLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        //            @Override
+        //            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        //                if (mStartPushFlag && fromUser) {
+        ////                    5. 设置磨皮级别
+        //                    mFURenderer.getFaceBeautyModule().setBlurLevel(seekBar.getProgress() / 9f);
+        //                }
+        //                mTextBlurLevel.setText(String.valueOf(progress));
+        //            }
+        //
+        //            @Override
+        //            public void onStartTrackingTouch(SeekBar seekBar) {
+        //
+        //            }
+        //
+        //            @Override
+        //            public void onStopTrackingTouch(SeekBar seekBar) {
+        //
+        //            }
+        //        });
     }
 
     @Override
@@ -267,7 +260,7 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
             } else {
                 if (mRemoteUserIdList.contains(userId)) {
                     mRemoteUserIdList.remove(userId);
-                    mTRTCCloud.stopRemoteView(userId);
+                    mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 }
             }
             refreshRemoteVideo();
@@ -278,8 +271,8 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
                 for (int i = 0; i < mRemoteUserIdList.size() || i < 6; i++) {
                     if (i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))) {
                         mRemoteVideoList.get(i).setVisibility(View.VISIBLE);
-                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i),
-                                TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideoList.get(i));
+                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                                mRemoteVideoList.get(i));
                     } else {
                         mRemoteVideoList.get(i).setVisibility(View.GONE);
                     }

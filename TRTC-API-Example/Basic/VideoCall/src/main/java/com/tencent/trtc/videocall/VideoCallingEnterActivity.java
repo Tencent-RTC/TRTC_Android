@@ -16,9 +16,7 @@ import com.tencent.trtc.debug.Constant;
  * TRTC视频通话的入口页面（可以设置房间id和用户id）
  *
  * - 可跳转TRTC视频通话页面{@link VideoCallingActivity}
- */
-
-/**
+ *
  * Video Call Entrance View (set room ID and user ID)
  *
  * - Direct to the video call view: {@link VideoCallingActivity}
@@ -61,9 +59,10 @@ public class VideoCallingEnterActivity extends AppCompatActivity {
     }
 
     private void startEnterRoom() {
-        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim())
-                || TextUtils.isEmpty(mEditInputRoomId.getText().toString().trim())) {
-            Toast.makeText(VideoCallingEnterActivity.this, getString(R.string.videocall_room_input_error_tip), Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim()) || TextUtils
+                .isEmpty(mEditInputRoomId.getText().toString().trim())) {
+            Toast.makeText(VideoCallingEnterActivity.this, getString(R.string.videocall_room_input_error_tip),
+                    Toast.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(VideoCallingEnterActivity.this, VideoCallingActivity.class);

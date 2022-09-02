@@ -33,9 +33,7 @@ import java.util.List;
  * - 免提(听筒/扬声器切换){@link AudioCallingActivity#audioRoute()}
  *
  * - 详见接入文档{https://cloud.tencent.com/document/product/647/42047}
- */
-
-/**
+ *
  * Audio Call
  *
  * Features:
@@ -48,24 +46,24 @@ import java.util.List;
  */
 public class AudioCallingActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String             TAG = "AudioCallingActivity";
-    private static final int                MAX_USER_COUNT = 6;
+    private static final String TAG            = "AudioCallingActivity";
+    private static final int    MAX_USER_COUNT = 6;
 
-    private TextView                        mTextTitle;
-    private ImageView                       mImageBack;
-    private List<LinearLayout>              mListUserView;
-    private List<TextView>                  mListUserIdView;
-    private List<TextView>                  mListVoiceInfo;
-    private List<TextView>                  mListNetWorkInfo;
-    private Button                          mButtonMuteAudio;
-    private Button                          mButtonAudioRoute;
-    private Button                          mButtonHangUp;
+    private TextView           mTextTitle;
+    private ImageView          mImageBack;
+    private List<LinearLayout> mListUserView;
+    private List<TextView>     mListUserIdView;
+    private List<TextView>     mListVoiceInfo;
+    private List<TextView>     mListNetWorkInfo;
+    private Button             mButtonMuteAudio;
+    private Button             mButtonAudioRoute;
+    private Button             mButtonHangUp;
 
-    private TRTCCloud                       mTRTCCloud;
-    private String                          mRoomId;
-    private String                          mUserId;
-    private boolean                         mAudioRouteFlag = true;
-    private List<String>                    mRemoteUserList = new ArrayList<>();
+    private TRTCCloud    mTRTCCloud;
+    private String       mRoomId;
+    private String       mUserId;
+    private boolean      mAudioRouteFlag = true;
+    private List<String> mRemoteUserList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,38 +97,38 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
         mButtonAudioRoute = findViewById(R.id.btn_audio_route);
         mButtonHangUp = findViewById(R.id.btn_hangup);
 
-        mListUserView       = new ArrayList<>();
-        mListUserIdView     = new ArrayList<>();
-        mListVoiceInfo      = new ArrayList<>();
-        mListNetWorkInfo    = new ArrayList<>();
+        mListUserView = new ArrayList<>();
+        mListUserIdView = new ArrayList<>();
+        mListVoiceInfo = new ArrayList<>();
+        mListNetWorkInfo = new ArrayList<>();
 
-        mListUserView.add((LinearLayout)findViewById(R.id.ll_user1));
-        mListUserView.add((LinearLayout)findViewById(R.id.ll_user2));
-        mListUserView.add((LinearLayout)findViewById(R.id.ll_user3));
-        mListUserView.add((LinearLayout)findViewById(R.id.ll_user4));
-        mListUserView.add((LinearLayout)findViewById(R.id.ll_user5));
-        mListUserView.add((LinearLayout)findViewById(R.id.ll_user6));
+        mListUserView.add((LinearLayout) findViewById(R.id.ll_user1));
+        mListUserView.add((LinearLayout) findViewById(R.id.ll_user2));
+        mListUserView.add((LinearLayout) findViewById(R.id.ll_user3));
+        mListUserView.add((LinearLayout) findViewById(R.id.ll_user4));
+        mListUserView.add((LinearLayout) findViewById(R.id.ll_user5));
+        mListUserView.add((LinearLayout) findViewById(R.id.ll_user6));
 
-        mListUserIdView.add((TextView)findViewById(R.id.tv_user1));
-        mListUserIdView.add((TextView)findViewById(R.id.tv_user2));
-        mListUserIdView.add((TextView)findViewById(R.id.tv_user3));
-        mListUserIdView.add((TextView)findViewById(R.id.tv_user4));
-        mListUserIdView.add((TextView)findViewById(R.id.tv_user5));
-        mListUserIdView.add((TextView)findViewById(R.id.tv_user6));
+        mListUserIdView.add((TextView) findViewById(R.id.tv_user1));
+        mListUserIdView.add((TextView) findViewById(R.id.tv_user2));
+        mListUserIdView.add((TextView) findViewById(R.id.tv_user3));
+        mListUserIdView.add((TextView) findViewById(R.id.tv_user4));
+        mListUserIdView.add((TextView) findViewById(R.id.tv_user5));
+        mListUserIdView.add((TextView) findViewById(R.id.tv_user6));
 
-        mListVoiceInfo.add((TextView)findViewById(R.id.tv_voice1));
-        mListVoiceInfo.add((TextView)findViewById(R.id.tv_voice2));
-        mListVoiceInfo.add((TextView)findViewById(R.id.tv_voice3));
-        mListVoiceInfo.add((TextView)findViewById(R.id.tv_voice4));
-        mListVoiceInfo.add((TextView)findViewById(R.id.tv_voice5));
-        mListVoiceInfo.add((TextView)findViewById(R.id.tv_voice6));
+        mListVoiceInfo.add((TextView) findViewById(R.id.tv_voice1));
+        mListVoiceInfo.add((TextView) findViewById(R.id.tv_voice2));
+        mListVoiceInfo.add((TextView) findViewById(R.id.tv_voice3));
+        mListVoiceInfo.add((TextView) findViewById(R.id.tv_voice4));
+        mListVoiceInfo.add((TextView) findViewById(R.id.tv_voice5));
+        mListVoiceInfo.add((TextView) findViewById(R.id.tv_voice6));
 
-        mListNetWorkInfo.add((TextView)findViewById(R.id.tv_network1));
-        mListNetWorkInfo.add((TextView)findViewById(R.id.tv_network2));
-        mListNetWorkInfo.add((TextView)findViewById(R.id.tv_network3));
-        mListNetWorkInfo.add((TextView)findViewById(R.id.tv_network4));
-        mListNetWorkInfo.add((TextView)findViewById(R.id.tv_network5));
-        mListNetWorkInfo.add((TextView)findViewById(R.id.tv_network6));
+        mListNetWorkInfo.add((TextView) findViewById(R.id.tv_network1));
+        mListNetWorkInfo.add((TextView) findViewById(R.id.tv_network2));
+        mListNetWorkInfo.add((TextView) findViewById(R.id.tv_network3));
+        mListNetWorkInfo.add((TextView) findViewById(R.id.tv_network4));
+        mListNetWorkInfo.add((TextView) findViewById(R.id.tv_network5));
+        mListNetWorkInfo.add((TextView) findViewById(R.id.tv_network6));
 
         mButtonAudioRoute.setSelected(mAudioRouteFlag);
         if (!TextUtils.isEmpty(mRoomId)) {
@@ -160,7 +158,7 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
         trtcParams.roomId = Integer.parseInt(mRoomId);
         trtcParams.userSig = GenerateTestUserSig.genTestUserSig(trtcParams.userId);
 
-        mTRTCCloud.enableAudioVolumeEvaluation(2000);
+        mTRTCCloud.enableAudioVolumeEvaluation(2000, true);
         mTRTCCloud.startLocalAudio(TRTCCloudDef.TRTC_AUDIO_QUALITY_SPEECH);
         mTRTCCloud.enterRoom(trtcParams, TRTCCloudDef.TRTC_APP_SCENE_AUDIOCALL);
     }
@@ -190,7 +188,7 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
             muteAudio();
         } else if (id == R.id.btn_audio_route) {
             audioRoute();
-        } else if (id == R.id.btn_hangup){
+        } else if (id == R.id.btn_hangup) {
             hangUp();
         }
     }
@@ -202,10 +200,10 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
     private void audioRoute() {
         mAudioRouteFlag = !mAudioRouteFlag;
         mButtonAudioRoute.setSelected(mAudioRouteFlag);
-        if(mAudioRouteFlag){
+        if (mAudioRouteFlag) {
             mTRTCCloud.setAudioRoute(TRTCCloudDef.TRTC_AUDIO_ROUTE_SPEAKER);
             mButtonAudioRoute.setText(getString(R.string.audiocall_use_receiver));
-        }else{
+        } else {
             mTRTCCloud.setAudioRoute(TRTCCloudDef.TRTC_AUDIO_ROUTE_EARPIECE);
             mButtonAudioRoute.setText(getString(R.string.audiocall_use_speaker));
         }
@@ -216,10 +214,10 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
         boolean isSelected = mButtonMuteAudio.isSelected();
         if (!isSelected) {
             mTRTCCloud.muteLocalAudio(true);
-            mButtonMuteAudio.setText( getString(R.string.audiocall_stop_mute_audio));
+            mButtonMuteAudio.setText(getString(R.string.audiocall_stop_mute_audio));
         } else {
             mTRTCCloud.muteLocalAudio(false);
-            mButtonMuteAudio.setText( getString(R.string.audiocall_mute_audio));
+            mButtonMuteAudio.setText(getString(R.string.audiocall_mute_audio));
         }
         mButtonMuteAudio.setSelected(!isSelected);
     }
@@ -254,7 +252,8 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
         }
 
         @Override
-        public void onNetworkQuality(TRTCCloudDef.TRTCQuality trtcQuality, ArrayList<TRTCCloudDef.TRTCQuality> arrayList) {
+        public void onNetworkQuality(TRTCCloudDef.TRTCQuality trtcQuality,
+                                     ArrayList<TRTCCloudDef.TRTCQuality> arrayList) {
             Log.d(TAG, "onNetworkQuality");
             if (arrayList != null && arrayList.size() > 0) {
                 int index = 0;
@@ -291,7 +290,7 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
             Log.d(TAG, "sdk callback onError");
             AudioCallingActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }
@@ -312,7 +311,7 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
         }
     }
 
-    public enum NetQuality{
+    public enum NetQuality {
         UNKNOW(0, "未定义"),
         EXCELLENT(1, "最好"),
         GOOD(2, "好"),
@@ -321,17 +320,17 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
         VBAD(5, "很差"),
         DOWN(6, "不可用");
 
-        private int     code;
-        private String  msg;
+        private int    code;
+        private String msg;
 
-        NetQuality(int code, String msg){
+        NetQuality(int code, String msg) {
             this.code = code;
-            this.msg  = msg;
+            this.msg = msg;
         }
 
-        public static String getMsg(int code){
+        public static String getMsg(int code) {
             for (NetQuality item : NetQuality.values()) {
-                if (item.code == code){
+                if (item.code == code) {
                     return item.msg;
                 }
             }

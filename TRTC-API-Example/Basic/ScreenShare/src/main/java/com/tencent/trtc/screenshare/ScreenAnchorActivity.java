@@ -1,5 +1,8 @@
 package com.tencent.trtc.screenshare;
 
+import static com.tencent.trtc.TRTCCloudDef.TRTCRoleAnchor;
+import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_VIDEOCALL;
+
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -7,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -27,9 +29,6 @@ import com.tencent.trtc.debug.GenerateTestUserSig;
 
 import java.lang.ref.WeakReference;
 
-import static com.tencent.trtc.TRTCCloudDef.TRTCRoleAnchor;
-import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_VIDEOCALL;
-
 /**
  * TRTC 屏幕分享的主播页面
  *
@@ -39,11 +38,10 @@ import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_VIDEOCALL;
  * - 开启屏幕分享{@link ScreenAnchorActivity#startScreenCapture()}
  * - 关闭屏幕共享{@link ScreenAnchorActivity#stopScreenCapture()}
  * - 打开/关闭麦克风{@link ScreenAnchorActivity#muteAudio()}
- * 
- * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#aa6671fc587513dad7df580556e43be58}
- */
-
-/**
+ *
+ * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
+ * .html#aa6671fc587513dad7df580556e43be58}
+ *
  * Screen Sharing View for Anchor
  *
  * Features:
@@ -53,25 +51,27 @@ import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_VIDEOCALL;
  * - End screen sharing: {@link ScreenAnchorActivity#stopScreenCapture()}
  * - Turn on/off the mic: {@link ScreenAnchorActivity#muteAudio()}
  *
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#aa6671fc587513dad7df580556e43be58}.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#aa6671fc587513dad7df580556e43be58}.
  */
 public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String TAG                                 = "ScreenAnchorActivity";
-    private static final int    OVERLAY_PERMISSION_REQ_CODE         = 1234;
-    private static final int    OVERLAY_PERMISSION_SHARE_REQ_CODE   = 1235;
+    private static final String TAG                               = "ScreenAnchorActivity";
+    private static final int    OVERLAY_PERMISSION_REQ_CODE       = 1234;
+    private static final int    OVERLAY_PERMISSION_SHARE_REQ_CODE = 1235;
 
-    private TextView        mTextStartScreenTips;
-    private TextView        mTextScreenCaptureInfo;
-    private ImageView       mImageBack;
-    private Button          mButtonMuteAudio;
-    private Button          mButtonStartCapture;
+    private TextView  mTextStartScreenTips;
+    private TextView  mTextScreenCaptureInfo;
+    private ImageView mImageBack;
+    private Button    mButtonMuteAudio;
+    private Button    mButtonShareSystemAudio;
+    private Button    mButtonStartCapture;
 
-    private TRTCCloud       mTRTCCloud;
-    private String          mRoomId;
-    private String          mUserId;
-    private boolean         mIsCapturing = false;
-    private FloatingView    mFloatingView;
+    private TRTCCloud    mTRTCCloud;
+    private String       mRoomId;
+    private String       mUserId;
+    private boolean      mIsCapturing = false;
+    private FloatingView mFloatingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,12 +119,14 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
     private void initView() {
         mImageBack = findViewById(R.id.screen_ic_back);
         mButtonMuteAudio = findViewById(R.id.screen_btn_mute_audio);
+        mButtonShareSystemAudio = findViewById(R.id.screen_btn_share_system_audio);
         mButtonStartCapture = findViewById(R.id.bt_start_capture);
         mTextStartScreenTips = findViewById(R.id.tv_start_screen);
         mTextScreenCaptureInfo = findViewById(R.id.tv_watch_tips);
 
         mImageBack.setOnClickListener(this);
         mButtonMuteAudio.setOnClickListener(this);
+        mButtonShareSystemAudio.setOnClickListener(this);
         mButtonStartCapture.setOnClickListener(this);
 
         mFloatingView = new FloatingView(getApplicationContext(), R.layout.screenshare_window_floating);
@@ -146,10 +148,10 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
         mTRTCCloud.startLocalAudio(TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT);
         mTRTCCloud.enterRoom(screenParams, TRTC_APP_SCENE_VIDEOCALL);
 
-        String text = getString(R.string.screenshare_room_id) + mRoomId + "\n"
-                + getString(R.string.screenshare_username) + mUserId + "\n"
-                + getString(R.string.screenshare_resolution) + "\n"
-                + getString(R.string.screenshare_watch_tips);
+        String text =
+                getString(R.string.screenshare_room_id) + mRoomId + "\n" + getString(R.string.screenshare_username)
+                        + mUserId + "\n" + getString(R.string.screenshare_resolution) + "\n" + getString(
+                        R.string.screenshare_watch_tips);
         mTextScreenCaptureInfo.setVisibility(View.VISIBLE);
         mTextScreenCaptureInfo.setText(text);
     }
@@ -171,7 +173,8 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
 
     public void requestDrawOverLays() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N && !Settings.canDrawOverlays(ScreenAnchorActivity.this)) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + ScreenAnchorActivity.this.getPackageName()));
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + ScreenAnchorActivity.this.getPackageName()));
             startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
         } else {
             showFloatingView();
@@ -192,13 +195,15 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N && !Settings.canDrawOverlays(ScreenAnchorActivity.this)) {
-                Toast.makeText(getApplicationContext(), getString(R.string.screenshare_permission_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.screenshare_permission_toast),
+                        Toast.LENGTH_SHORT).show();
             } else {
                 showFloatingView();
             }
-        }else if(resultCode == OVERLAY_PERMISSION_SHARE_REQ_CODE){
+        } else if (resultCode == OVERLAY_PERMISSION_SHARE_REQ_CODE) {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N && !Settings.canDrawOverlays(ScreenAnchorActivity.this)) {
-                Toast.makeText(getApplicationContext(),  getString(R.string.screenshare_permission_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.screenshare_permission_toast),
+                        Toast.LENGTH_SHORT).show();
             } else {
                 screenCapture();
             }
@@ -229,6 +234,8 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
             finish();
         } else if (id == R.id.screen_btn_mute_audio) {
             muteAudio();
+        } else if (id == R.id.screen_btn_share_system_audio) {
+            shareSystemAudio();
         } else if (id == R.id.bt_start_capture) {
             if (mIsCapturing) {
                 stopScreenCapture();
@@ -251,7 +258,8 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
 
     private void startScreenCapture() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N && !Settings.canDrawOverlays(ScreenAnchorActivity.this)) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + ScreenAnchorActivity.this.getPackageName()));
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + ScreenAnchorActivity.this.getPackageName()));
             startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
         } else {
             screenCapture();
@@ -267,7 +275,7 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
         encParams.videoBitrate = 1200;
 
         TRTCCloudDef.TRTCScreenShareParams params = new TRTCCloudDef.TRTCScreenShareParams();
-        mTRTCCloud.startScreenCapture(encParams, params);
+        mTRTCCloud.startScreenCapture(TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, encParams, params);
         mIsCapturing = true;
         mTextStartScreenTips.setVisibility(View.VISIBLE);
         mButtonStartCapture.setText(getString(R.string.screenshare_stop));
@@ -292,6 +300,25 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
         mButtonMuteAudio.setSelected(!isSelected);
     }
 
+    private void shareSystemAudio() {
+        if (!mIsCapturing) {
+            Toast.makeText(this.getApplicationContext(), getString(R.string.screenshare_start_screen_share_first),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        boolean isSelected = mButtonShareSystemAudio.isSelected();
+        if (isSelected) {
+            Log.d(TAG, "stopSystemAudioLoopback");
+            mTRTCCloud.stopSystemAudioLoopback();
+            mButtonShareSystemAudio.setText(getString(R.string.screenshare_start_share_system_audio));
+        } else {
+            Log.d(TAG, "startSystemAudioLoopback");
+            mTRTCCloud.startSystemAudioLoopback();
+            mButtonShareSystemAudio.setText(getString(R.string.screenshare_stop_share_system_audio));
+        }
+        mButtonShareSystemAudio.setSelected(!isSelected);
+    }
+
     private class TRTCCloudImplListener extends TRTCCloudListener {
 
         private WeakReference<ScreenAnchorActivity> mContext;
@@ -306,11 +333,12 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
             Log.d(TAG, "sdk callback onError");
             ScreenAnchorActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 } else if (errCode == -1308) {
-                   Toast.makeText(ScreenAnchorActivity.this, getString(R.string.screenshare_start_failed), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScreenAnchorActivity.this, getString(R.string.screenshare_start_failed),
+                            Toast.LENGTH_SHORT).show();
                     stopScreenCapture();
                 }
             }

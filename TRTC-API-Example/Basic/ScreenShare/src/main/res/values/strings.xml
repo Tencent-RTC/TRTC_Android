@@ -13,6 +13,9 @@
     <string name="screenshare_please_select_role">请选择角色(必填项)</string>
     <string name="screenshare_mute_audio">关闭麦克风</string>
     <string name="screenshare_stop_mute_audio">打开麦克风</string>
+    <string name="screenshare_start_screen_share_first">开始屏幕分享后生效</string>
+    <string name="screenshare_start_share_system_audio">开始系统声音分享</string>
+    <string name="screenshare_stop_share_system_audio">停止系统声音分享</string>
     <string name="screenshare_enter_room">进入房间</string>
     <string name="screenshare_please_input_userid">请输入用户名(必填项)</string>
     <string name="screenshare_please_input_roomid">请输入房间号(必填项)</string>

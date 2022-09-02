@@ -14,22 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
  * - 可以选择：
  * - 1.以主播身份进房进行推流和CDN发布{@link PushCDNAnchorActivity}
  * - 2.以观众身份输入CDN地址直接播放观看{@link PushCDNAudienceActivity}
- */
-
-/**
+ *
  * Role Selection for CDN Publish/Playback
  *
  * - A user can:
- * - 1. Enter the room as an anchor and push streams via CDNs: {@link PushCDNAnchorActivity
+ * - 1. Enter the room as an anchor and push streams via CDNs: {@link PushCDNAnchorActivity}
  * - 2. Enter a CDN address as audience to play back streams: {@link PushCDNAudienceActivity}
  */
 public class PushCDNSelectRoleActivity extends AppCompatActivity {
 
-    private TextView    mTextAnchorChoice;
-    private TextView    mTextAudienceChoice;
-    private Button      mButtonConfirm;
+    private TextView mTextAnchorChoice;
+    private TextView mTextAudienceChoice;
+    private Button   mButtonConfirm;
 
-    private static final int ROLE_ANCHOR = 1;
+    private static final int ROLE_ANCHOR   = 1;
     private static final int ROLE_AUDIENCE = 2;
 
     private int mCurrentRole = ROLE_ANCHOR;
@@ -65,7 +63,8 @@ public class PushCDNSelectRoleActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             mCurrentRole = ROLE_AUDIENCE;
-            mTextAudienceChoice.setBackground(getResources().getDrawable(R.drawable.pushcdn_selectrole_bg_circle_green));
+            mTextAudienceChoice
+                    .setBackground(getResources().getDrawable(R.drawable.pushcdn_selectrole_bg_circle_green));
             mTextAnchorChoice.setBackground(getResources().getDrawable(R.drawable.pushcdn_selectrole_bg_circle_gray));
         }
     };
@@ -78,7 +77,7 @@ public class PushCDNSelectRoleActivity extends AppCompatActivity {
     };
 
     private void dealWithChoiceConfirm(int currentRole) {
-        if(currentRole == ROLE_ANCHOR) {
+        if (currentRole == ROLE_ANCHOR) {
             Intent intent = new Intent(this, PushCDNAnchorActivity.class);
             startActivity(intent);
         } else if (currentRole == ROLE_AUDIENCE) {

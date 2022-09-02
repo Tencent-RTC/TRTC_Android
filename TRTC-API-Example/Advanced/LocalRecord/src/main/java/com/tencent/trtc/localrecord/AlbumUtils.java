@@ -25,7 +25,7 @@ import java.io.IOException;
 public class AlbumUtils {
     private static final String TAG = "AlbumUtils";
 
-    private AlbumUtils(){
+    private AlbumUtils() {
 
     }
 
@@ -46,9 +46,7 @@ public class AlbumUtils {
     private static void saveVideoToDCIMBelowAndroid10(Context context, String videoPath, String coverPath) {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(videoPath);
-        int duration = Integer
-                .parseInt(retriever
-                        .extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+        int duration = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
 
         File file = new File(videoPath);
         if (file.exists()) {
@@ -75,9 +73,7 @@ public class AlbumUtils {
     private static void saveVideoToDCIMOnAndroid10(Context context, String videoPath) {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(videoPath);
-        int duration = Integer
-                .parseInt(retriever
-                        .extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+        int duration = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
 
         File file = new File(videoPath);
         if (file.exists()) {
@@ -158,10 +154,11 @@ public class AlbumUtils {
     }
 
     private static void insertVideoThumb(Context context, String videoPath, String coverPath) {
-        Cursor cursor = context.getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
-                new String[]{MediaStore.Video.Thumbnails._ID},//返回id列表
-                String.format("%s = ?", MediaStore.Video.Thumbnails.DATA), //根据路径查询数据库
-                new String[]{videoPath}, null);
+        Cursor cursor = context.getContentResolver()
+                .query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Video.Thumbnails._ID},
+                        //返回id列表
+                        String.format("%s = ?", MediaStore.Video.Thumbnails.DATA), //根据路径查询数据库
+                        new String[]{videoPath}, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String videoId = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Thumbnails._ID));
@@ -182,7 +179,8 @@ public class AlbumUtils {
                         bitmap.recycle();
                     }
                 }
-                context.getContentResolver().insert(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI, thumbValues);//缩略图数据库
+                context.getContentResolver()
+                        .insert(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI, thumbValues);//缩略图数据库
             }
             cursor.close();
         }

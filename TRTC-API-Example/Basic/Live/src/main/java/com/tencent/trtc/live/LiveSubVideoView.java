@@ -14,25 +14,29 @@ import com.tencent.rtmp.ui.TXCloudVideoView;
  * TRTC 视频互动直播房间内的小视频画面
  *
  * - 用于管理小视频画面上的“关闭声音”、“关闭视频”按钮的状态
- */
-
-/**
+ *
  * Small Image in Interactive Live Video Streaming Room
  *
  * - Use the buttons on the small image to enable/disable audio/video
  */
 public class LiveSubVideoView extends FrameLayout {
 
-    private TXCloudVideoView                mSubVideoView;         // 【控件】子画面View
-    private Button                          mButtonMuteAudio;            // 【控件】关闭声音
-    private Button                          mButtonMuteVideo;            // 【控件】关闭视频
-    private LiveSubViewListener             mListener;             //  监听器，比如关闭声音，关闭视频时通知
-    private LinearLayout                    mVideoMutedTipsView;   // 【控件】关闭视频时，显示默认头像
+    private TXCloudVideoView    mSubVideoView;         // 【控件】子画面View
+    private Button              mButtonMuteAudio;            // 【控件】关闭声音
+    private Button              mButtonMuteVideo;            // 【控件】关闭视频
+    private LiveSubViewListener mListener;             //  监听器，比如关闭声音，关闭视频时通知
+    private LinearLayout        mVideoMutedTipsView;   // 【控件】关闭视频时，显示默认头像
 
     public LiveSubVideoView(Context context) {
         super(context);
     }
 
+    /**
+     * Live 辅路视频的 view。
+     *
+     * @param context
+     * @param attrs
+     */
     public LiveSubVideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.live_sub_view_layout, this);
@@ -80,6 +84,7 @@ public class LiveSubVideoView extends FrameLayout {
 
     public interface LiveSubViewListener {
         void onMuteRemoteAudioClicked(View view);
+
         void onMuteRemoteVideoClicked(View view);
     }
 

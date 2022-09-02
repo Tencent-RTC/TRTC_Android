@@ -1,5 +1,7 @@
 package com.tencent.trtc.live;
 
+import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,8 +23,6 @@ import com.tencent.trtc.debug.GenerateTestUserSig;
 
 import java.lang.ref.WeakReference;
 
-import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
-
 /**
  * TRTC 观众视角下的RTC视频互动直播房间页面
  *
@@ -32,9 +32,7 @@ import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
  * - 静音{@link LiveAudienceActivity#muteAudio()}
  *
  * - 详见接入文档{https://cloud.tencent.com/document/product/647/43182}
- */
-
-/**
+ *
  * Room View of Interactive Live Video Streaming for Audience
  *
  * Features:
@@ -45,20 +43,20 @@ import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
  * - For more information, please see the integration document {https://cloud.tencent.com/document/product/647/43182}.
  */
 public class LiveAudienceActivity extends TRTCBaseActivity implements View.OnClickListener {
-    private static final String             TAG                     = "LiveAudienceActivity";
+    private static final String TAG = "LiveAudienceActivity";
 
-    private TXCloudVideoView                mTxcvvAnchorPreviewView;
-    private ImageView                       mImageBack;
-    private TextView                        mTextTitle;
-    private Button                          mButtonMuteAudio;
+    private TXCloudVideoView mTxcvvAnchorPreviewView;
+    private ImageView        mImageBack;
+    private TextView         mTextTitle;
+    private Button           mButtonMuteAudio;
 
-    private TRTCCloud                       mTRTCCloud;
-    private TRTCCloudDef.TRTCParams         mTRTCParams;
+    private TRTCCloud               mTRTCCloud;
+    private TRTCCloudDef.TRTCParams mTRTCParams;
 
-    private String                          mRoomId;
-    private String                          mUserId;
-    private String                          mRemoteUserId;
-    private boolean                         mMuteAudioFlag = false;
+    private String  mRoomId;
+    private String  mUserId;
+    private String  mRemoteUserId;
+    private boolean mMuteAudioFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +98,7 @@ public class LiveAudienceActivity extends TRTCBaseActivity implements View.OnCli
         mButtonMuteAudio = findViewById(R.id.btn_remote_mute_audio);
         mTxcvvAnchorPreviewView = findViewById(R.id.live_cloud_view_main);
 
-        ((TextView)findViewById(R.id.tv_room_number)).setText(mRoomId);
+        ((TextView) findViewById(R.id.tv_room_number)).setText(mRoomId);
 
         if (!TextUtils.isEmpty(mRoomId)) {
             mTextTitle.setText(getString(R.string.live_roomid) + mRoomId);
@@ -116,7 +114,7 @@ public class LiveAudienceActivity extends TRTCBaseActivity implements View.OnCli
         mTRTCParams.userId = mUserId;
         mTRTCParams.roomId = Integer.parseInt(mRoomId);
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
-        mTRTCParams.role =TRTCCloudDef.TRTCRoleAudience;
+        mTRTCParams.role = TRTCCloudDef.TRTCRoleAudience;
 
         mTRTCCloud.enterRoom(mTRTCParams, TRTC_APP_SCENE_LIVE);
     }
@@ -133,16 +131,16 @@ public class LiveAudienceActivity extends TRTCBaseActivity implements View.OnCli
 
     private void muteAudio() {
         mMuteAudioFlag = !mMuteAudioFlag;
-        if(mMuteAudioFlag){
-            if(!TextUtils.isEmpty(mRemoteUserId)){
+        if (mMuteAudioFlag) {
+            if (!TextUtils.isEmpty(mRemoteUserId)) {
                 mTRTCCloud.muteRemoteAudio(mRemoteUserId, true);
             }
-            mButtonMuteAudio.setText( getString(R.string.live_close_mute_audio));
+            mButtonMuteAudio.setText(getString(R.string.live_close_mute_audio));
         } else {
-            if(!TextUtils.isEmpty(mRemoteUserId)){
-                mTRTCCloud.muteRemoteAudio(mRemoteUserId,false);
+            if (!TextUtils.isEmpty(mRemoteUserId)) {
+                mTRTCCloud.muteRemoteAudio(mRemoteUserId, false);
             }
-            mButtonMuteAudio.setText( getString(R.string.live_mute));
+            mButtonMuteAudio.setText(getString(R.string.live_mute));
         }
     }
 
@@ -168,10 +166,11 @@ public class LiveAudienceActivity extends TRTCBaseActivity implements View.OnCli
             Log.d(TAG, "onUserVideoAvailable  available " + available + " userId " + userId);
             if (available) {
                 mRemoteUserId = userId;
-                mTRTCCloud.startRemoteView(mRemoteUserId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_SMALL, mTxcvvAnchorPreviewView);
+                mTRTCCloud.startRemoteView(mRemoteUserId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                        mTxcvvAnchorPreviewView);
             } else {
                 mRemoteUserId = "";
-                mTRTCCloud.stopRemoteView(mRemoteUserId);
+                mTRTCCloud.stopRemoteView(mRemoteUserId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
             }
         }
 
@@ -180,7 +179,7 @@ public class LiveAudienceActivity extends TRTCBaseActivity implements View.OnCli
             Log.d(TAG, "sdk callback onError");
             LiveAudienceActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }
