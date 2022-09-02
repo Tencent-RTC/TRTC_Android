@@ -39,9 +39,7 @@ import java.util.List;
  * - 显示房间内其他用户的视频画面（当前示例最多可显示6个其他用户的视频画面）{@link TRTCCloudImplListener#refreshRemoteVideoViews()}
  *
  * - 详见接入文档{https://cloud.tencent.com/document/product/647/42045}
- */
-
-/**
+ *
  * Video Call
  *
  * Features:
@@ -56,27 +54,27 @@ import java.util.List;
  */
 public class VideoCallingActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String             TAG = "VideoCallingActivity";
-    private static final int                OVERLAY_PERMISSION_REQ_CODE = 1234;
+    private static final String TAG                         = "VideoCallingActivity";
+    private static final int    OVERLAY_PERMISSION_REQ_CODE = 1234;
 
-    private TextView mTextTitle;
-    private TXCloudVideoView                mTXCVVLocalPreviewView;
-    private ImageView                       mImageBack;
-    private Button                          mButtonMuteVideo;
-    private Button                          mButtonMuteAudio;
-    private Button                          mButtonSwitchCamera;
-    private Button                          mButtonAudioRoute;
+    private TextView         mTextTitle;
+    private TXCloudVideoView mTXCVVLocalPreviewView;
+    private ImageView        mImageBack;
+    private Button           mButtonMuteVideo;
+    private Button           mButtonMuteAudio;
+    private Button           mButtonSwitchCamera;
+    private Button           mButtonAudioRoute;
 
-    private TRTCCloud                       mTRTCCloud;
-    private TXDeviceManager                 mTXDeviceManager;
-    private boolean                         mIsFrontCamera = true;
-    private List<String>                    mRemoteUidList;
-    private List<TXCloudVideoView>          mRemoteViewList;
-    private int                             mUserCount = 0;
-    private String                          mRoomId;
-    private String                          mUserId;
-    private boolean                         mAudioRouteFlag = true;
-    private FloatingView                    mFloatingView;
+    private TRTCCloud              mTRTCCloud;
+    private TXDeviceManager        mTXDeviceManager;
+    private boolean                mIsFrontCamera  = true;
+    private List<String>           mRemoteUidList;
+    private List<TXCloudVideoView> mRemoteViewList;
+    private int                    mUserCount      = 0;
+    private String                 mRoomId;
+    private String                 mUserId;
+    private boolean                mAudioRouteFlag = true;
+    private FloatingView           mFloatingView;
 
 
     @Override
@@ -124,12 +122,12 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
 
         mRemoteUidList = new ArrayList<>();
         mRemoteViewList = new ArrayList<>();
-        mRemoteViewList.add((TXCloudVideoView)findViewById(R.id.trtc_view_1));
-        mRemoteViewList.add((TXCloudVideoView)findViewById(R.id.trtc_view_2));
-        mRemoteViewList.add((TXCloudVideoView)findViewById(R.id.trtc_view_3));
-        mRemoteViewList.add((TXCloudVideoView)findViewById(R.id.trtc_view_4));
-        mRemoteViewList.add((TXCloudVideoView)findViewById(R.id.trtc_view_5));
-        mRemoteViewList.add((TXCloudVideoView)findViewById(R.id.trtc_view_6));
+        mRemoteViewList.add((TXCloudVideoView) findViewById(R.id.trtc_view_1));
+        mRemoteViewList.add((TXCloudVideoView) findViewById(R.id.trtc_view_2));
+        mRemoteViewList.add((TXCloudVideoView) findViewById(R.id.trtc_view_3));
+        mRemoteViewList.add((TXCloudVideoView) findViewById(R.id.trtc_view_4));
+        mRemoteViewList.add((TXCloudVideoView) findViewById(R.id.trtc_view_5));
+        mRemoteViewList.add((TXCloudVideoView) findViewById(R.id.trtc_view_6));
 
         mFloatingView = new FloatingView(getApplicationContext(), R.layout.videocall_view_floating_default);
         mFloatingView.setPopupWindow(R.layout.videocall_popup_layout);
@@ -205,7 +203,7 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
             switchCamera();
         } else if (id == R.id.btn_audio_route) {
             audioRoute();
-        } else if (id == R.id.iv_return){
+        } else if (id == R.id.iv_return) {
             floatViewClick();
         }
     }
@@ -250,19 +248,19 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
     private void switchCamera() {
         mIsFrontCamera = !mIsFrontCamera;
         mTXDeviceManager.switchCamera(mIsFrontCamera);
-        if(mIsFrontCamera){
-            mButtonSwitchCamera.setText( getString(R.string.videocall_user_back_camera));
-        }else{
-            mButtonSwitchCamera.setText( getString(R.string.videocall_user_front_camera));
+        if (mIsFrontCamera) {
+            mButtonSwitchCamera.setText(getString(R.string.videocall_user_back_camera));
+        } else {
+            mButtonSwitchCamera.setText(getString(R.string.videocall_user_front_camera));
         }
     }
 
     private void audioRoute() {
-        if(mAudioRouteFlag){
+        if (mAudioRouteFlag) {
             mAudioRouteFlag = false;
             mTXDeviceManager.setAudioRoute(TXDeviceManager.TXAudioRoute.TXAudioRouteEarpiece);
             mButtonAudioRoute.setText(getString(R.string.videocall_use_speaker));
-        }else{
+        } else {
             mAudioRouteFlag = true;
             mTXDeviceManager.setAudioRoute(TXDeviceManager.TXAudioRoute.TXAudioRouteSpeakerphone);
             mButtonAudioRoute.setText(getString(R.string.videocall_use_receiver));
@@ -280,7 +278,8 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
 
         @Override
         public void onUserVideoAvailable(String userId, boolean available) {
-            Log.d(TAG, "onUserVideoAvailable userId " + userId + ", mUserCount " + mUserCount + ",available " + available);
+            Log.d(TAG,
+                    "onUserVideoAvailable userId " + userId + ", mUserCount " + mUserCount + ",available " + available);
             int index = mRemoteUidList.indexOf(userId);
             if (available) {
                 if (index != -1) {
@@ -292,7 +291,7 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
                 if (index == -1) {
                     return;
                 }
-                mTRTCCloud.stopRemoteView(userId);
+                mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 mRemoteUidList.remove(index);
                 refreshRemoteVideoViews();
             }
@@ -304,7 +303,8 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
                 if (i < mRemoteUidList.size()) {
                     String remoteUid = mRemoteUidList.get(i);
                     mRemoteViewList.get(i).setVisibility(View.VISIBLE);
-                    mTRTCCloud.startRemoteView(remoteUid, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_SMALL,mRemoteViewList.get(i));
+                    mTRTCCloud.startRemoteView(remoteUid, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                            mRemoteViewList.get(i));
                 } else {
                     mRemoteViewList.get(i).setVisibility(View.GONE);
                 }
@@ -316,7 +316,7 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
             Log.d(TAG, "sdk callback onError");
             VideoCallingActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }
@@ -326,7 +326,8 @@ public class VideoCallingActivity extends TRTCBaseActivity implements View.OnCli
 
     public void requestDrawOverLays() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N && !Settings.canDrawOverlays(VideoCallingActivity.this)) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + VideoCallingActivity.this.getPackageName()));
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + VideoCallingActivity.this.getPackageName()));
             startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
         } else {
             showFloatingView();

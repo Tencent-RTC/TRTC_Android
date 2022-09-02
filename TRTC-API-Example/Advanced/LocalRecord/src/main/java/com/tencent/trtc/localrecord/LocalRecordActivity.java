@@ -27,39 +27,38 @@ import java.util.Random;
 
 /**
  * TRTC本地视频录制页面
- *
  * 包含如下简单功能：
  * - 开始视频录制{@link TRTCCloud#startLocalRecording(TRTCCloudDef.TRTCLocalRecordingParams)}
  * - 停止视频录制{@link TRTCCloud#stopLocalRecording()}
  *
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a5d6bf60e9d3051f601988e55106b296c}
- */
-
-/**
+ * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
+ * .html#a5d6bf60e9d3051f601988e55106b296c}
+ *
  * Local Video Recording
  *
  * Features:
  * - Start video recording: {@link TRTCCloud#startLocalRecording(TRTCCloudDef.TRTCLocalRecordingParams)}
  * - Stop video recording: {@link TRTCCloud#stopLocalRecording()}
  *
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a5d6bf60e9d3051f601988e55106b296c}.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a5d6bf60e9d3051f601988e55106b296c}.
  */
 public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String     TAG                     = "LocalRecordActivity";
+    private static final String TAG = "LocalRecordActivity";
 
-    private ImageView               mImageBack;
-    private TextView                mTextTitle;
-    private Button                  mButtonStartPush;
-    private Button                  mButtonRecord;
-    private EditText                mEditRoomId;
-    private EditText                mEditRecordPath;
-    private TXCloudVideoView        mTXCloudPreviewView;
+    private ImageView        mImageBack;
+    private TextView         mTextTitle;
+    private Button           mButtonStartPush;
+    private Button           mButtonRecord;
+    private EditText         mEditRoomId;
+    private EditText         mEditRecordPath;
+    private TXCloudVideoView mTXCloudPreviewView;
 
 
-    private TRTCCloud               mTRTCCloud;
-    private boolean                 mStartPushFlag      = false;
-    private boolean                 mStartRecordFlag    = false;
+    private TRTCCloud mTRTCCloud;
+    private boolean   mStartPushFlag   = false;
+    private boolean   mStartRecordFlag = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,13 +72,13 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
     }
 
     private void initView() {
-        mImageBack              = findViewById(R.id.iv_back);
-        mTextTitle              = findViewById(R.id.tv_room_number);
-        mButtonStartPush        = findViewById(R.id.btn_start_push);
-        mButtonRecord           = findViewById(R.id.btn_record);
-        mEditRoomId             = findViewById(R.id.et_room_id);
-        mEditRecordPath         = findViewById(R.id.et_record_path);
-        mTXCloudPreviewView     = findViewById(R.id.txcvv_main_local);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mButtonRecord = findViewById(R.id.btn_record);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEditRecordPath = findViewById(R.id.et_record_path);
+        mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
 
 
         mImageBack.setOnClickListener(this);
@@ -103,7 +102,7 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
         mTRTCCloud.enterRoom(mTRTCParams, TRTCCloudDef.TRTC_APP_SCENE_LIVE);
     }
 
-    private void exitRoom(){
+    private void exitRoom() {
         if (mTRTCCloud != null) {
             mTRTCCloud.stopAllRemoteView();
             mTRTCCloud.stopLocalAudio();
@@ -117,39 +116,41 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.iv_back){
+        if (view.getId() == R.id.iv_back) {
             finish();
-        }else if(view.getId() == R.id.btn_start_push){
+        } else if (view.getId() == R.id.btn_start_push) {
             String roomId = mEditRoomId.getText().toString();
-            if(!mStartPushFlag){
-                if(!TextUtils.isEmpty(roomId)){
+            if (!mStartPushFlag) {
+                if (!TextUtils.isEmpty(roomId)) {
                     mButtonStartPush.setText(getString(R.string.localrecord_stop_push));
                     enterRoom(roomId);
                     mButtonRecord.setBackgroundColor(getResources().getColor(R.color.localrecord_button_select));
                     mStartPushFlag = true;
-                }else{
-                    Toast.makeText(LocalRecordActivity.this, getString(R.string.localrecord_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LocalRecordActivity.this,
+                            getString(R.string.localrecord_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 mButtonRecord.setBackgroundColor(getResources().getColor(R.color.localrecord_button_select_off));
                 mButtonStartPush.setText(getString(R.string.localrecord_start_push));
                 exitRoom();
                 mStartPushFlag = false;
             }
-        }else if(view.getId() == R.id.btn_record){
-            if(!mStartPushFlag){
+        } else if (view.getId() == R.id.btn_record) {
+            if (!mStartPushFlag) {
                 return;
             }
             String recordFile = mEditRecordPath.getText().toString();
-            if(!mStartRecordFlag){
-                if(!TextUtils.isEmpty(recordFile)){
+            if (!mStartRecordFlag) {
+                if (!TextUtils.isEmpty(recordFile)) {
                     mStartRecordFlag = true;
                     mButtonRecord.setText(R.string.localrecord_stop_record);
                     startRecord(recordFile);
-                }else{
-                    Toast.makeText(LocalRecordActivity.this, getString(R.string.localrecord_please_input_record_file_name), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LocalRecordActivity.this,
+                            getString(R.string.localrecord_please_input_record_file_name), Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 mStartRecordFlag = false;
                 mButtonRecord.setText(R.string.localrecord_start_record);
                 stopRecord();
@@ -163,7 +164,8 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
     }
 
     private void saveVideo() {
-        String videoPath = getExternalFilesDir(null).getAbsolutePath() + File.separator + mEditRecordPath.getText().toString();
+        String videoPath =
+                getExternalFilesDir(null).getAbsolutePath() + File.separator + mEditRecordPath.getText().toString();
         String coverPath = getExternalFilesDir(null).getAbsolutePath() + File.separator + "albun.png";
         AlbumUtils.saveVideoToDCIM(LocalRecordActivity.this, videoPath, coverPath);
     }
@@ -172,7 +174,7 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
         String recordPath = getExternalFilesDir(null).getAbsolutePath();
         Log.d(TAG, "recordPath = " + recordPath);
         File file = new File(recordPath + File.separator + recordFile);
-        if(file.exists()){
+        if (file.exists()) {
             file.delete();
         }
         try {
@@ -200,7 +202,7 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
             Log.d(TAG, "sdk callback onError");
             LocalRecordActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }

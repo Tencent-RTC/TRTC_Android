@@ -18,9 +18,7 @@ import com.tencent.trtc.debug.Constant;
  *
  * 以主播角色进入房间{@link ScreenAnchorActivity}
  * 以观众角色进入房间{@link ScreenAudienceActvity}
- */
-
-/**
+ *
  * Entrance for Screen Sharing Live Streaming (enter a room after specifying the room ID and selecting a role)
  *
  * Enter a room as an anchor: {@link ScreenAnchorActivity}
@@ -28,12 +26,12 @@ import com.tencent.trtc.debug.Constant;
  */
 public class ScreenEntranceActivity extends AppCompatActivity {
 
-    private EditText    mEditInputUserId;
-    private EditText    mEditInputRoomId;
-    private Button      mBtnAnchor;
-    private Button      mBtnAudience;
+    private EditText mEditInputUserId;
+    private EditText mEditInputRoomId;
+    private Button   mBtnAnchor;
+    private Button   mBtnAudience;
 
-    private int         mRoleSelectFlag = 1;
+    private int mRoleSelectFlag = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +50,11 @@ public class ScreenEntranceActivity extends AppCompatActivity {
         mBtnAnchor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mRoleSelectFlag != 1){
+                if (mRoleSelectFlag != 1) {
                     mRoleSelectFlag = 1;
                     mBtnAnchor.setBackgroundColor(getResources().getColor(R.color.screenshare_single_select_button_bg));
-                    mBtnAudience.setBackgroundColor(getResources().getColor(R.color.screenshare_single_select_button_bg_off));
+                    mBtnAudience.setBackgroundColor(
+                            getResources().getColor(R.color.screenshare_single_select_button_bg_off));
                 }
             }
         });
@@ -63,10 +62,12 @@ public class ScreenEntranceActivity extends AppCompatActivity {
         mBtnAudience.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mRoleSelectFlag != 2){
+                if (mRoleSelectFlag != 2) {
                     mRoleSelectFlag = 2;
-                    mBtnAnchor.setBackgroundColor(getResources().getColor(R.color.screenshare_single_select_button_bg_off));
-                    mBtnAudience.setBackgroundColor(getResources().getColor(R.color.screenshare_single_select_button_bg));
+                    mBtnAnchor.setBackgroundColor(
+                            getResources().getColor(R.color.screenshare_single_select_button_bg_off));
+                    mBtnAudience
+                            .setBackgroundColor(getResources().getColor(R.color.screenshare_single_select_button_bg));
                 }
             }
         });
@@ -95,23 +96,25 @@ public class ScreenEntranceActivity extends AppCompatActivity {
     }
 
     private void startEnterRoom() {
-        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim())
-                || TextUtils.isEmpty(mEditInputRoomId.getText().toString().trim())) {
-            Toast.makeText(ScreenEntranceActivity.this, getString(R.string.screenshare_room_input_error_tip), Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim()) || TextUtils
+                .isEmpty(mEditInputRoomId.getText().toString().trim())) {
+            Toast.makeText(ScreenEntranceActivity.this, getString(R.string.screenshare_room_input_error_tip),
+                    Toast.LENGTH_LONG).show();
             return;
         }
-        if(mRoleSelectFlag == 1){
+        if (mRoleSelectFlag == 1) {
             Intent intent = new Intent(ScreenEntranceActivity.this, ScreenAnchorActivity.class);
             intent.putExtra(Constant.ROOM_ID, mEditInputRoomId.getText().toString().trim());
             intent.putExtra(Constant.USER_ID, mEditInputUserId.getText().toString().trim());
             startActivity(intent);
-        }else if(mRoleSelectFlag == 2){
+        } else if (mRoleSelectFlag == 2) {
             Intent intent = new Intent(ScreenEntranceActivity.this, ScreenAudienceActvity.class);
             intent.putExtra(Constant.ROOM_ID, mEditInputRoomId.getText().toString().trim());
             intent.putExtra(Constant.USER_ID, mEditInputUserId.getText().toString().trim());
             startActivity(intent);
-        }else{
-            Toast.makeText(ScreenEntranceActivity.this, getString(R.string.screenshare_please_select_role), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ScreenEntranceActivity.this, getString(R.string.screenshare_please_select_role),
+                    Toast.LENGTH_SHORT).show();
         }
 
     }

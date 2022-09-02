@@ -21,16 +21,11 @@ import java.util.List;
 
 /**
  * 加入多个房间页面
- *
- * <p>
  * 包含如下功能:
  * - 创建子 TRTCCloud 实例 {@link TRTCCloud#createSubCloud}
  * - 销毁子 TRTCCloud 实例 {@link TRTCCloud#destroySubCloud}
  * - 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a3c4a93d24e0ef076168b44cf3545a8d4}
- * </p>
- */
-
-/**
+ *
  * Entering Multiple Rooms
  *
  * Features:
@@ -179,7 +174,7 @@ public class JoinMultipleRoomActivity extends TRTCBaseActivity {
                 if (available) {
                     mSubCloud.startRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideo);
                 } else {
-                    mSubCloud.stopRemoteView(userId);
+                    mSubCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 }
             }
 

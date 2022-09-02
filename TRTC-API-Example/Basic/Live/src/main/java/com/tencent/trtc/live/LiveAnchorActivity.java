@@ -1,5 +1,7 @@
 package com.tencent.trtc.live;
 
+import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,8 +26,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
-
 /**
  * TRTC 主播视角下的RTC视频互动直播房间页面
  *
@@ -37,9 +37,7 @@ import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
  * - 关闭/打开麦克风{@link LiveAnchorActivity#muteAudio()}
  *
  * 详见接入文档{https://cloud.tencent.com/document/product/647/43182}
- */
-
-/**
+ *
  * Room View of Interactive Live Video Streaming for Anchor
  *
  * Features:
@@ -52,26 +50,26 @@ import static com.tencent.trtc.TRTCCloudDef.TRTC_APP_SCENE_LIVE;
  * For more information, please see the integration document {https://cloud.tencent.com/document/product/647/43182}.
  */
 public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClickListener {
-    private static final String             TAG                     = "LiveBaseActivity";
-    private static final int                DEFAULT_CAPACITY        = 5;
+    private static final String TAG              = "LiveBaseActivity";
+    private static final int    DEFAULT_CAPACITY = 5;
 
-    private TXCloudVideoView                mTxcvvAnchorPreviewView;
-    private Button                          mButtonSwitchCamera;
-    private Button                          mButtonMuteVideo;
-    private Button                          mButtonMuteAudio;
-    private ImageView                       mButtonBack;
-    private TextView                        mTextTitle;
+    private TXCloudVideoView mTxcvvAnchorPreviewView;
+    private Button           mButtonSwitchCamera;
+    private Button           mButtonMuteVideo;
+    private Button           mButtonMuteAudio;
+    private ImageView        mButtonBack;
+    private TextView         mTextTitle;
 
-    private TRTCCloud                       mTRTCCloud;
-    private TXDeviceManager                 mTXDeviceManager;
-    private TRTCCloudDef.TRTCParams         mTRTCParams;
-    private boolean                         mIsFrontCamera = true;
-    private String                          mRoomId;
-    private String                          mUserId;
-    private List<String>                    mRemoteUidList;
-    private List<LiveSubVideoView>          mRemoteViewList;
-    private boolean                         mMuteVideoFlag = true;
-    private boolean                         mMuteAudioFlag = true;
+    private TRTCCloud               mTRTCCloud;
+    private TXDeviceManager         mTXDeviceManager;
+    private TRTCCloudDef.TRTCParams mTRTCParams;
+    private boolean                 mIsFrontCamera = true;
+    private String                  mRoomId;
+    private String                  mUserId;
+    private List<String>            mRemoteUidList;
+    private List<LiveSubVideoView>  mRemoteViewList;
+    private boolean                 mMuteVideoFlag = true;
+    private boolean                 mMuteAudioFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,15 +121,15 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
         mRemoteUidList = new ArrayList<>(DEFAULT_CAPACITY);
         mRemoteViewList = new ArrayList<>(DEFAULT_CAPACITY);
 
-        mRemoteViewList.add((LiveSubVideoView)findViewById(R.id.live_cloud_view_2));
-        mRemoteViewList.add((LiveSubVideoView)findViewById(R.id.live_cloud_view_3));
-        mRemoteViewList.add((LiveSubVideoView)findViewById(R.id.live_cloud_view_4));
-        mRemoteViewList.add((LiveSubVideoView)findViewById(R.id.live_cloud_view_5));
-        mRemoteViewList.add((LiveSubVideoView)findViewById(R.id.live_cloud_view_6));
+        mRemoteViewList.add((LiveSubVideoView) findViewById(R.id.live_cloud_view_2));
+        mRemoteViewList.add((LiveSubVideoView) findViewById(R.id.live_cloud_view_3));
+        mRemoteViewList.add((LiveSubVideoView) findViewById(R.id.live_cloud_view_4));
+        mRemoteViewList.add((LiveSubVideoView) findViewById(R.id.live_cloud_view_5));
+        mRemoteViewList.add((LiveSubVideoView) findViewById(R.id.live_cloud_view_6));
 
         mButtonBack.setOnClickListener(this);
         mTRTCCloud.setListener(new TRTCCloudImplListener(LiveAnchorActivity.this));
-        for (int index = 0 ; index < mRemoteViewList.size(); index++) {
+        for (int index = 0; index < mRemoteViewList.size(); index++) {
             mRemoteViewList.get(index).setLiveSubViewListener(new LiveSubViewListenerImpl(index));
         }
         mButtonMuteVideo.setOnClickListener(this);
@@ -169,10 +167,10 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
     protected void switchCamera() {
         if (mIsFrontCamera) {
             mIsFrontCamera = false;
-            mButtonSwitchCamera.setText( getString(R.string.live_user_front_camera));
+            mButtonSwitchCamera.setText(getString(R.string.live_user_front_camera));
         } else {
             mIsFrontCamera = true;
-            mButtonSwitchCamera.setText( getString(R.string.live_user_back_camera));
+            mButtonSwitchCamera.setText(getString(R.string.live_user_back_camera));
         }
         mTXDeviceManager.switchCamera(mIsFrontCamera);
     }
@@ -193,11 +191,11 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
         if (mMuteAudioFlag) {
             mMuteAudioFlag = false;
             mTRTCCloud.muteLocalAudio(true);
-            mButtonMuteAudio.setText( getString(R.string.live_open_mic));
+            mButtonMuteAudio.setText(getString(R.string.live_open_mic));
         } else {
             mMuteAudioFlag = true;
             mTRTCCloud.muteLocalAudio(false);
-            mButtonMuteAudio.setText( getString(R.string.live_close_mic));
+            mButtonMuteAudio.setText(getString(R.string.live_close_mic));
         }
     }
 
@@ -231,7 +229,7 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
                 }
             } else {
                 if (index != -1 && !userId.equals(mRoomId)) {
-                    mTRTCCloud.stopRemoteView(userId);
+                    mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                     mRemoteUidList.remove(index);
                     refreshRemoteVideoViews();
                 }
@@ -243,7 +241,7 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
             Log.d(TAG, "sdk callback onError");
             LiveAnchorActivity activity = mContext.get();
             if (activity != null) {
-                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode+ "]" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "onError: " + errMsg + "[" + errCode + "]", Toast.LENGTH_SHORT).show();
                 if (errCode == TXLiteAVCode.ERR_ROOM_ENTER_FAIL) {
                     activity.exitRoom();
                 }
@@ -256,7 +254,8 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
                     String remoteUid = mRemoteUidList.get(i);
                     mRemoteViewList.get(i).setVisibility(View.VISIBLE);
                     // 开始显示用户userId的视频画面
-                    mTRTCCloud.startRemoteView(remoteUid, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_SMALL, mRemoteViewList.get(i).getVideoView());
+                    mTRTCCloud.startRemoteView(remoteUid, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                            mRemoteViewList.get(i).getVideoView());
                 } else {
                     mRemoteViewList.get(i).setVisibility(View.GONE);
                 }
@@ -268,7 +267,7 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
 
         private int mIndex;
 
-        public LiveSubViewListenerImpl (int index) {
+        public LiveSubViewListenerImpl(int index) {
             mIndex = index;
         }
 
@@ -276,10 +275,10 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
         public void onMuteRemoteAudioClicked(View view) {
             boolean isSelected = view.isSelected();
             if (!isSelected) {
-                mTRTCCloud.muteRemoteAudio(mRemoteUidList.get(mIndex),true);
+                mTRTCCloud.muteRemoteAudio(mRemoteUidList.get(mIndex), true);
                 view.setBackground(getResources().getDrawable(R.mipmap.live_subview_sound_mute));
             } else {
-                mTRTCCloud.muteRemoteAudio(mRemoteUidList.get(mIndex),false);
+                mTRTCCloud.muteRemoteAudio(mRemoteUidList.get(mIndex), false);
                 view.setBackground(getResources().getDrawable(R.mipmap.live_subview_sound_unmute));
             }
             view.setSelected(!isSelected);
@@ -289,11 +288,12 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
         public void onMuteRemoteVideoClicked(View view) {
             boolean isSelected = view.isSelected();
             if (!isSelected) {
-                mTRTCCloud.stopRemoteView(mRemoteUidList.get(mIndex));
+                mTRTCCloud.stopRemoteView(mRemoteUidList.get(mIndex), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 mRemoteViewList.get(mIndex).getMuteVideoDefault().setVisibility(View.VISIBLE);
                 view.setBackground(getResources().getDrawable(R.mipmap.live_subview_video_mute));
             } else {
-                mTRTCCloud.startRemoteView(mRemoteUidList.get(mIndex), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_SMALL, mRemoteViewList.get(mIndex).getVideoView());
+                mTRTCCloud.startRemoteView(mRemoteUidList.get(mIndex), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                        mRemoteViewList.get(mIndex).getVideoView());
                 view.setBackground(getResources().getDrawable(R.mipmap.live_subview_video_unmute));
                 mRemoteViewList.get(mIndex).getMuteVideoDefault().setVisibility(View.GONE);
             }

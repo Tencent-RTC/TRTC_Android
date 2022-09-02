@@ -19,7 +19,7 @@ public class VideoFrameReader extends BaseReader {
     private final String mVideoPath;
     private final long   mLoopDurationMs;
 
-    private VideoFrameToTexture mDecoderConsumer;
+    private VideoFrameToTexture    mDecoderConsumer;
     private long                   mStartTimeMs = -1;
     private VideoFrameReadListener mListener;
 
@@ -71,7 +71,8 @@ public class VideoFrameReader extends BaseReader {
 
         VideoFrameReadListener listener = mListener;
         if (listener != null) {
-            listener.onFrameAvailable(textureFrame.eglContext, textureFrame.textureId, textureFrame.width, textureFrame.height, textureFrame.timestampMs);
+            listener.onFrameAvailable(textureFrame.eglContext, textureFrame.textureId, textureFrame.width,
+                    textureFrame.height, textureFrame.timestampMs);
         }
 
         mDecoderConsumer.enqueueOutputBuffer(textureFrame);
@@ -79,7 +80,7 @@ public class VideoFrameReader extends BaseReader {
 
     private Size retrieveVideoSize() throws SetupException {
         MediaFormat mediaFormat = Utils.retrieveMediaFormat(mVideoPath, true);
-        Size        size        = new Size();
+        Size size = new Size();
         size.width = mediaFormat.getInteger(MediaFormat.KEY_WIDTH);
         size.height = mediaFormat.getInteger(MediaFormat.KEY_HEIGHT);
         if (mediaFormat.containsKey(Utils.KEY_ROTATION)) {

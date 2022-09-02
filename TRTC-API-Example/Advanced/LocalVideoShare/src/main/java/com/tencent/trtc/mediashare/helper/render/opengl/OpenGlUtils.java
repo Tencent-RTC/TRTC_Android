@@ -23,6 +23,16 @@ public class OpenGlUtils {
         return frameBufferIds[0];
     }
 
+    /**
+     * 加载 Texture 数据。
+     *
+     * @param format
+     * @param data
+     * @param width
+     * @param height
+     * @param usedTexId
+     * @return
+     */
     public static int loadTexture(int format, Buffer data, int width, int height, int usedTexId) {
         int[] textures = new int[1];
         if (usedTexId == NO_TEXTURE) {
@@ -34,7 +44,8 @@ public class OpenGlUtils {
             GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
             GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
             GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
-            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, format, width, height, 0, format, GLES20.GL_UNSIGNED_BYTE, data);
+            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, format, width, height, 0, format, GLES20.GL_UNSIGNED_BYTE,
+                    data);
         } else {
             OpenGlUtils.bindTexture(GLES20.GL_TEXTURE_2D, usedTexId);
             GLES20.glTexSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0, width, height, format, GLES20.GL_UNSIGNED_BYTE, data);
@@ -96,40 +107,31 @@ public class OpenGlUtils {
      * @param outputHeight       绘制目标的高
      * @return 返回顶点数组和纹理数组
      */
-    public static Pair<float[], float[]> calcCubeAndTextureBuffer(ScaleType scaleType,
-                                                                  Rotation inputRotation,
-                                                                  boolean needFlipHorizontal,
-                                                                  int inputWith,
-                                                                  int inputHeight,
-                                                                  int outputWidth,
-                                                                  int outputHeight) {
+    public static Pair<float[], float[]> calcCubeAndTextureBuffer(ScaleType scaleType, Rotation inputRotation,
+                                                                  boolean needFlipHorizontal, int inputWith,
+                                                                  int inputHeight, int outputWidth, int outputHeight) {
 
-        boolean needRotate    = (inputRotation == Rotation.ROTATION_90 || inputRotation == Rotation.ROTATION_270);
-        int     rotatedWidth  = needRotate ? inputHeight : inputWith;
-        int     rotatedHeight = needRotate ? inputWith : inputHeight;
-        float   maxRratio     = Math.max(1.0f * outputWidth / rotatedWidth, 1.0f * outputHeight / rotatedHeight);
-        float   ratioWidth    = 1.0f * Math.round(rotatedWidth * maxRratio) / outputWidth;
-        float   ratioHeight   = 1.0f * Math.round(rotatedHeight * maxRratio) / outputHeight;
+        boolean needRotate = (inputRotation == Rotation.ROTATION_90 || inputRotation == Rotation.ROTATION_270);
+        int rotatedWidth = needRotate ? inputHeight : inputWith;
+        int rotatedHeight = needRotate ? inputWith : inputHeight;
+        float maxRratio = Math.max(1.0f * outputWidth / rotatedWidth, 1.0f * outputHeight / rotatedHeight);
+        float ratioWidth = 1.0f * Math.round(rotatedWidth * maxRratio) / outputWidth;
+        float ratioHeight = 1.0f * Math.round(rotatedHeight * maxRratio) / outputHeight;
 
-        float[] cube         = OpenGlUtils.CUBE;
+        float[] cube = OpenGlUtils.CUBE;
         float[] textureCords = TextureRotationUtils.getRotation(inputRotation, needFlipHorizontal, true);
         if (scaleType == ScaleType.CENTER_CROP) {
             float distHorizontal = needRotate ? ((1 - 1 / ratioHeight) / 2) : ((1 - 1 / ratioWidth) / 2);
-            float distVertical   = needRotate ? ((1 - 1 / ratioWidth) / 2) : ((1 - 1 / ratioHeight) / 2);
+            float distVertical = needRotate ? ((1 - 1 / ratioWidth) / 2) : ((1 - 1 / ratioHeight) / 2);
             textureCords = new float[]{
-                    addDistance(textureCords[0], distHorizontal),
-                    addDistance(textureCords[1], distVertical),
-                    addDistance(textureCords[2], distHorizontal),
-                    addDistance(textureCords[3], distVertical),
-                    addDistance(textureCords[4], distHorizontal),
-                    addDistance(textureCords[5], distVertical),
-                    addDistance(textureCords[6], distHorizontal),
-                    addDistance(textureCords[7], distVertical),};
+                    addDistance(textureCords[0], distHorizontal), addDistance(textureCords[1], distVertical),
+                    addDistance(textureCords[2], distHorizontal), addDistance(textureCords[3], distVertical),
+                    addDistance(textureCords[4], distHorizontal), addDistance(textureCords[5], distVertical),
+                    addDistance(textureCords[6], distHorizontal), addDistance(textureCords[7], distVertical),};
         } else {
-            cube = new float[]{cube[0] / ratioHeight, cube[1] / ratioWidth,
-                    cube[2] / ratioHeight, cube[3] / ratioWidth,
-                    cube[4] / ratioHeight, cube[5] / ratioWidth,
-                    cube[6] / ratioHeight, cube[7] / ratioWidth,};
+            cube = new float[]{
+                    cube[0] / ratioHeight, cube[1] / ratioWidth, cube[2] / ratioHeight, cube[3] / ratioWidth,
+                    cube[4] / ratioHeight, cube[5] / ratioWidth, cube[6] / ratioHeight, cube[7] / ratioWidth,};
         }
         return new Pair<>(cube, textureCords);
     }

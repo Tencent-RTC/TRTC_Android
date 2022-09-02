@@ -37,39 +37,33 @@ import java.util.concurrent.CountDownLatch;
  * 主要包含：
  * - 本地预览视频帧/远端用户视频帧的自定义渲染；
  * - 本地音频/远端音频混音后的播放；
- *
  * ## 视频帧渲染流程
  * 视频帧渲染采用了 texture，也就是 openGL 纹理的方案，这是 android 系统下性能最好的一种视频处理方案，具体流程如下：
- *
- *  1. 构造函数：会创建一个{@link android.os.HandlerThread}线程，所有的OpenGL操作均在该线程进行。
- *
- *  2. start()：传入一个系统TextureView（这个 View 需要加到 activity 的控件树上），用来显示渲染的结果。
- *
- *  3. onSurfaceTextureAvailable(): TextureView 的 SurfaceTexture 已经准备好，将SurfaceTexture与
- *     {@link com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame#texture}中的EGLContext（可为null）作为参数，
- *     生成一个新的EGLContext，SurfaceTexture也会作为此EGLContext的渲染目标。
- *
- *  4. onRenderVideoFrame(): SDK 视频帧回调，在回调中可以拿到视频纹理ID和对应的 EGLContext。
- *     用这个 EGLContext 作为参数创建出来的新的 EGLContext，这样新的 EGLContext 就能访问SDK返回的纹理。
- *     然后会向HandlerThread发送一个渲染消息，用来渲染得到的视频纹理。
- *
- *  5. renderInternal(): HandlerThread线程具体的渲染流程，将视频纹理渲染到 TextureView。
- *
- *  ## 音频帧播放流程
- *  音频帧的播放采用了AudioTrack的方式，整体流程比较简单：
- *  1. onMixedAllAudioFrame(): SDK 所有音频数据混合后的数据回调（包括采集音频数据和所有播放音频数据）
- *     在这个回调中，可以拿到音频帧的data信息，使用AudioTrack播放即可；
- *
+ * 1. 构造函数：会创建一个{@link android.os.HandlerThread}线程，所有的OpenGL操作均在该线程进行。
+ * 2. start()：传入一个系统TextureView（这个 View 需要加到 activity 的控件树上），用来显示渲染的结果。
+ * 3. onSurfaceTextureAvailable(): TextureView 的 SurfaceTexture 已经准备好，将SurfaceTexture与
+ * {@link com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame#texture}中的EGLContext（可为null）作为参数，
+ * 生成一个新的EGLContext，SurfaceTexture也会作为此EGLContext的渲染目标。
+ * 4. onRenderVideoFrame(): SDK 视频帧回调，在回调中可以拿到视频纹理ID和对应的 EGLContext。
+ * 用这个 EGLContext 作为参数创建出来的新的 EGLContext，这样新的 EGLContext 就能访问SDK返回的纹理。
+ * 然后会向HandlerThread发送一个渲染消息，用来渲染得到的视频纹理。
+ * 5. renderInternal(): HandlerThread线程具体的渲染流程，将视频纹理渲染到 TextureView。
+ * ## 音频帧播放流程
+ * 音频帧的播放采用了AudioTrack的方式，整体流程比较简单：
+ * 1. onMixedAllAudioFrame(): SDK 所有音频数据混合后的数据回调（包括采集音频数据和所有播放音频数据）
+ * 在这个回调中，可以拿到音频帧的data信息，使用AudioTrack播放即可；
  */
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListener, TRTCCloudListener.TRTCAudioFrameListener, Handler.Callback {
+public class CustomFrameRender
+        implements TRTCCloudListener.TRTCVideoRenderListener, TRTCCloudListener.TRTCAudioFrameListener,
+        Handler.Callback {
     public static final String TAG = "TestRenderVideoFrame";
 
-    private static final int MSG_RENDER              = 2;
-    private static final int MSG_DESTROY             = 3;
-    private static final int RENDER_TYPE_TEXTURE     = 0;
-    private static final int RENDER_TYPE_I420        = 1;
-    private static final int MSG_PLAY_AUDIO          = 5;
+    private static final int MSG_RENDER          = 2;
+    private static final int MSG_DESTROY         = 3;
+    private static final int RENDER_TYPE_TEXTURE = 0;
+    private static final int RENDER_TYPE_I420    = 1;
+    private static final int MSG_PLAY_AUDIO      = 5;
 
     private       int                mRenderType     = RENDER_TYPE_TEXTURE;
     private       int                mSteamType;
@@ -130,12 +124,12 @@ public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListe
     public CustomFrameRender(String userId, int steamType) {
         mUserId = userId;
         mSteamType = steamType;
-        mGLCubeBuffer = ByteBuffer.allocateDirect(OpenGlUtils.CUBE.length * 4)
-                .order(ByteOrder.nativeOrder()).asFloatBuffer();
+        mGLCubeBuffer =
+                ByteBuffer.allocateDirect(OpenGlUtils.CUBE.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         mGLCubeBuffer.put(OpenGlUtils.CUBE).position(0);
 
-        mGLTextureBuffer = ByteBuffer.allocateDirect(OpenGlUtils.TEXTURE.length * 4)
-                .order(ByteOrder.nativeOrder()).asFloatBuffer();
+        mGLTextureBuffer = ByteBuffer.allocateDirect(OpenGlUtils.TEXTURE.length * 4).order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
         mGLTextureBuffer.put(OpenGlUtils.TEXTURE).position(0);
 
         mGLThread = new HandlerThread(TAG);
@@ -144,6 +138,11 @@ public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListe
         Log.i(TAG, "TestRenderVideoFrame");
     }
 
+    /**
+     * 开始 Camera 的自定义渲染。
+     *
+     * @param videoView 用户显示预览画面的 view。
+     */
     public void start(TextureView videoView) {
         if (videoView == null) {
             Log.w(TAG, "start error when render view is null");
@@ -209,7 +208,8 @@ public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListe
 
         try {
             if (eglContext instanceof javax.microedition.khronos.egl.EGLContext) {
-                mEglCore = new EglCore((javax.microedition.khronos.egl.EGLContext) eglContext, new Surface(mSurfaceTexture));
+                mEglCore = new EglCore((javax.microedition.khronos.egl.EGLContext) eglContext,
+                        new Surface(mSurfaceTexture));
             } else {
                 mEglCore = new EglCore((android.opengl.EGLContext) eglContext, new Surface(mSurfaceTexture));
             }
@@ -243,7 +243,8 @@ public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListe
         if (mEglCore == null && mSurfaceTexture != null) {
             Object eglContext = null;
             if (frame.texture != null) {
-                eglContext = frame.texture.eglContext10 != null ? frame.texture.eglContext10 : frame.texture.eglContext14;
+                eglContext =
+                        frame.texture.eglContext10 != null ? frame.texture.eglContext10 : frame.texture.eglContext14;
             }
             initGlComponent(eglContext);
         }
@@ -254,8 +255,9 @@ public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListe
 
         if (mLastInputSize.width != frame.width || mLastInputSize.height != frame.height
                 || mLastOutputSize.width != mSurfaceSize.width || mLastOutputSize.height != mSurfaceSize.height) {
-            Pair<float[], float[]> cubeAndTextureBuffer = OpenGlUtils.calcCubeAndTextureBuffer(ScaleType.CENTER,
-                    Rotation.ROTATION_180, true, frame.width, frame.height, mSurfaceSize.width, mSurfaceSize.height);
+            Pair<float[], float[]> cubeAndTextureBuffer = OpenGlUtils
+                    .calcCubeAndTextureBuffer(ScaleType.CENTER, Rotation.ROTATION_180, true, frame.width, frame.height,
+                            mSurfaceSize.width, mSurfaceSize.height);
             mGLCubeBuffer.clear();
             mGLCubeBuffer.put(cubeAndTextureBuffer.first);
             mGLTextureBuffer.clear();
@@ -317,6 +319,10 @@ public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListe
                 break;
             case MSG_PLAY_AUDIO:
                 playAudioFrame((TRTCCloudDef.TRTCAudioFrame) msg.obj);
+                break;
+            default:
+                Log.e(TAG, "handleMessage wrong what : " + msg.what);
+                break;
         }
         return false;
     }
@@ -332,9 +338,10 @@ public class CustomFrameRender implements TRTCCloudListener.TRTCVideoRenderListe
                 Log.e(TAG, "audioFrame channel [" + audioFrame.channel + "] is error !");
                 return;
             }
-            mAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
-                    audioFrame.sampleRate, channelConfig, AudioFormat.ENCODING_PCM_16BIT,
-                    AudioTrack.getMinBufferSize(audioFrame.sampleRate, channelConfig, AudioFormat.ENCODING_PCM_16BIT), AudioTrack.MODE_STREAM);
+            mAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, audioFrame.sampleRate, channelConfig,
+                    AudioFormat.ENCODING_PCM_16BIT,
+                    AudioTrack.getMinBufferSize(audioFrame.sampleRate, channelConfig, AudioFormat.ENCODING_PCM_16BIT),
+                    AudioTrack.MODE_STREAM);
             mAudioTrack.play();
         }
         mAudioTrack.write(audioFrame.data, 0, audioFrame.data.length);

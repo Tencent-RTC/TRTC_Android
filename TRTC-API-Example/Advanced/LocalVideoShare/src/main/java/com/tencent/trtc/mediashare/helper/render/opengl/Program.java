@@ -17,27 +17,28 @@ public class Program {
         mProgramId = INVALID_PROGRAM_ID;
     }
 
+    /**
+     * 创建 programId。
+     */
     public void build() {
-        int   vertexShaderId, fragmentShaderId, programId;
-        int[] link = new int[1];
-
-        vertexShaderId = loadShader(mVertexShader, GLES20.GL_VERTEX_SHADER);
+        int vertexShaderId = loadShader(mVertexShader, GLES20.GL_VERTEX_SHADER);
         if (vertexShaderId == 0) {
             Log.e(TAG, "load vertex shader failed.");
             return;
         }
 
-        fragmentShaderId = loadShader(mFragmentShader, GLES20.GL_FRAGMENT_SHADER);
+        int fragmentShaderId = loadShader(mFragmentShader, GLES20.GL_FRAGMENT_SHADER);
         if (fragmentShaderId == 0) {
             Log.e(TAG, "load fragment shader failed.");
             return;
         }
 
-        programId = GLES20.glCreateProgram();
+        int programId = GLES20.glCreateProgram();
         GLES20.glAttachShader(programId, vertexShaderId);
         GLES20.glAttachShader(programId, fragmentShaderId);
         GLES20.glLinkProgram(programId);
 
+        int[] link = new int[1];
         GLES20.glGetProgramiv(programId, GLES20.GL_LINK_STATUS, link, 0);
         if (link[0] <= 0) {
             Log.e(TAG, "link program failed. status: " + link[0]);
@@ -60,7 +61,7 @@ public class Program {
 
     private int loadShader(final String strSource, final int iType) {
         int[] compiled = new int[1];
-        int   iShader  = GLES20.glCreateShader(iType);
+        int iShader = GLES20.glCreateShader(iType);
         GLES20.glShaderSource(iShader, strSource);
         GLES20.glCompileShader(iShader);
         GLES20.glGetShaderiv(iShader, GLES20.GL_COMPILE_STATUS, compiled, 0);

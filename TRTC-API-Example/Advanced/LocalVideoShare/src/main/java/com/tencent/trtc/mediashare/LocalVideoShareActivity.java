@@ -37,46 +37,73 @@ import java.util.Random;
 
 /**
  * TRTC 视频文件分享的示例
- *
  * 本文件展示了如何使用TRTC SDK实现视频文件直播分享功能，主要流程如下：
- *  - 读取视频文件、对视频文件进行解封装 --> 解码；
- *  - 将解码后的音视频帧通过TRTC的自定义采集接口{@link com.tencent.trtc.TRTCCloud#sendCustomAudioData(com.tencent.trtc.TRTCCloudDef.TRTCAudioFrame)} 和{@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}发送给TRTC SDK；
- *  - 通过{@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}获取处理后的本地视频帧并渲染到屏幕上；
- *  - 通过{@link com.tencent.trtc.TRTCCloud#setAudioFrameListener(com.tencent.trtc.TRTCCloudListener.TRTCAudioFrameListener)} )}获取处理后的音频帧并进行播放；
- *  - 如果有远端主播，可以通过{@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)} 获取远端主播的视频帧并渲染到屏幕上，远端主播的音频会在上一步自动混音后播放；
+ * - 读取视频文件、对视频文件进行解封装 --> 解码；
+ * - 将解码后的音视频帧通过TRTC
+ * 的自定义采集接口{@link com.tencent.trtc.TRTCCloud#sendCustomAudioData(com.tencent.trtc.TRTCCloudDef.TRTCAudioFrame)} 和
+ * {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}发送给TRTC SDK；
+ * -
+ * 通过
+ * {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(
+ * int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * 获取处理后的本地视频帧并渲染到屏幕上；
+ * -
+ * 通过
+ * {@link com.tencent.trtc.TRTCCloud#setAudioFrameListener(
+ * com.tencent.trtc.TRTCCloudListener.TRTCAudioFrameListener)} )}
+ * 获取处理后的音频帧并进行播放；
+ * -
+ * 如果有远端主播，可以通过
+ * {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(
+ * String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * 获取远端主播的视频帧并渲染到屏幕上，远端主播的音频会在上一步自动混音后播放；
+ * - 更多细节，详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html}
  *
- *  - 更多细节，详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html}
- */
-
-/**
  * Video File Sharing
  *
  * This document shows how to share a video file during live streaming. The steps are detailed below:
  *  - Read and de-encapsulate the video file --> decode
- *  - Call the SDK’s custom audio and video capturing APIs {@link com.tencent.trtc.TRTCCloud#sendCustomAudioData(com.tencent.trtc.TRTCCloudDef.TRTCAudioFrame)} and {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)} to send the decoded audio and video frames to the SDK.
- *  - Call {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)} to get the processed local video frames and render them to the screen.
- *  - Call {@link com.tencent.trtc.TRTCCloud#setAudioFrameListener(com.tencent.trtc.TRTCCloudListener.TRTCAudioFrameListener)} )} to get and play the processed audio frames.
- *  - If there is a remote anchor, call {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)} to get the anchor’s video frames and render them to the screen. The audio of the anchor is automatically mixed and played in the previous step.
+ *  - Call the SDK’s custom audio and video capturing APIs
+ *  {@link com.tencent.trtc.TRTCCloud#sendCustomAudioData(com.tencent.trtc.TRTCCloudDef.TRTCAudioFrame)} and
+ *  {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)} to send
+ *  the decoded audio and video frames to the SDK.
+ *  - Call
  *
- *  - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html}.
+ * {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(
+ * int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * to get the processed local video frames and render them to the screen.
+ *  - Call
+ *
+ * {@link com.tencent.trtc.TRTCCloud#setAudioFrameListener(
+ * com.tencent.trtc.TRTCCloudListener.TRTCAudioFrameListener)} )}
+ * to get and play the processed audio frames.
+ *  - If there is a remote anchor, call
+ *
+ * {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(
+ * String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * to get the anchor’s video frames and render them to the screen.
+ * The audio of the anchor is automatically mixed and played in the previous step.
+ *
+ *  - For more information, please see the API document {https://liteav.sdk.qcloud
+ *  .com/doc/api/zh-cn/group__TRTCCloud__android.html}.
  */
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class LocalVideoShareActivity extends TRTCBaseActivity implements View.OnClickListener {
 
     private static final String TAG = "LocalVideoShareActivity";
 
-    private ImageView                          mImageBack;
-    private TextView                           mTextTitle;
-    private Button                             mButtonSelectFile;
-    private Button                             mButtonStartPush;
-    private EditText                           mEditRoomId;
-    private EditText                           mEditVideoFilePath;
-    private TXCloudVideoView                   mTXCloudPreviewView;
-    private List<TXCloudVideoView>             mRemoteVideoList;
+    private ImageView              mImageBack;
+    private TextView               mTextTitle;
+    private Button                 mButtonSelectFile;
+    private Button                 mButtonStartPush;
+    private EditText               mEditRoomId;
+    private EditText               mEditVideoFilePath;
+    private TXCloudVideoView       mTXCloudPreviewView;
+    private List<TXCloudVideoView> mRemoteVideoList;
 
-    private TRTCCloud                          mTRTCCloud;
-    private MediaFileSyncReader                mMediaFileSyncReader;
-    private CustomFrameRender                  mCustomFrameRender;
+    private TRTCCloud           mTRTCCloud;
+    private MediaFileSyncReader mMediaFileSyncReader;
+    private CustomFrameRender   mCustomFrameRender;
 
     private String                             mVideoFilePath;
     private List<String>                       mRemoteUserIdList;
@@ -85,35 +112,38 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
     private String                             mUserId;
 
 
-    private MediaFileSyncReader.AudioFrameReadListener mAudioFrameReadListener = new MediaFileSyncReader.AudioFrameReadListener() {
-        @Override
-        public void onFrameAvailable(byte[] data, int sampleRate, int channel, long timestamp) {
-            TRTCCloudDef.TRTCAudioFrame trtcAudioFrame = new TRTCCloudDef.TRTCAudioFrame();
-            trtcAudioFrame.data = data;
-            trtcAudioFrame.sampleRate = sampleRate;
-            trtcAudioFrame.channel = channel;
-            trtcAudioFrame.timestamp = timestamp;
+    private MediaFileSyncReader.AudioFrameReadListener mAudioFrameReadListener =
+            new MediaFileSyncReader.AudioFrameReadListener() {
+                @Override
+                public void onFrameAvailable(byte[] data, int sampleRate, int channel, long timestamp) {
+                    TRTCCloudDef.TRTCAudioFrame trtcAudioFrame = new TRTCCloudDef.TRTCAudioFrame();
+                    trtcAudioFrame.data = data;
+                    trtcAudioFrame.sampleRate = sampleRate;
+                    trtcAudioFrame.channel = channel;
+                    trtcAudioFrame.timestamp = timestamp;
 
-            mTRTCCloud.sendCustomAudioData(trtcAudioFrame);
-        }
-    };
+                    mTRTCCloud.sendCustomAudioData(trtcAudioFrame);
+                }
+            };
 
-    private MediaFileSyncReader.VideoFrameReadListener mVideoFrameReadListener = new MediaFileSyncReader.VideoFrameReadListener() {
-        @Override
-        public void onFrameAvailable(EGLContext eglContext, int textureId, int width, int height, long timestamp) {
-            TRTCCloudDef.TRTCVideoFrame videoFrame = new TRTCCloudDef.TRTCVideoFrame();
-            videoFrame.texture = new TRTCCloudDef.TRTCTexture();
-            videoFrame.texture.textureId = textureId;
-            videoFrame.texture.eglContext14 = eglContext;
-            videoFrame.width = width;
-            videoFrame.height = height;
-            videoFrame.timestamp = timestamp;
-            videoFrame.pixelFormat = TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D;
-            videoFrame.bufferType = TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE;
+    private MediaFileSyncReader.VideoFrameReadListener mVideoFrameReadListener =
+            new MediaFileSyncReader.VideoFrameReadListener() {
+                @Override
+                public void onFrameAvailable(EGLContext eglContext, int textureId, int width, int height,
+                                             long timestamp) {
+                    TRTCCloudDef.TRTCVideoFrame videoFrame = new TRTCCloudDef.TRTCVideoFrame();
+                    videoFrame.texture = new TRTCCloudDef.TRTCTexture();
+                    videoFrame.texture.textureId = textureId;
+                    videoFrame.texture.eglContext14 = eglContext;
+                    videoFrame.width = width;
+                    videoFrame.height = height;
+                    videoFrame.timestamp = timestamp;
+                    videoFrame.pixelFormat = TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D;
+                    videoFrame.bufferType = TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE;
 
-            mTRTCCloud.sendCustomVideoData(TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, videoFrame);
-        }
-    };
+                    mTRTCCloud.sendCustomVideoData(TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, videoFrame);
+                }
+            };
 
 
     @Override
@@ -130,12 +160,12 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
     }
 
     private void initView() {
-        mImageBack          = findViewById(R.id.iv_back);
-        mTextTitle          = findViewById(R.id.tv_room_number);
-        mButtonSelectFile   = findViewById(R.id.btn_file_select);
-        mButtonStartPush    = findViewById(R.id.btn_start_push);
-        mEditRoomId         = findViewById(R.id.et_room_id);
-        mEditVideoFilePath  = findViewById(R.id.et_file_path);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mButtonSelectFile = findViewById(R.id.btn_file_select);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEditVideoFilePath = findViewById(R.id.et_file_path);
         mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
         mRemoteVideoList = new ArrayList<>();
 
@@ -175,7 +205,8 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
         mTRTCCloud.enableCustomAudioCapture(true);
         mMediaFileSyncReader.start(mAudioFrameReadListener, mVideoFrameReadListener);
 
-        mTRTCCloud.setLocalVideoRenderListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D, TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, mCustomFrameRender);
+        mTRTCCloud.setLocalVideoRenderListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
+                TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, mCustomFrameRender);
         final TextureView textureView = new TextureView(this);
         mTXCloudPreviewView.addVideoView(textureView);
         mCustomFrameRender.start(textureView);
@@ -223,7 +254,8 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
             finish();
         } else if (view.getId() == R.id.btn_start_push) {
             if (TextUtils.isEmpty(mVideoFilePath)) {
-                Toast.makeText(LocalVideoShareActivity.this, getString(R.string.mediashare_please_select_video_file), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LocalVideoShareActivity.this, getString(R.string.mediashare_please_select_video_file),
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
             String roomId = mEditRoomId.getText().toString();
@@ -233,7 +265,8 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
                     enterRoom(roomId, mUserId);
                     mStartPushFlag = true;
                 } else {
-                    Toast.makeText(LocalVideoShareActivity.this, getString(R.string.mediashare_please_input_roomid_userid), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LocalVideoShareActivity.this,
+                            getString(R.string.mediashare_please_input_roomid_userid), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 mButtonStartPush.setText(R.string.mediashare_start_push);
@@ -255,10 +288,11 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
         CustomFrameRender customRender = new CustomFrameRender(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
         TextureView textureView = new TextureView(renderView.getContext());
         renderView.addVideoView(textureView);
-        mTRTCCloud.setRemoteVideoRenderListener(userId, TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_I420, TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_BYTE_ARRAY, customRender);
+        mTRTCCloud.setRemoteVideoRenderListener(userId, TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_I420,
+                TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_BYTE_ARRAY, customRender);
         customRender.start(textureView);
         mCustomRemoteRenderMap.put(userId, customRender);
-        mTRTCCloud.startRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,null);
+        mTRTCCloud.startRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, null);
     }
 
     private void stopRemoteCustomRender(String userId) {
@@ -266,7 +300,7 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
         if (render != null) {
             render.stop();
         }
-        mTRTCCloud.stopRemoteView(userId);
+        mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
     }
 
 

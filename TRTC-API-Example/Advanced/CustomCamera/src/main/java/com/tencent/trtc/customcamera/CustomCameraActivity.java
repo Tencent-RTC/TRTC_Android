@@ -32,63 +32,86 @@ import java.util.Random;
 
 /**
  * TRTC 自定义相机采集&渲染的示例
- *
  * 本文件展示了如何使用TRTC SDK 实现相机的自定义采集&渲染功能，主要流程如下：
- * - 调用{@link com.tencent.trtc.customcamera.helper.CustomCameraCapture#startInternal(com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener)}，启动Camera采集，并传入一个VideoFrameReadListener；
- * - 将{@link com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener}返回的视频帧通过TRTC的自定义视频采集接口 {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}; 发送给TRTC SDK；
- * - 通过{@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}获取处理后的本地视频帧并渲染到屏幕上；
- * - 如果有远端主播，可以通过{@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)} 获取远端主播的视频帧并渲染到屏幕上；
- *
+ * -
+ * 调用
+ * {@link com.tencent.trtc.customcamera.helper.CustomCameraCapture#startInternal(
+ * com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener)}，
+ * 启动Camera采集，并传入一个VideoFrameReadListener；
+ * - 将{@link com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener}
+ * 返回的视频帧通过TRTC的自定义视频采集接口
+ * {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}; 发送给TRTC
+ * SDK；
+ * -
+ * 通过
+ * {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(
+ * int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * 获取处理后的本地视频帧并渲染到屏幕上；
+ * -
+ * 如果有远端主播，可以通过
+ * {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(
+ * String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * 获取远端主播的视频帧并渲染到屏幕上；
  * - 更多细节，详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html}
- */
-
-/**
+ *
  * Custom Video Capturing & Rendering
- *
  * This document shows how to enable custom video capturing and rendering in the TRTC SDK.
- * - Call {@link com.tencent.trtc.customcamera.helper.CustomCameraCapture#startInternal(com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener)} to start video capturing by the camera, with `VideoFrameReadListener` passed in.
- * - Call the custom video capturing API {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}; to send the video frames returned by `{@link com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener}` to the SDK.
- * - Get the processed local video data using {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)} and render it to the screen.
- * - If there is a remote anchor, call {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)} to get the anchor’s video frames and render them to the screen.
- *
- * - For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html}.
+ * - Call
+ * {@link com.tencent.trtc.customcamera.helper.CustomCameraCapture#startInternal(
+ * com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener)}
+ * to start video capturing by the camera, with `VideoFrameReadListener` passed in.
+ * - Call the custom video capturing API
+ * {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}; to send
+ * the video frames returned by
+ * `{@link com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener}` to the SDK.
+ * - Get the processed local video data using
+ * {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(
+ * int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * and render it to the screen.
+ * - If there is a remote anchor, call
+ * {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(
+ * String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
+ * to get the anchor’s video frames and render them to the screen.
+ * - For more information, please see the API document {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html}.
  */
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class CustomCameraActivity extends TRTCBaseActivity implements View.OnClickListener {
 
     private static final String TAG = "CustomCameraActivity";
 
-    private ImageView                           mImageBack;
-    private TextView                            mTextTitle;
-    private Button                              mButtonStartPush;
-    private EditText                            mEditRoomId;
-    private EditText                            mEditUserId;
-    private TXCloudVideoView                    mTXCloudPreviewView;
-    private List<TXCloudVideoView>              mRemoteVideoList;
+    private ImageView              mImageBack;
+    private TextView               mTextTitle;
+    private Button                 mButtonStartPush;
+    private EditText               mEditRoomId;
+    private EditText               mEditUserId;
+    private TXCloudVideoView       mTXCloudPreviewView;
+    private List<TXCloudVideoView> mRemoteVideoList;
 
-    private TRTCCloud                           mTRTCCloud;
-    private CustomCameraCapture                 mCustomCameraCapture;
-    private CustomFrameRender                   mCustomFrameRender;
+    private TRTCCloud           mTRTCCloud;
+    private CustomCameraCapture mCustomCameraCapture;
+    private CustomFrameRender   mCustomFrameRender;
 
-    private List<String>                        mRemoteUserIdList;
-    private boolean                             mStartPushFlag = false;
-    private HashMap<String, CustomFrameRender>  mCustomRemoteRenderMap;
+    private List<String>                       mRemoteUserIdList;
+    private boolean                            mStartPushFlag = false;
+    private HashMap<String, CustomFrameRender> mCustomRemoteRenderMap;
 
-    private CustomCameraCapture.VideoFrameReadListener mVideoFrameReadListener = new CustomCameraCapture.VideoFrameReadListener() {
-        @Override
-        public void onFrameAvailable(EGLContext eglContext, int textureId, int width, int height) {
-            TRTCCloudDef.TRTCVideoFrame videoFrame = new TRTCCloudDef.TRTCVideoFrame();
-            videoFrame.texture = new TRTCCloudDef.TRTCTexture();
-            videoFrame.texture.textureId = textureId;
-            videoFrame.texture.eglContext14 = eglContext;
-            videoFrame.width = width;
-            videoFrame.height = height;
-            videoFrame.pixelFormat = TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D;
-            videoFrame.bufferType = TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE;
+    private CustomCameraCapture.VideoFrameReadListener mVideoFrameReadListener =
+            new CustomCameraCapture.VideoFrameReadListener() {
+                @Override
+                public void onFrameAvailable(EGLContext eglContext, int textureId, int width, int height) {
+                    TRTCCloudDef.TRTCVideoFrame videoFrame = new TRTCCloudDef.TRTCVideoFrame();
+                    videoFrame.texture = new TRTCCloudDef.TRTCTexture();
+                    videoFrame.texture.textureId = textureId;
+                    videoFrame.texture.eglContext14 = eglContext;
+                    videoFrame.width = width;
+                    videoFrame.height = height;
+                    videoFrame.pixelFormat = TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D;
+                    videoFrame.bufferType = TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE;
 
-            mTRTCCloud.sendCustomVideoData(TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG ,videoFrame);
-        }
-    };
+                    mTRTCCloud.sendCustomVideoData(TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, videoFrame);
+                }
+            };
 
 
     @Override
@@ -105,11 +128,11 @@ public class CustomCameraActivity extends TRTCBaseActivity implements View.OnCli
     }
 
     private void initView() {
-        mImageBack          = findViewById(R.id.iv_back);
-        mTextTitle          = findViewById(R.id.tv_room_number);
-        mButtonStartPush    = findViewById(R.id.btn_start_push);
-        mEditRoomId         = findViewById(R.id.et_room_id);
-        mEditUserId         = findViewById(R.id.et_user_id);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEditUserId = findViewById(R.id.et_user_id);
         mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
         mRemoteVideoList = new ArrayList<>();
 
@@ -144,11 +167,12 @@ public class CustomCameraActivity extends TRTCBaseActivity implements View.OnCli
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAnchor;
         mTRTCCloud.enterRoom(mTRTCParams, TRTCCloudDef.TRTC_APP_SCENE_LIVE);
 
-        mTRTCCloud.enableCustomVideoCapture(TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,true);
+        mTRTCCloud.enableCustomVideoCapture(TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, true);
 
         mCustomCameraCapture.startInternal(mVideoFrameReadListener);
 
-        mTRTCCloud.setLocalVideoRenderListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D, TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, mCustomFrameRender);
+        mTRTCCloud.setLocalVideoRenderListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
+                TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, mCustomFrameRender);
         final TextureView textureView = new TextureView(this);
         mTXCloudPreviewView.addVideoView(textureView);
         mCustomFrameRender.start(textureView);
@@ -200,7 +224,8 @@ public class CustomCameraActivity extends TRTCBaseActivity implements View.OnCli
                     enterRoom(roomId, userId);
                     mStartPushFlag = true;
                 } else {
-                    Toast.makeText(CustomCameraActivity.this, getString(R.string.customcamera_please_input_roomid_userid), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CustomCameraActivity.this,
+                            getString(R.string.customcamera_please_input_roomid_userid), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 mButtonStartPush.setText(R.string.customcamera_start_push);
@@ -215,10 +240,11 @@ public class CustomCameraActivity extends TRTCBaseActivity implements View.OnCli
         CustomFrameRender customRender = new CustomFrameRender(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
         TextureView textureView = new TextureView(renderView.getContext());
         renderView.addVideoView(textureView);
-        mTRTCCloud.setRemoteVideoRenderListener(userId, TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_I420, TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_BYTE_ARRAY, customRender);
+        mTRTCCloud.setRemoteVideoRenderListener(userId, TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_I420,
+                TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_BYTE_ARRAY, customRender);
         customRender.start(textureView);
         mCustomRemoteRenderMap.put(userId, customRender);
-        mTRTCCloud.startRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,null);
+        mTRTCCloud.startRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, null);
     }
 
 
@@ -227,7 +253,7 @@ public class CustomCameraActivity extends TRTCBaseActivity implements View.OnCli
         if (render != null) {
             render.stop();
         }
-        mTRTCCloud.stopRemoteView(userId);
+        mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
     }
 
 

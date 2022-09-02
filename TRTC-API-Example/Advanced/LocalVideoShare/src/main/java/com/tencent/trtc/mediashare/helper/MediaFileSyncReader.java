@@ -47,7 +47,12 @@ public class MediaFileSyncReader {
         mMediaFilePath = mediaFilePath;
     }
 
-    // 需要一定耗时，最好放在非主线程调用
+    /**
+     * 开始视频和音频数据的播放。
+     *
+     * @param audioListener
+     * @param videoListener
+     */
     public synchronized void start(AudioFrameReadListener audioListener, VideoFrameReadListener videoListener) {
         if (mAudioFrameReader != null || mVideoFrameReader != null) {
             return;

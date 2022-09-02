@@ -13,6 +13,9 @@
     <string name="screenshare_please_select_role">Role (Required)</string>
     <string name="screenshare_mute_audio">Mic Off</string>
     <string name="screenshare_stop_mute_audio">Mic On</string>
+    <string name="screenshare_start_screen_share_first">Start screen share first</string>
+    <string name="screenshare_start_share_system_audio">Start share system audio</string>
+    <string name="screenshare_stop_share_system_audio">Stop share system audio</string>
     <string name="screenshare_enter_room">Enter Room</string>
     <string name="screenshare_please_input_userid">User ID (Required)</string>
     <string name="screenshare_please_input_roomid">Room ID (Required)</string>

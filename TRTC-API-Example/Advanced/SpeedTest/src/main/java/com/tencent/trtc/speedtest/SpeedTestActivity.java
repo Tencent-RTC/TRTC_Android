@@ -22,30 +22,31 @@ import java.util.Random;
  * TRTC 网络测试
  *
  * 相关API：
- * - <a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0dbceb18d61d99ca33e967427dd0a344">startSpeedTest (int sdkAppId, String userId, String userSig)</a>
- */
-
-/**
+ * -
+ * <a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0dbceb18d61d99ca33e967427dd0a344">startSpeedTest (int sdkAppId, String userId, String userSig)</a>
+ *
  * Network Testing
  *
  * Network testing API:
- * - <a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0dbceb18d61d99ca33e967427dd0a344">startSpeedTest (int sdkAppId, String userId, String userSig)</a>
+ * -
+ * <a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0dbceb18d61d99ca33e967427dd0a344">startSpeedTest (int sdkAppId, String userId, String userSig)</a>
  */
 public class SpeedTestActivity extends AppCompatActivity {
 
     private static final String TAG = "SpeedTestActivity";
 
-    private static final int STATE_SPEED_TEST_IDLE = 0;
-    private static final int STATE_SPEED_TEST_TESTING = 1;
+    private static final int STATE_SPEED_TEST_IDLE     = 0;
+    private static final int STATE_SPEED_TEST_TESTING  = 1;
     private static final int STATE_SPEED_TEST_FINISHED = 2;
 
     private static final int SDK_APP_ID = GenerateTestUserSig.SDKAPPID;
 
-    private TRTCCloud       mTRTCCloud;
+    private TRTCCloudDef.TRTCSpeedTestParams mTRTCSpeedTestParams;
+    private TRTCCloud                        mTRTCCloud;
 
-    private TextView        mTextTestResult;
-    private Button          mButtonSpeedTest;
-    private EditText        mEditUserId;
+    private TextView mTextTestResult;
+    private Button   mButtonSpeedTest;
+    private EditText mEditUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class SpeedTestActivity extends AppCompatActivity {
     }
 
     private void releaseModule() {
-        if(mTRTCCloud != null) {
+        if (mTRTCCloud != null) {
             mTRTCCloud.stopSpeedTest();
             mTRTCCloud.setListener(null);
             mTRTCCloud = null;
@@ -88,7 +89,8 @@ public class SpeedTestActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (TextUtils.isEmpty(mEditUserId.getText())) {
-                Toast.makeText(SpeedTestActivity.this, getResources().getString(R.string.speedtest_input_error_tip), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SpeedTestActivity.this, getResources().getString(R.string.speedtest_input_error_tip),
+                        Toast.LENGTH_SHORT).show();
             } else {
                 if (mTRTCCloud == null) {
                     initModule();
@@ -104,9 +106,15 @@ public class SpeedTestActivity extends AppCompatActivity {
         Integer status = (Integer) mButtonSpeedTest.getTag();
         switch (status) {
             case STATE_SPEED_TEST_IDLE: {
-                mTRTCCloud.startSpeedTest(SDK_APP_ID, userId, userSig);
+                mTRTCSpeedTestParams = new TRTCCloudDef.TRTCSpeedTestParams();
+                mTRTCSpeedTestParams.sdkAppId = SDK_APP_ID;
+                mTRTCSpeedTestParams.userId = userId;
+                mTRTCSpeedTestParams.userSig = userSig;
+                mTRTCSpeedTestParams.expectedDownBandwidth = 5000;
+                mTRTCSpeedTestParams.expectedUpBandwidth = 5000;
+                mTRTCCloud.startSpeedTest(mTRTCSpeedTestParams);
                 mButtonSpeedTest.setTag(STATE_SPEED_TEST_TESTING);
-                mButtonSpeedTest.setText("0%");
+                mButtonSpeedTest.setText(R.string.speedtest_running);
                 break;
             }
             case STATE_SPEED_TEST_FINISHED: {
@@ -124,16 +132,12 @@ public class SpeedTestActivity extends AppCompatActivity {
 
     private final TRTCCloudListener mTRTCCloudListener = new TRTCCloudListener() {
         @Override
-        public void onSpeedTest(TRTCCloudDef.TRTCSpeedTestResult currentResult, int finishedCount, int totalCount) {
-            int percent = finishedCount * 100 /totalCount;
+        public void onSpeedTestResult(TRTCCloudDef.TRTCSpeedTestResult currentResult) {
             mTextTestResult.append(currentResult.toString());
             mTextTestResult.append("\n");
-            if(percent == 100) {
+            if (currentResult.success) {
                 mButtonSpeedTest.setTag(STATE_SPEED_TEST_FINISHED);
                 mButtonSpeedTest.setText(R.string.speedtest_finish);
-            } else {
-                mButtonSpeedTest.setTag(STATE_SPEED_TEST_TESTING);
-                mButtonSpeedTest.setText(percent + "%");
             }
         }
 

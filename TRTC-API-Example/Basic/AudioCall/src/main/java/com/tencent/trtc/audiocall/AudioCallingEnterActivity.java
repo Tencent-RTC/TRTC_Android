@@ -55,9 +55,10 @@ public class AudioCallingEnterActivity extends AppCompatActivity {
     }
 
     private void startEnterRoom() {
-        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim())
-                || TextUtils.isEmpty(mEditInputRoomId.getText().toString().trim())) {
-            Toast.makeText(AudioCallingEnterActivity.this, getString(R.string.audiocall_input_error_tip), Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(mEditInputUserId.getText().toString().trim()) || TextUtils
+                .isEmpty(mEditInputRoomId.getText().toString().trim())) {
+            Toast.makeText(AudioCallingEnterActivity.this, getString(R.string.audiocall_input_error_tip),
+                    Toast.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(AudioCallingEnterActivity.this, AudioCallingActivity.class);

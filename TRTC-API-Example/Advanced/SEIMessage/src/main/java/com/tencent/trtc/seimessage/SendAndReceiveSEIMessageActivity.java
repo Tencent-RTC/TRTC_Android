@@ -26,25 +26,24 @@ import java.util.List;
 /**
  * 接收和发送SEI页面
  *
- * <p>
  * 包含如下功能：
- * - 发送SEI消息{@link TRTCCloud#sendSEIMsg}，详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a034f9e1effbdadf8b9bfb7f3f06486c4}；
- * - 接收SEI消息{@link TRTCCloudListener#onRecvSEIMsg}，详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#ad3640e6bf80a1f93991644701e9b0d96}；
- * </p>
- */
-
-/**
+ * - 发送SEI消息{@link TRTCCloud#sendSEIMsg}，详见API说明文档 {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a034f9e1effbdadf8b9bfb7f3f06486c4}；
+ * - 接收SEI消息{@link TRTCCloudListener#onRecvSEIMsg}，详见API说明文档 {https://liteav.sdk.qcloud
+ * .com/doc/api/zh-cn/group__TRTCCloudListener__android.html#ad3640e6bf80a1f93991644701e9b0d96}；
+ *
  * SEI Message Receiving/Sending
  *
- * <p>
  * Features:
- * - Send SEI messages: {@link TRTCCloud#sendSEIMsg}. For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a034f9e1effbdadf8b9bfb7f3f06486c4}.
- * - Receive SEI messages: {@link TRTCCloudListener#onRecvSEIMsg}. For more information, please see the API document {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#ad3640e6bf80a1f93991644701e9b0d96}.
- * </p>
+ * - Send SEI messages: {@link TRTCCloud#sendSEIMsg}. For more information, please see the API document {https
+ * ://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a034f9e1effbdadf8b9bfb7f3f06486c4}.
+ * - Receive SEI messages: {@link TRTCCloudListener#onRecvSEIMsg}. For more information, please see the API document
+ * {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android
+ * .html#ad3640e6bf80a1f93991644701e9b0d96}.
  */
 public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implements View.OnClickListener {
 
-    private static final String    TAG                 = "SendAndReceiveSEIMessageActivity";
+    private static final String TAG = "SendAndReceiveSEIMessageActivity";
 
     private ImageView              mImageBack;
     private TextView               mTextTitle;
@@ -56,9 +55,9 @@ public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implement
     private TXCloudVideoView       mTXCloudPreviewView;
     private List<TXCloudVideoView> mRemoteVideoList;
 
-    private TRTCCloud              mTRTCCloud;
-    private List<String>           mRemoteUserIdList;
-    private boolean                mStartPushFlag = false;
+    private TRTCCloud    mTRTCCloud;
+    private List<String> mRemoteUserIdList;
+    private boolean      mStartPushFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,14 +108,14 @@ public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implement
         mRemoteUserIdList = new ArrayList<>();
         mRemoteVideoList = new ArrayList<>();
 
-        mImageBack              = findViewById(R.id.iv_back);
-        mTextTitle              = findViewById(R.id.tv_room_number);
-        mButtonStartPush        = findViewById(R.id.btn_start_push);
-        mButtonSendSEIMessage   = findViewById(R.id.btn_send_sei_message);
-        mEditRoomId             = findViewById(R.id.et_room_id);
-        mEditUserId             = findViewById(R.id.et_user_id);
-        mEditSEIMessage         = findViewById(R.id.et_sei_message);
-        mTXCloudPreviewView     = findViewById(R.id.txcvv_main_local);
+        mImageBack = findViewById(R.id.iv_back);
+        mTextTitle = findViewById(R.id.tv_room_number);
+        mButtonStartPush = findViewById(R.id.btn_start_push);
+        mButtonSendSEIMessage = findViewById(R.id.btn_send_sei_message);
+        mEditRoomId = findViewById(R.id.et_room_id);
+        mEditUserId = findViewById(R.id.et_user_id);
+        mEditSEIMessage = findViewById(R.id.et_sei_message);
+        mTXCloudPreviewView = findViewById(R.id.txcvv_main_local);
 
         mRemoteVideoList.add((TXCloudVideoView) findViewById(R.id.txcvv_video_remote1));
         mRemoteVideoList.add((TXCloudVideoView) findViewById(R.id.txcvv_video_remote2));
@@ -150,7 +149,8 @@ public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implement
                     mStartPushFlag = true;
                     mButtonSendSEIMessage.setEnabled(true);
                 } else {
-                    Toast.makeText(SendAndReceiveSEIMessageActivity.this, getString(R.string.seimessage_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendAndReceiveSEIMessageActivity.this,
+                            getString(R.string.seimessage_please_input_roomid_and_userid), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 mButtonStartPush.setText(R.string.seimessage_start_push);
@@ -167,13 +167,16 @@ public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implement
         if (mTRTCCloud != null && mStartPushFlag) {
             String message = mEditSEIMessage.getText().toString();
             if (TextUtils.isEmpty(message)) {
-                Toast.makeText(SendAndReceiveSEIMessageActivity.this, getString(R.string.seimessage_content_empty_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SendAndReceiveSEIMessageActivity.this,
+                        getString(R.string.seimessage_content_empty_toast), Toast.LENGTH_SHORT).show();
             } else {
                 mTRTCCloud.sendSEIMsg(message.getBytes(), 1);
-                Toast.makeText(SendAndReceiveSEIMessageActivity.this, getString(R.string.seimessage_send_message_success_toast, message), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SendAndReceiveSEIMessageActivity.this,
+                        getString(R.string.seimessage_send_message_success_toast, message), Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(SendAndReceiveSEIMessageActivity.this, getString(R.string.seimessage_send_message_error_toast), Toast.LENGTH_SHORT).show();
+            Toast.makeText(SendAndReceiveSEIMessageActivity.this,
+                    getString(R.string.seimessage_send_message_error_toast), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -193,7 +196,7 @@ public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implement
             } else {
                 if (mRemoteUserIdList.contains(userId)) {
                     mRemoteUserIdList.remove(userId);
-                    mTRTCCloud.stopRemoteView(userId);
+                    mTRTCCloud.stopRemoteView(userId, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG);
                 }
             }
             refreshRemoteVideo();
@@ -204,7 +207,8 @@ public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implement
                 for (int i = 0; i < mRemoteUserIdList.size() || i < 6; i++) {
                     if (i < mRemoteUserIdList.size() && !TextUtils.isEmpty(mRemoteUserIdList.get(i))) {
                         mRemoteVideoList.get(i).setVisibility(View.VISIBLE);
-                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG, mRemoteVideoList.get(i));
+                        mTRTCCloud.startRemoteView(mRemoteUserIdList.get(i), TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
+                                mRemoteVideoList.get(i));
                     } else {
                         mRemoteVideoList.get(i).setVisibility(View.GONE);
                     }
@@ -228,10 +232,13 @@ public class SendAndReceiveSEIMessageActivity extends TRTCBaseActivity implement
             if (activity != null) {
                 try {
                     String message = new String(data, "UTF-8");
-                    Toast.makeText(activity, getString(R.string.seimessage_receive_sei_message_toast, userId, message), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, getString(R.string.seimessage_receive_sei_message_toast, userId, message),
+                            Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(activity, getString(R.string.seimessage_receive_sei_message_toast_error, e.getMessage()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity,
+                            getString(R.string.seimessage_receive_sei_message_toast_error, e.getMessage()),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         }
