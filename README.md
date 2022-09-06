@@ -10,21 +10,22 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 10.4 @ 2022.07.21
-
-**New features:**
-- iOS & Android: Support RGBA32 format in custom video capture, see: sendCustomVideoData;
-- Windows & Mac: Support local preview when setting Watermark, see: setWaterMark;
+### Version 10.6 @ 2022.09.05
 
 **Function optimization:**
-- Android: Optimized the compatibility of low-latency in-ear return and binaural capture;
-- Android: Optimize the strategy of switching from hard decoding to soft decoding to improve decoding performance;
-- iOS: Optimized the problem of low volume for iPad acquisition;
+
+- All platforms: Improved the room entry speed in the IPv6 network environment.
+-  All platforms: Optimized the recovery efficiency of audio and the synchronization effect of audio and video in weak network environment to improve the call experience.
+- All platforms: Optimized the connection retention ability in weak network environment and reduce the probability of disconnection and reconnection.
+- All platforms: Optimized the problem of low volume in the Music gear (specified in startLocalAudio) to improve user experience.
+- Mac: Optimized the communication experience when using a Bluetooth headset, with less noise and clearer sound.
+- Android: Optimized the compatibility of stereo capture and support more models.
+-  Android: Optimized the occasional echo leakage problem and improve the communication experience;
 
 **Bug fixes:**
 
-- All platforms: Fixed the occasional check-in and check-out callback exception;
-- Windows: Fixed the problem that the content of the new window is clipped when switching the sharing window;
+- Android & iOS: Fixed the occasional missing word problem in Speech gear (specified in startLocalAudio).
+- Mac: Fixed occasional echo cancellation failure when switching between microphones.;
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 
