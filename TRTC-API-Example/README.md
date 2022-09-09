@@ -47,7 +47,7 @@ You have [signed up for a Tencent Cloud account](https://intl.cloud.tencent.com/
 
 
 ### Obtaining `SDKAPPID` and `SECRETKEY`
-1. Log in to the TRTC console and select **Application Management** > **[Demo Quick Run](https://console.tencentcloud.com/trtc/app/create)**.
+1. Log in to the TRTC console and select **Application Management** > **[Create application](https://console.tencentcloud.com/trtc/app/create)**.
 2. Enter an application name such as `TestTRTC`, and click **Next**.
 
 ![ #900px](https://qcloudimg.tencent-cloud.cn/raw/51c73a617e69a76ed26e6f74b0071ec9.png)
