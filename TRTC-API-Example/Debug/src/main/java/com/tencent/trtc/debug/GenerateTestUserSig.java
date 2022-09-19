@@ -65,16 +65,22 @@ public class GenerateTestUserSig {
     public static final String CDN_DOMAIN_NAME = "PLACEHOLDER";
 
     /**
-     * CDN发布功能 混流bizId
+     * CDN发布功能 混流bizId；
+     * 使用 CND 时用实际值替换，暂不使用 CDN 时请用 0 替换，以便编译通过。
      *
-     * `bizId` for CDN publishing and stream mixing
+     * `bizId` for CDN publishing and stream mixing.
+     * Replace it with the actual value when using CND,
+     * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
     public static final int BIZID = PLACEHOLDER;
 
     /**
-     * CDN发布功能 混流appId
+     * CDN发布功能 混流appId；
+     * 使用 CND 时用实际值替换，暂不使用 CDN 时请用 0 替换，以便编译通过。
      *
-     * `appId` for CDN publishing and stream mixing
+     * `appId` for CDN publishing and stream mixing.
+     * Replace it with the actual value when using CND,
+     * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
     public static final int APPID = PLACEHOLDER;
 

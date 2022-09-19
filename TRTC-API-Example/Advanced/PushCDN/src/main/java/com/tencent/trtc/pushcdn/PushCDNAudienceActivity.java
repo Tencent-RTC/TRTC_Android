@@ -17,12 +17,12 @@ import com.tencent.trtc.debug.GenerateTestUserSig;
 /**
  * TRTC CDN发布观众页
  *
- * - 可以直接输入stream id进行播放{@link TXLivePlayer#startPlay(String, int)}
+ * - 可以直接输入stream id进行播放{@link TXLivePlayer#startLivePlay(String, int)}
  * - 播放器API见<a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXLivePlayer__android.html">TXLivePlayer</a>
  *
  * CDN Playback
  *
- * - Enter the stream ID to play back streams: {@link TXLivePlayer#startPlay(String, int)}
+ * - Enter the stream ID to play back streams: {@link TXLivePlayer#startLivePlay(String, int)}
  * - To learn about player APIs, see
  * <a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXLivePlayer__android.html">TXLivePlayer</a>.
  */
@@ -96,7 +96,7 @@ public class PushCDNAudienceActivity extends TRTCBaseActivity {
                      * 具体可参考：https://cloud.tencent.com/document/product/647/16826
                      */
                     String playUrl = "http://" + GenerateTestUserSig.CDN_DOMAIN_NAME + "/live/" + streamId + ".flv";
-                    mTXLivePlayer.startPlay(playUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV);
+                    mTXLivePlayer.startLivePlay(playUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV);
                 }
             }
         }
