@@ -9,23 +9,24 @@ _[English](README.md) | 简体中文_
 
 
 
-## 更新日志## 
-### Version 10.6 @2022.09.05
+## 更新日志
+### **Version 10.7 @ 2022.09.20**
+
+**新特性：**
+
+- 全平台：云端混流支持调整每路输入流的音量，详见 [TRTCMixUser](https://cloud.tencent.com/document/product/647/79626#5934a926ba45ac0d5c9bd8632d3d44b5).soundLevel。
+- 全平台：新增了 [onRemoteAudioStatusUpdated](https://cloud.tencent.com/document/product/647/79621#80ffbac8268b90337b6e8d4a8af2f997) 回调接口，可用于更好地识别和监控远端音频流状态。
 
 **功能优化:** 
 
-- 全平台：提升在 IPv6 网络环境下的进房速度。
-- 全平台：优化弱网络环境下音频的恢复效率以及音画同步效果，提升通话体验。
-- 全平台：优化弱网络环境下的连接保持能力，减少断网重连概率。
-- 全平台：优化 Music 档位（在 startLocalAudio 时指定）下音量较小的问题，提升用户体验。
-- Mac：优化使用蓝牙耳机时的沟通体验，杂音更少，声音更清晰。
-- Android：优化立体声采集的兼容性，支持更多机型。
-- Android：优化偶现的漏回声问题，提升沟通体验；
+- 全平台：升级编码内核，提升屏幕分享场景的画质。
+- 全平台：优化弱网下编码码控效果。
 
 **缺陷修复:** 
 
-- Android & iOS：修复在 Speech 档位（在 startLocalAudio 时指定）下偶现的漏字问题。
-- Mac：修复切换麦克风时偶现的回声消除失效的问题。
+- iOS：修复 iPad 部分设备采集音量较小的问题。
+- Android：修复偶现连接蓝牙耳机但是声音外放的问题。
+- 全平台：修复频繁进退房场景下偶现的 crash 问题。
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 

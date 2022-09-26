@@ -10,22 +10,23 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 10.6 @ 2022.09.05
+### **Version 10.7 @ 2022.09.20**
+
+**New features:**
+
+- All platforms: Mixing Stream supports adjusting the volume of each input stream, see [TRTCMixUser](https://cloud.tencent.com/document/product/647/79626#5934a926ba45ac0d5c9bd8632d3d44b5).soundLevel.
+- All platforms: Added [onRemoteAudioStatusUpdated](https://cloud.tencent.com/document/product/647/79621#80ffbac8268b90337b6e8d4a8af2f997) callback, which can be used to better identify and monitor remote audio stream status.
 
 **Function optimization:**
 
-- All platforms: Improved the room entry speed in the IPv6 network environment.
--  All platforms: Optimized the recovery efficiency of audio and the synchronization effect of audio and video in weak network environment to improve the call experience.
-- All platforms: Optimized the connection retention ability in weak network environment and reduce the probability of disconnection and reconnection.
-- All platforms: Optimized the problem of low volume in the Music gear (specified in startLocalAudio) to improve user experience.
-- Mac: Optimized the communication experience when using a Bluetooth headset, with less noise and clearer sound.
-- Android: Optimized the compatibility of stereo capture and support more models.
--  Android: Optimized the occasional echo leakage problem and improve the communication experience;
+- All platforms: Upgraded the encoding core to improve the picture quality of screen sharing scenes.
+- All platforms: Optimized the encoding code control effect under weak network.
 
 **Bug fixes:**
 
-- Android & iOS: Fixed the occasional missing word problem in Speech gear (specified in startLocalAudio).
-- Mac: Fixed occasional echo cancellation failure when switching between microphones.;
+- iOS: Fixed the issue that the volume of some iPad devices was low.
+- Android: Fixed the problem that the bluetooth headset is occasionally connected but the sound is played out.
+- All platforms: Fixed the occasional crash problem in frequent check-in and check-out scenarios.
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 
