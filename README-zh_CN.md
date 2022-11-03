@@ -10,23 +10,24 @@ _[English](README.md) | 简体中文_
 
 
 ## 更新日志
-### **Version 10.7 @ 2022.09.20**
+### Version 10.8 @ 2022 10.31
 
-**新特性：**
+**新特性**
 
-- 全平台：云端混流支持调整每路输入流的音量，详见 [TRTCMixUser](https://cloud.tencent.com/document/product/647/79626#5934a926ba45ac0d5c9bd8632d3d44b5).soundLevel。
-- 全平台：新增了 [onRemoteAudioStatusUpdated](https://cloud.tencent.com/document/product/647/79621#80ffbac8268b90337b6e8d4a8af2f997) 回调接口，可用于更好地识别和监控远端音频流状态。
+- 全平台：新增搓碟音效，提供更加全面的在线 K 歌体验，详见：TXAudioEffectManager.[setMusicScratchSpeedRate](https://cloud.tencent.com/document/product/647/79623#314ea310a5f8f3a7c2d51599a47a4c99)。
 
-**功能优化:** 
+**功能优化**
 
-- 全平台：升级编码内核，提升屏幕分享场景的画质。
-- 全平台：优化弱网下编码码控效果。
+- Android：优化视频解码启动速度，有效提升画面秒开速度，最快可以达到 50ms。
+- 全平台：优化 NTP 时间的准确性，详见：TXLiveBase.updateNetworkTime。
 
-**缺陷修复:** 
+**缺陷修复**
 
-- iOS：修复 iPad 部分设备采集音量较小的问题。
-- Android：修复偶现连接蓝牙耳机但是声音外放的问题。
-- 全平台：修复频繁进退房场景下偶现的 crash 问题。
+- 全平台：修复下特定场景下（无音视频上行）[混流机器人](https://cloud.tencent.com/document/product/647/79626#ff59c8b94f588385a0ed3b39f6b6184a) 回推 TRTC 房间场景中，偶现的拉流异常以及回调错误的问题。
+- 全平台：修复观众进房后切换角色时，因网络类型变化偶现的音视频上行失败问题。
+- 全平台：修复在断网重连过程中出现的音质切换不生效问题。
+- 全平台：修复在断网重连过程中偶现的上行无声问题。
+- Android & iOS：修复当调用 muteRemoteVideoStream 时会移除最后一帧视频画面的问题。
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 

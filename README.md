@@ -10,23 +10,24 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### **Version 10.7 @ 2022.09.20**
+### Version 10.8 @ 2022 10.31
 
-**New features:**
+**New features**
 
-- All platforms: Mixing Stream supports adjusting the volume of each input stream, see [TRTCMixUser](https://cloud.tencent.com/document/product/647/79626#5934a926ba45ac0d5c9bd8632d3d44b5).soundLevel.
-- All platforms: Added [onRemoteAudioStatusUpdated](https://cloud.tencent.com/document/product/647/79621#80ffbac8268b90337b6e8d4a8af2f997) callback, which can be used to better identify and monitor remote audio stream status.
+- All platforms: Added scratch sound effects to provide a more comprehensive online karaoke experience, see: TXAudioEffectManager.[setMusicScratchSpeedRate](https://cloud.tencent.com/document/product/647/79623#314ea310a5f8f3a7c2d51599a47a4c99).
 
-**Function optimization:**
+**Function optimization**
 
-- All platforms: Upgraded the encoding core to improve the picture quality of screen sharing scenes.
-- All platforms: Optimized the encoding code control effect under weak network.
+- Android: Optimize the video decoding startup speed, effectively improve the screen opening speed in seconds, the fastest can reach 50ms.
+- All platforms: Optimize the accuracy of NTP time, see: TXLiveBase.updateNetworkTime.
 
-**Bug fixes:**
+**Bug fixes**
 
-- iOS: Fixed the issue that the volume of some iPad devices was low.
-- Android: Fixed the problem that the bluetooth headset is occasionally connected but the sound is played out.
-- All platforms: Fixed the occasional crash problem in frequent check-in and check-out scenarios.
+- All platforms: In a specific scene (no audio and video upstream) [Mixed Streaming Robot](https://cloud.tencent.com/document/product/647/79626#ff59c8b94f588385a0ed3b39f6b6184a) In the TRTC room scene, the occasional occurrence Pull stream exceptions and callback errors.
+- All platforms: Fixed the occasional audio and video upload failure due to network type changes when the audience switches roles after entering the room.
+- All platforms: Fixed the problem that the sound quality switch does not take effect during the disconnection and reconnection process.
+- All platforms: Fixed the occasional uplink silent problem during disconnection and reconnection.
+- Android & iOS: Fixed an issue where the last video frame would be removed when calling muteRemoteVideoStream.
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 
