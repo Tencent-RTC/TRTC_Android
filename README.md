@@ -10,24 +10,20 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 10.8 @ 2022 10.31
+### Version 10.9 @ 2023.01.09
 
 **New features**
 
-- All platforms: Added scratch sound effects to provide a more comprehensive online karaoke experience, see: TXAudioEffectManager.[setMusicScratchSpeedRate](https://cloud.tencent.com/document/product/647/79623#314ea310a5f8f3a7c2d51599a47a4c99).
+- Android: Added audio capture support for external microphone devices (such as lavalier microphones).
 
 **Function optimization**
 
-- Android: Optimize the video decoding startup speed, effectively improve the screen opening speed in seconds, the fastest can reach 50ms.
-- All platforms: Optimize the accuracy of NTP time, see: TXLiveBase.updateNetworkTime.
-
-**Bug fixes**
-
-- All platforms: In a specific scene (no audio and video upstream) [Mixed Streaming Robot](https://cloud.tencent.com/document/product/647/79626#ff59c8b94f588385a0ed3b39f6b6184a) In the TRTC room scene, the occasional occurrence Pull stream exceptions and callback errors.
-- All platforms: Fixed the occasional audio and video upload failure due to network type changes when the audience switches roles after entering the room.
-- All platforms: Fixed the problem that the sound quality switch does not take effect during the disconnection and reconnection process.
-- All platforms: Fixed the occasional uplink silent problem during disconnection and reconnection.
-- Android & iOS: Fixed an issue where the last video frame would be removed when calling muteRemoteVideoStream.
+- All platforms: optimized the synchronization of audio and video, and improve the smoothness of video playback.
+- Full platform: optimized the uplink delay in some weak network scenarios, and improve the interactive effect of video calls.
+- Windows&Android: Optimized the problem that popping sounds are easy to occur after setting the music sound quality in specific scenarios.
+- iOS: Optimized the external recording screen to automatically turn to the right side when the system switches between horizontal and vertical screens, improving the viewing experience.
+- Mac: Optimized the screen recording performance of MacOS 12.3 and later versions, reducing CPU overhead and memory usage.
+- Android: Optimized the sound output problem that still exists after plugging in headphones under the media volume of a small number of models.
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 

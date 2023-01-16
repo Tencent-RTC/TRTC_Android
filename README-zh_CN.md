@@ -10,24 +10,20 @@ _[English](README.md) | 简体中文_
 
 
 ## 更新日志
-### Version 10.8 @ 2022 10.31
+### Version 10.9 @ 2023.01.09
 
 **新特性**
 
-- 全平台：新增搓碟音效，提供更加全面的在线 K 歌体验，详见：TXAudioEffectManager.[setMusicScratchSpeedRate](https://cloud.tencent.com/document/product/647/79623#314ea310a5f8f3a7c2d51599a47a4c99)。
+- Android：增加对外置麦克风设备（比如领夹式麦克风）的音频采集支持。
 
 **功能优化**
 
-- Android：优化视频解码启动速度，有效提升画面秒开速度，最快可以达到 50ms。
-- 全平台：优化 NTP 时间的准确性，详见：TXLiveBase.updateNetworkTime。
-
-**缺陷修复**
-
-- 全平台：修复下特定场景下（无音视频上行）[混流机器人](https://cloud.tencent.com/document/product/647/79626#ff59c8b94f588385a0ed3b39f6b6184a) 回推 TRTC 房间场景中，偶现的拉流异常以及回调错误的问题。
-- 全平台：修复观众进房后切换角色时，因网络类型变化偶现的音视频上行失败问题。
-- 全平台：修复在断网重连过程中出现的音质切换不生效问题。
-- 全平台：修复在断网重连过程中偶现的上行无声问题。
-- Android & iOS：修复当调用 muteRemoteVideoStream 时会移除最后一帧视频画面的问题。
+- 全平台：优化音画同步问题，提升视频播放平滑度。
+- 全平台：优化部分弱网场景的上行延迟，提升视频通话的互动效果。
+- Windows&Android：优化特定场景下设定音乐音质后易产生爆音的问题。
+- iOS：优化外录屏在系统横竖屏切换时随系统方向自动转正，提升观看端的体验。
+- Mac：优化 MacOS 12.3 及之后版本的录屏性能，降低 CPU 开销及内存占用。
+- Android：优化少量机型在媒体音量下，插入耳机后仍存在的声音外发问题。
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 
