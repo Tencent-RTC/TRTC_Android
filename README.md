@@ -10,20 +10,21 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 10.9 @ 2023.01.09
+### Version 11.0 @ 2023.03.08
 
-**New features**
+**NEW FEATURES**
+- Android: Interface changes, the return type of TXLiveBase.setLibraryPath is adjusted to bool, indicating whether the SDK dynamic library is loaded successfully.
 
-- Android: Added audio capture support for external microphone devices (such as lavalier microphones).
+**Function Optimization**
+- All platforms: Improved the success rate of palying eonline BGM when network is weak.
+- All platforms: Optimized the fluency of the first video frame in video call scene.
+- Android: Optimized audio compatibility, reduce current noise and silent problems.
 
-**Function optimization**
+**BUG FIX**
+- All platforms: Fixed the occasional crash problem when using the sendCustomCmdMsg function in the case of frequent check-in and check-out.
+- All platforms: Fixed the problem of incorrectly calling back the onRemoteUserLeaveRoom, onUserVideoAvailable, and onUserAudioAvailable of the remote host when checking out locally.
+- All platforms: Fixed the issue where noise may be heard when the remote anchor is muted.
 
-- All platforms: optimized the synchronization of audio and video, and improve the smoothness of video playback.
-- Full platform: optimized the uplink delay in some weak network scenarios, and improve the interactive effect of video calls.
-- Windows&Android: Optimized the problem that popping sounds are easy to occur after setting the music sound quality in specific scenarios.
-- iOS: Optimized the external recording screen to automatically turn to the right side when the system switches between horizontal and vertical screens, improving the viewing experience.
-- Mac: Optimized the screen recording performance of MacOS 12.3 and later versions, reducing CPU overhead and memory usage.
-- Android: Optimized the sound output problem that still exists after plugging in headphones under the media volume of a small number of models.
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 

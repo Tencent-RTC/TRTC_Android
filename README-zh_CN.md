@@ -10,20 +10,20 @@ _[English](README.md) | 简体中文_
 
 
 ## 更新日志
-### Version 10.9 @ 2023.01.09
+### Version 11.0 @ 2023.03.08
 
 **新特性**
-
-- Android：增加对外置麦克风设备（比如领夹式麦克风）的音频采集支持。
+- Android：接口变更，TXLiveBase.setLibraryPath 返回类型调整为 bool，表示加载 SDK 动态库是否成功。
 
 **功能优化**
+- 全平台：提升弱网情况下在线 BGM 的播放成功率。
+- 全平台：优化了 VideoCall 进房场景下，首帧播放流畅度。
+- Android：优化音频兼容性，减少电流杂音、无声类问题。
 
-- 全平台：优化音画同步问题，提升视频播放平滑度。
-- 全平台：优化部分弱网场景的上行延迟，提升视频通话的互动效果。
-- Windows&Android：优化特定场景下设定音乐音质后易产生爆音的问题。
-- iOS：优化外录屏在系统横竖屏切换时随系统方向自动转正，提升观看端的体验。
-- Mac：优化 MacOS 12.3 及之后版本的录屏性能，降低 CPU 开销及内存占用。
-- Android：优化少量机型在媒体音量下，插入耳机后仍存在的声音外发问题。
+**缺陷修复**
+- 全平台：修复了使用 sendCustomCmdMsg 功能时，在频繁进退房情况下偶现的 crash 问题。
+- 全平台：修复了本地退房时，错误回调远端主播的 onRemoteUserLeaveRoom、 onUserVideoAvailable、onUserAudioAvailable 问题。
+- 全平台：修复了远端主播静音时，可能听到杂音的问题。
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 
