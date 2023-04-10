@@ -94,7 +94,7 @@ public class CustomFrameRender
     }
 
     @Override
-    public void onCapturedRawAudioFrame(TRTCCloudDef.TRTCAudioFrame audioFrame) {
+    public void onCapturedAudioFrame(TRTCCloudDef.TRTCAudioFrame trtcAudioFrame) {
 
     }
 
@@ -119,6 +119,11 @@ public class CustomFrameRender
             return;
         }
         mGLHandler.obtainMessage(MSG_PLAY_AUDIO, audioFrame).sendToTarget();
+    }
+
+    @Override
+    public void onVoiceEarMonitorAudioFrame(TRTCCloudDef.TRTCAudioFrame trtcAudioFrame) {
+
     }
 
     public CustomFrameRender(String userId, int steamType) {
