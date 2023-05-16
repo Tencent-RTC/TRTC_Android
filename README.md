@@ -10,21 +10,26 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 11.0 @ 2023.03.08
+### Version 11.1 @ 2023.04.17
 
 **NEW FEATURES**
-- Android: Interface changes, the return type of TXLiveBase.setLibraryPath is adjusted to bool, indicating whether the SDK dynamic library is loaded successfully.
+
+- All platforms: Added `onVoiceEarMonitorAudioFrame` callback, which is used to obtain or modify earphone data.
+- All platforms: `onCapturedRawAudioFrame` renamed to `onCapturedAudioFrame`.
+- Mac: Screen sharing supports PPT presentation mode.
 
 **Function Optimization**
-- All platforms: Improved the success rate of palying eonline BGM when network is weak.
-- All platforms: Optimized the fluency of the first video frame in video call scene.
-- Android: Optimized audio compatibility, reduce current noise and silent problems.
+
+- All platforms: Optimize the log file cleaning logic to prevent the log file from being too large.
+- iOS & Android: Optimized the color matrix compatibility when decoding and rendering to avoid introducing color deviation.
+- Android: Optimized the problem that the low-end device occasionally cannot start the hardcode in the high-resolution scene, resulting in increased performance overhead.
+- Android: Optimized the occasional problem that the hardcoded rate of the system above Android 12 is occasionally out of control.
+- Android: Optimized the problem of low sound collection by the hosts of a small number of models in the chorus scene.
+- Android: Optimized the occasional sound clipping problem in the chorus scene.
 
 **BUG FIX**
-- All platforms: Fixed the occasional crash problem when using the sendCustomCmdMsg function in the case of frequent check-in and check-out.
-- All platforms: Fixed the problem of incorrectly calling back the onRemoteUserLeaveRoom, onUserVideoAvailable, and onUserAudioAvailable of the remote host when checking out locally.
-- All platforms: Fixed the issue where noise may be heard when the remote anchor is muted.
-
+- Android: Fixed missing echo when bluetooth headset is connected but not enabled.
+- Windows: Fixed the problem of missing echo when the system is switched on and off.
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 
