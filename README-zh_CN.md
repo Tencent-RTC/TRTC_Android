@@ -10,26 +10,29 @@ _[English](README.md) | 简体中文_
 
 
 ## 更新日志
-### Version 11.1 @ 2023.04.17
+### Version 11.2 @ 2023.06.05
 
 **新特性**
 
-- 全平台：新增 onVoiceEarMonitorAudioFrame 数据回调，用于获取或修改耳返数据。
-- 全平台：数据回调 onCapturedRawAudioFrame 优化命名为 onCapturedAudioFrame
-- Mac：窗口分享支持 PPT 放映模式
+- 全平台：支持合唱场景下 BGM 伴奏、原唱无缝切换，详见 setMusicTrack。
+- Android：全功能版（Professional）、直播基础版（Smart）支持x86架构，并支持通过Maven获取。
+- Android：满足 Android 12 及以上版本的操作系统要求，在屏幕采集时启动前台服务，详见：`enableForegroundService`。
+- iOS：支持在 Apple 芯片设备上通过 Xcode 模拟器运行 SDK。
+- Mac：支持获取屏幕窗口信息时返回宽高等信息，对齐 Windows，详见：TXCScreenSourceInfo。
 
 **功能优化**
 
-- 全平台：优化 log 文件自动清理逻辑，防止 log 文件夹体积超标。
-- iOS & Android：优化解码渲染时的颜色矩阵兼容性，避免引入色彩偏差。
-- Android：优化低端机在高分辨率场景下偶现硬编无法启动导致性能开销增大的问题。
-- Android：优化 Android 12以上系统偶现硬编码率不受控的问题。
-- Android：优化在合唱场景中少量机型主播采集声音小的问题。
-- Android：优化在合唱场景中偶现的声音剪切严重的问题。
-
-**缺陷修复**
-- Android：修复蓝牙耳机连接状态但未启用时漏回声。
-- Windows：修复开关系统混音偶现漏回声的问题。
+- 全平台：优化合唱场景的整体音质，提升合唱效果，减少合唱延迟。
+- 全平台：优化上下麦时的音频效果，上下麦体验更平滑。
+- 全平台：优化极限弱网下的音频体验。
+- 全平台：优化直播单主播推流时的弱网体验。
+- 全平台：优化视频通话场景大小流切换过程的流畅度。
+- Android&iOS：优化音乐场景下的音质表现，提升合唱体验。
+- Android&iOS：优化不同音量类型下使用蓝牙耳机的体验。
+- Android：优化硬件解码延时，提升首帧体验。
+- Android：优化耳返功能，提升开关耳返时的体验。
+- Android：优化 Android 设备的采集兼容性，减少音频异常问题。
+- iOS：优化画质表现，提升视频体验。
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 

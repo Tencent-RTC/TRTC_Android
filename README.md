@@ -10,26 +10,28 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 11.1 @ 2023.04.17
+### Version 11.2 @ 2023.06.05
 
-**NEW FEATURES**
+**New features**
 
-- All platforms: Added `onVoiceEarMonitorAudioFrame` callback, which is used to obtain or modify earphone data.
-- All platforms: `onCapturedRawAudioFrame` renamed to `onCapturedAudioFrame`.
-- Mac: Screen sharing supports PPT presentation mode.
+ - Cross-platform: Supports seamless switching between instrumentals and original vocals of BGM in duet scenes. See `setMusicTrack` for details.
+ - Android: To be compatible with the foreground service launch restrictions on Android 12 and above, a foreground service is initiated during screen capture. See `enableForegroundService` for details.
+ - iOS: Supports use in the Xcode simulator running on Apple chip hardware.
+ - Mac: `TRTCScreenSourceInfo` adds property value width and height.
 
-**Function Optimization**
+**Improvements**
 
-- All platforms: Optimize the log file cleaning logic to prevent the log file from being too large.
-- iOS & Android: Optimized the color matrix compatibility when decoding and rendering to avoid introducing color deviation.
-- Android: Optimized the problem that the low-end device occasionally cannot start the hardcode in the high-resolution scene, resulting in increased performance overhead.
-- Android: Optimized the occasional problem that the hardcoded rate of the system above Android 12 is occasionally out of control.
-- Android: Optimized the problem of low sound collection by the hosts of a small number of models in the chorus scene.
-- Android: Optimized the occasional sound clipping problem in the chorus scene.
-
-**BUG FIX**
-- Android: Fixed missing echo when bluetooth headset is connected but not enabled.
-- Windows: Fixed the problem of missing echo when the system is switched on and off.
+- Cross-platform: Optimized sound quality in duet scenes, and reduced end-to-end latency.
+- Cross-platform: Optimized performance when turning on/off microphone, providing a smoother experience.
+- Cross-platform: Optimized audio experience under extremely bad networks.
+- Cross-platform: Optimized weak network experience when broadcast live stream only.
+- Cross-platform: Optimized the smoothness of switching high-quality and low-quality remote video streams.
+- Android & iOS: Optimized audio quality in music scenes.
+- Android & iOS: Optimized the experience with Bluetooth headphones.
+- Android: Optimized hardware decoder latency, improving the speed of rendering the first video image.
+- Android: Optimized the in-ear monitoring feature, enhancing the experience when switching on/off in-ear monitoring.
+- Android: Optimized the audio devices capture compatibility.
+- iOS: Optimized quality of video, enhancing image clarity.
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 
