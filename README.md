@@ -10,28 +10,32 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 11.2 @ 2023.06.05
+### Version 11.3 @ 2023.07.07
 
 **New features**
 
- - Cross-platform: Supports seamless switching between instrumentals and original vocals of BGM in duet scenes. See `setMusicTrack` for details.
- - Android: To be compatible with the foreground service launch restrictions on Android 12 and above, a foreground service is initiated during screen capture. See `enableForegroundService` for details.
- - iOS: Supports use in the Xcode simulator running on Apple chip hardware.
- - Mac: `TRTCScreenSourceInfo` adds property value width and height.
+- All Platforms: Added trapezoid correction for video (only supported by the Professional version) for manual correction of perspective distortion. See `setPerspectiveCorrectionPoints` for details.
+- All Platforms: Added audio spectrum callback, which can be used for sound wave animation or volume spectrum display. See `enableAudioVolumeEvaluation` and `TRTCVolumeInfo` for details.
+- All Platforms: Added a new reverb effect "Studio 2". See `TXVoiceReverbType` for details.
+- All Platforms: Added SEI parameter settings for mixed stream, used for transport SEI infomation when publishing stream to CDN. See `TRTCTranscodingConfig` for details.
+- Windows: Added real-time music scoring for Yinsuda Authorized Music, which can be used for real-time scoring of online singing. See `createSongScore` for details.
+- iOS & Android: Added support for .ogg format music files in `startPlayMusic`.
+- Flutter: Added `setSystemAudioLoopbackVolume`(iOS).
+
 
 **Improvements**
 
-- Cross-platform: Optimized sound quality in duet scenes, and reduced end-to-end latency.
-- Cross-platform: Optimized performance when turning on/off microphone, providing a smoother experience.
-- Cross-platform: Optimized audio experience under extremely bad networks.
-- Cross-platform: Optimized weak network experience when broadcast live stream only.
-- Cross-platform: Optimized the smoothness of switching high-quality and low-quality remote video streams.
-- Android & iOS: Optimized audio quality in music scenes.
-- Android & iOS: Optimized the experience with Bluetooth headphones.
-- Android: Optimized hardware decoder latency, improving the speed of rendering the first video image.
-- Android: Optimized the in-ear monitoring feature, enhancing the experience when switching on/off in-ear monitoring.
-- Android: Optimized the audio devices capture compatibility.
-- iOS: Optimized quality of video, enhancing image clarity.
+- All platforms: Optimized adaptive digital gain algorithm to improve listening experience.
+- All platforms: Optimized the loading speed of the first video frame after entering the room.
+- All platforms: Optimized weak network resistance for single user streaming to improve smoothness under network delay and jitter.
+- Android: Optimized audio capture and playback feature to avoid abnormal sound issues on some Android devices.
+- Android: Optimized video sub-stream hardware encoding performance, improving quality of screen sharing.
+- iOS: Optimized audio device restart strategy to reduce the occurrence of sound interruptions.
+- iOS & Android: Removed on-demand related interfaces from `TXLivePlayer`. For on-demand video playback, please use `TXVodPlayer`.
+
+**Bug fixes**
+- Android: Fixed the issue where some locally recorded videos on Android 12 and above system versions cannot be played on Apple's Safari.
+
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
 

@@ -10,29 +10,31 @@ _[English](README.md) | 简体中文_
 
 
 ## 更新日志
-### Version 11.2 @ 2023.06.05
+### Version 11.3 @ 2023.07.07
 
 **新特性**
+- 全平台：新增视频画面梯形校正功能（仅 Professinal 版本支持），用于手动修正透视画面角度畸变。详见 `setPerspectiveCorrectionPoints`。
+- 全平台：新增声音频谱回调，可用于声浪动画或音量频谱展示。详见 `enableAudioVolumeEvaluation` 及 `TRTCVolumeInfo`。
+- 全平台：新增混响效果“录音棚2”，详见 `TXVoiceReverbType`。
+- 全平台：新增混流接口 SEI 参数设置，用于转推 CDN 分发时透传 SEI。详见 `TRTCTranscodingConfig`。
+- Windows：新增音速达版权曲库音乐打分功能，可用于合唱实时评分，详见 `createSongScore`。
+- iOS&Android：新增 `startPlayMusic` 对 .ogg 格式音乐文件的支持。
+- Flutter：新增 `setSystemAudioLoopbackVolume` 方法（iOS）。
 
-- 全平台：支持合唱场景下 BGM 伴奏、原唱无缝切换，详见 setMusicTrack。
-- Android：全功能版（Professional）、直播基础版（Smart）支持x86架构，并支持通过Maven获取。
-- Android：满足 Android 12 及以上版本的操作系统要求，在屏幕采集时启动前台服务，详见：`enableForegroundService`。
-- iOS：支持在 Apple 芯片设备上通过 Xcode 模拟器运行 SDK。
-- Mac：支持获取屏幕窗口信息时返回宽高等信息，对齐 Windows，详见：TXCScreenSourceInfo。
 
 **功能优化**
+- 全平台：优化自适应数字增益算法，提升声音听感，增强音量稳定性，避免音量过大或过小。
+- 全平台：优化视频秒开耗时，提升进房后视频第一帧画面的加载速度。
+- 全平台：优化单主播推流的弱网抗性，提升网络延时抖动情况下的流畅度。
+- Android：优化音频采集播放逻辑，避免在部分 Android 设备上出现声音异常的问题。
+- Android：优化视频辅流硬编表现，提升共享屏幕的画面质量。
+- iOS：优化音频设备重启逻辑，减少声音中断的发生次数。
+- iOS&Android：TXLivePlayer 删除点播相关接口，点播视频请使用 TXVodPlayer 进行播放。
 
-- 全平台：优化合唱场景的整体音质，提升合唱效果，减少合唱延迟。
-- 全平台：优化上下麦时的音频效果，上下麦体验更平滑。
-- 全平台：优化极限弱网下的音频体验。
-- 全平台：优化直播单主播推流时的弱网体验。
-- 全平台：优化视频通话场景大小流切换过程的流畅度。
-- Android&iOS：优化音乐场景下的音质表现，提升合唱体验。
-- Android&iOS：优化不同音量类型下使用蓝牙耳机的体验。
-- Android：优化硬件解码延时，提升首帧体验。
-- Android：优化耳返功能，提升开关耳返时的体验。
-- Android：优化 Android 设备的采集兼容性，减少音频异常问题。
-- iOS：优化画质表现，提升视频体验。
+**缺陷修复**
+- Android：修复Android 12及以上版本系统部分本地录制的视频在苹果Safari 浏览器上无法播放的问题。
+
+
 
 更早期的版本更新历史请点击  [更多](https://cloud.tencent.com/document/product/647/46907)...
 
