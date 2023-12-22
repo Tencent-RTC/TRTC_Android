@@ -10,31 +10,74 @@ Leveraging Tencent's many years of experience in network and audio/video technol
 
 
 ## Changelog
-### Version 11.3 @ 2023.07.07
+### Version 11.5 @ 2023.11.27
 
-**New features**
+#### Improvements
+- All platforms: Optimized the performance and stability of the video engine.
 
-- All Platforms: Added trapezoid correction for video (only supported by the Professional version) for manual correction of perspective distortion. See `setPerspectiveCorrectionPoints` for details.
-- All Platforms: Added audio spectrum callback, which can be used for sound wave animation or volume spectrum display. See `enableAudioVolumeEvaluation` and `TRTCVolumeInfo` for details.
-- All Platforms: Added a new reverb effect "Studio 2". See `TXVoiceReverbType` for details.
-- All Platforms: Added SEI parameter settings for mixed stream, used for transport SEI infomation when publishing stream to CDN. See `TRTCTranscodingConfig` for details.
-- Windows: Added real-time music scoring for Yinsuda Authorized Music, which can be used for real-time scoring of online singing. See `createSongScore` for details.
-- iOS & Android: Added support for .ogg format music files in `startPlayMusic`.
-- Flutter: Added `setSystemAudioLoopbackVolume`(iOS).
+- All platforms: Optimized the stability of the audio engine.
+
+- All platforms: Optimized the behavior strategy of some APIs, see the adjustment of interface behavior for details.
+
+- All platforms: Optimized the strategy and performance of the background music module (BGM module), reducing the occurrence of BGM playback exceptions.
+
+- Windows: Optimized HEVC hardware decoding compatibility with AMD and Nvidia graphics cards.
+
+- Windows: Optimized the overall performance of screen sharing, improved screen capture frame rate and stability.
+
+- Android: Optimized the playback effect of TRTC with VODPlayer.
+
+- iOS & Mac: Optimized the performance of pre-processing and rendering using Metal.
 
 
-**Improvements**
+#### Adjustment of Interface Behavior
+- All platforms: When the video resolution is set to vertical 540P (expecting 540x960), the specific resolution for processing is adjusted from 544x960 to 536x960.
 
-- All platforms: Optimized adaptive digital gain algorithm to improve listening experience.
-- All platforms: Optimized the loading speed of the first video frame after entering the room.
-- All platforms: Optimized weak network resistance for single user streaming to improve smoothness under network delay and jitter.
-- Android: Optimized audio capture and playback feature to avoid abnormal sound issues on some Android devices.
-- Android: Optimized video sub-stream hardware encoding performance, improving quality of screen sharing.
-- iOS: Optimized audio device restart strategy to reduce the occurrence of sound interruptions.
-- iOS & Android: Removed on-demand related interfaces from `TXLivePlayer`. For on-demand video playback, please use `TXVodPlayer`.
+- All platforms: The callback interval of BGM progress callback `onPlayProgress` is adjusted from 200ms to 300ms.
 
-**Bug fixes**
-- Android: Fixed the issue where some locally recorded videos on Android 12 and above system versions cannot be played on Apple's Safari.
+- All platforms: The internal implementation of the BGM module is adjusted to a singleton, and the musicID needs to be globally unique in multiple instances. When developers use sub-instances to play BGM, please make sure that different instances use different musicIDs.
+
+- All platforms: Local recording event status codes are adjusted to be returned asynchronously. The default return is 0 after the related interface is called, and the specific status code is obtained through the corresponding event callback.
+
+- All platforms: Adjust the following status codes for the `onLocalRecordBegin` callback for starting recording events.
+
+<table>
+<tr>
+<td rowspan="1" colSpan="1" >Event</td>
+
+<td rowspan="1" colSpan="1" >Status code before v11.5	</td>
+
+<td rowspan="1" colSpan="1" >Status code in v11.5</td>
+</tr>
+
+<tr>
+<td rowspan="1" colSpan="1" >Recording has started, stop previous recording first</td>
+
+<td rowspan="1" colSpan="1" >-1</td>
+
+<td rowspan="1" colSpan="1" >-6</td>
+</tr>
+
+<tr>
+<td rowspan="1" colSpan="1" >Directory has no write permission, please check directory permissions</td>
+
+<td rowspan="1" colSpan="1" >-2</td>
+
+<td rowspan="1" colSpan="1" >-8</td>
+</tr>
+
+<tr>
+<td rowspan="1" colSpan="1" >Incorrect file extension (e.g. unsupported recording format)	</td>
+
+<td rowspan="1" colSpan="1" >-3</td>
+
+<td rowspan="1" colSpan="1" >-2</td>
+</tr>
+</table>
+
+- iOS & Android: Optimized the continuity of mobile screen sharing, retaining the last frame sent during sharing pause, with a frame rate of 1-2 fps.
+
+- iOS & Android: Adjusted the response behavior of gravity sensor, only responding to gravity sensor on or off.
 
 
 For the release notes of earlier versions, click [More](https://www.tencentcloud.com/document/product/647/39426).
