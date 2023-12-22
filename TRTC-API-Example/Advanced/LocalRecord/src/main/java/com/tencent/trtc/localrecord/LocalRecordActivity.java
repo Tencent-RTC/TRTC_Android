@@ -177,11 +177,6 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
         if (file.exists()) {
             file.delete();
         }
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         TRTCCloudDef.TRTCLocalRecordingParams params = new TRTCCloudDef.TRTCLocalRecordingParams();
         params.recordType = TRTCCloudDef.TRTC_RECORD_TYPE_BOTH;
         params.filePath = recordPath + File.separator + recordFile;
@@ -207,6 +202,18 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
                     activity.exitRoom();
                 }
             }
+        }
+
+        @Override
+        public void onLocalRecordBegin(int errCode, String storagePath) {
+            super.onLocalRecordBegin(errCode, storagePath);
+            Log.e(TAG, "onLocalRecordBegin errCode:" + errCode + ", storagePath:" + storagePath);
+        }
+
+        @Override
+        public void onLocalRecordComplete(int errCode, String storagePath) {
+            super.onLocalRecordComplete(errCode, storagePath);
+            Log.e(TAG, "onLocalRecordComplete errCode:" + errCode + ", storagePath:" + storagePath);
         }
     }
 
