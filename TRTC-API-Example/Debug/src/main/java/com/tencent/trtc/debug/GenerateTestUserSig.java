@@ -72,7 +72,7 @@ public class GenerateTestUserSig {
      * Replace it with the actual value when using CND,
      * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
-    public static final int BIZID = PLACEHOLDER;
+    public static final int BIZID = 0;
 
     /**
      * CDN发布功能 混流appId；
@@ -82,7 +82,7 @@ public class GenerateTestUserSig {
      * Replace it with the actual value when using CND,
      * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
-    public static final int APPID = PLACEHOLDER;
+    public static final int APPID = 0;
 
     /**
      * 腾讯云 SDKAppId，需要替换为您自己账号下的 SDKAppId。
