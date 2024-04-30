@@ -72,7 +72,7 @@ public class GenerateTestUserSig {
      * Replace it with the actual value when using CND,
      * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
-    public static final int BIZID = 0;
+    public static final int BIZID = PLACEHOLDER;
 
     /**
      * CDN发布功能 混流appId；
@@ -82,7 +82,7 @@ public class GenerateTestUserSig {
      * Replace it with the actual value when using CND,
      * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
-    public static final int APPID = 0;
+    public static final int APPID = PLACEHOLDER;
 
     /**
      * 腾讯云 SDKAppId，需要替换为您自己账号下的 SDKAppId。
@@ -143,7 +143,7 @@ public class GenerateTestUserSig {
      * 请不要将如下代码发布到您的线上正式版本的 App 中，原因如下：
      *
      * 本文件中的代码虽然能够正确计算出 UserSig，但仅适合快速调通 SDK 的基本功能，不适合线上产品，
-     * 这是因为客户端代码中的 SECRETKEY 很容易被反编译逆向破解，尤其是 Web 端的代码被破解的难度几乎为零。
+     * 这是因为客户端代码中的 SDKSECRETKEY 很容易被反编译逆向破解，尤其是 Web 端的代码被破解的难度几乎为零。
      * 一旦您的密钥泄露，攻击者就可以计算出正确的 UserSig 来盗用您的腾讯云流量。
      *
      * 正确的做法是将 UserSig 的计算代码和加密密钥放在您的业务服务器上，然后由 App 按需向您的服务器获取实时算出的 UserSig。
