@@ -14,11 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tencent.trtc.debug.Constant;
 
 /**
- * 直播分享入口类，可输入房间ID，选择角色进入直播间
- *
- * 以主播角色进入房间{@link ScreenAnchorActivity}
- * 以观众角色进入房间{@link ScreenAudienceActvity}
- *
  * Entrance for Screen Sharing Live Streaming (enter a room after specifying the room ID and selecting a role)
  *
  * Enter a room as an anchor: {@link ScreenAnchorActivity}

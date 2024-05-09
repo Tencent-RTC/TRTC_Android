@@ -19,12 +19,6 @@ import com.tencent.trtc.debug.GenerateTestUserSig;
 import java.util.Random;
 
 /**
- * TRTC 网络测试
- *
- * 相关API：
- * -
- * <a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0dbceb18d61d99ca33e967427dd0a344">startSpeedTest (int sdkAppId, String userId, String userSig)</a>
- *
  * Network Testing
  *
  * Network testing API:

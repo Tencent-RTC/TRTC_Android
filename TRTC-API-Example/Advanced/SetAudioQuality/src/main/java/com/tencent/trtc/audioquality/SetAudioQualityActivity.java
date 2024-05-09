@@ -27,14 +27,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TRTC设置音频质量页面
- * 包含如下简单功能：
- * - 设置音频质量{@link TRTCCloud#startLocalAudio(int)},其方法中参数为音频质量参数。
- * - 设置音频采集音量{@link TRTCCloud#setAudioCaptureVolume(int)}
- *
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#a6af5e2c4819a683042f382688aff41e9}
- *
  * Setting Audio Quality
  *
  * Features:

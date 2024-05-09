@@ -15,11 +15,6 @@ import com.tencent.rtmp.ui.TXCloudVideoView;
 import com.tencent.trtc.debug.GenerateTestUserSig;
 
 /**
- * TRTC CDN发布观众页
- *
- * - 可以直接输入stream id进行播放{@link TXLivePlayer#startLivePlay(String, int)}
- * - 播放器API见<a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXLivePlayer__android.html">TXLivePlayer</a>
- *
  * CDN Playback
  *
  * - Enter the stream ID to play back streams: {@link TXLivePlayer#startLivePlay(String, int)}
@@ -92,8 +87,9 @@ public class PushCDNAudienceActivity extends TRTCBaseActivity {
                 } else {
                     String streamId = mEditStreamId.getText().toString().trim();
                     /*
-                     * 需要首先开启CDN旁路直播，再将URL_PLACEHOLDER替换成您的播放域名
-                     * 具体可参考：https://cloud.tencent.com/document/product/647/16826
+                     * You need to enable CDN bypass live broadcast first,
+                     * and then replace URL_PLACEHOLDER with your playback domain name
+                     * For details, please refer to: https://cloud.tencent.com/document/product/647/16826
                      */
                     String playUrl = "http://" + GenerateTestUserSig.CDN_DOMAIN_NAME + "/live/" + streamId + ".flv";
                     mTXLivePlayer.startLivePlay(playUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV);

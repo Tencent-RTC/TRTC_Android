@@ -52,14 +52,14 @@ public class GpuImageI420Filter extends GPUImageFilter {
     }
 
     /**
-     * 加载 YUV 数据到 Texture。
+     * Load YUV data into Texture.
      *
      * @param yuvData
      * @param width
      * @param height
      */
     public void loadYuvDataToTexture(byte[] yuvData, int width, int height) {
-        // 纹理大小发生变化，需要重新创建纹理
+        // The texture size changes and the texture needs to be re-created
         if (mTextureSize == null || mTextureSize.width != width || mTextureSize.height != height) {
             mYData = new byte[width * height];
             OpenGlUtils.deleteTexture(mYTextureId);
@@ -70,7 +70,7 @@ public class GpuImageI420Filter extends GPUImageFilter {
             mUvTextureId = OpenGlUtils.NO_TEXTURE;
         }
 
-        // 可以使用其他方式，去除这两句拷贝。比如：在JNI加载数据。
+        // You can use other methods to remove the copies of these two sentences. For example: loading data in JNI.
         System.arraycopy(yuvData, 0, mYData, 0, mYData.length);
         System.arraycopy(yuvData, mYData.length, mUvData, 0, mUvData.length);
         mYTextureId = OpenGlUtils.loadTexture(GLES20.GL_LUMINANCE, ByteBuffer.wrap(mYData), width, height, mYTextureId);

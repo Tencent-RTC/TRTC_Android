@@ -16,9 +16,11 @@ import androidx.core.app.NotificationCompat;
 import com.blankj.utilcode.util.ServiceUtils;
 
 /**
- * 该 Service 用于应用保活，勿删
- * 9.0 及之后的系统，应用退后台后摄像头和麦克风将停止工作（https://developer.android.com/about/versions/pie/android-9.0-changes-all）
- * 该 Service 是为了保证应用退后台摄像头和麦克风依旧可以正常工作。
+ * This Service is used to keep the application alive and should not be deleted.
+ * For systems of 9.0 and later, the camera and microphone will stop working after the application exits the background
+ * (https://developer.android.com/about/versions/pie/android-9.0-changes-all)
+ * This Service is to ensure that the camera and microphone can still work normally
+ * after the application exits the background.
  */
 public class ToolKitService extends Service {
 
@@ -48,8 +50,10 @@ public class ToolKitService extends Service {
         }
         Intent service = new Intent(context, ToolKitService.class);
         /*
-         * 9.0 及之后的系统，应用退后台后摄像头和麦克风将停止工作（https://developer.android.com/about/versions/pie/android-9.0-changes-all）
-         * 该 Service 是为了保证应用退后台摄像头和麦克风依旧可以正常工作，故仅在 9.0 及之后的系统启动。
+         * For systems of 9.0 and later, the camera and microphone will stop working after the application exits the
+         * background (https://developer.android.com/about/versions/pie/android-9.0-changes-all)
+         * This Service is to ensure that the camera and microphone can still work normally after the application exits
+         *  the background, so it can only be started in 9.0 and later systems.
          */
         if (Build.VERSION.SDK_INT >= 28) {
             context.startForegroundService(service);
@@ -60,9 +64,9 @@ public class ToolKitService extends Service {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         String notificationChannelId = "notification_channel_id_01";
-        // Android8.0以上的系统，新建消息通道
+        // For systems above Android 8.0, create a new message channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //用户可见的通道名称
+            //Channel name visible to users
             String channelName = "TRTC Foreground Service Notification";
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel notificationChannel =

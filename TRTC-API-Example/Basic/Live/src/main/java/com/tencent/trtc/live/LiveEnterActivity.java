@@ -14,11 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tencent.trtc.debug.Constant;
 
 /**
- * TRTC 视频互动直播的入口页面
- *
- * - 以主播角色进入视频互动直播房间{@link LiveAnchorActivity}
- * - 以观众角色进入视频互动直播房间{@link LiveAudienceActivity}
- *
  * Entrance View of Interactive Live Video Streaming
  *
  * - Enter a room as an anchor: {@link LiveAnchorActivity}

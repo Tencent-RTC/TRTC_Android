@@ -35,7 +35,7 @@ public abstract class BaseReader extends Thread {
 
                 processFrame();
 
-                // 如果一帧的处理时长太短，增加sleep，防止占用太高CPU。
+                // If the processing time of a frame is too short, increase sleep to prevent excessive CPU usage.
                 long frameCost = SystemClock.elapsedRealtime() - frameStartTime;
                 if (frameCost < DEFAULT_FRAME_PROCESS_INTERVAL) {
                     try {

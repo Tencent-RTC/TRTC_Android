@@ -26,14 +26,6 @@ import java.lang.ref.WeakReference;
 import java.util.Random;
 
 /**
- * TRTC本地视频录制页面
- * 包含如下简单功能：
- * - 开始视频录制{@link TRTCCloud#startLocalRecording(TRTCCloudDef.TRTCLocalRecordingParams)}
- * - 停止视频录制{@link TRTCCloud#stopLocalRecording()}
- *
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#a5d6bf60e9d3051f601988e55106b296c}
- *
  * Local Video Recording
  *
  * Features:

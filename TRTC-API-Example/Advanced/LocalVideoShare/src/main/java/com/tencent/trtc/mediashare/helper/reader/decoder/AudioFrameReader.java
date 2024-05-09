@@ -72,7 +72,7 @@ public class AudioFrameReader extends BaseReader {
             mSampleRate *= 2;
         }
 
-        // 每次只发送FRAME_DURATION长度的数据
+        // Only send data of FRAME_DURATION length each time
         mFrameData = new byte[FRAME_DURATION * mBytesPreMills];
         mSize = 0;
     }
@@ -89,7 +89,7 @@ public class AudioFrameReader extends BaseReader {
             return;
         }
 
-        // 检查时间戳是否连上，如果没连上，则中间插点静音数据
+        // Check whether the timestamp is connected. If not, insert some silent data in the middle.
         long diff = MICROSECONDS.toMillis(frame.presentationTimeUs) - (mLastEndTime + mSize / mBytesPreMills);
         while (diff > 0) {
             Log.v(TAG, "diff: " + diff);
@@ -118,7 +118,7 @@ public class AudioFrameReader extends BaseReader {
             return;
         }
 
-        // 检查当前帧与预期发送的时间差多久，睡眠这段时间，然后再发送
+        // Check how far the current frame is from the expected sending time, sleep for this period, and then send again
         long time = SystemClock.elapsedRealtime() - mStartTimeMs;
         if (mLastEndTime > time) {
             try {
@@ -133,7 +133,7 @@ public class AudioFrameReader extends BaseReader {
             mListener.onFrameAvailable(mFrameData, mSampleRate, mChannels, mLastEndTime);
         }
 
-        // 每次发送的时间长度为FRAME_DURATION
+        //The length of each sending is FRAME_DURATION
         mLastEndTime += FRAME_DURATION;
         mSize = 0;
     }

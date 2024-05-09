@@ -1,18 +1,18 @@
 package com.tencent.trtc.mediashare.helper.reader.decoder.pipeline;
 
 /**
- * 作为某个处理单元的数据提供者
+ * As a data provider for a certain processing unit
  *
- * @param <T> 数据类型
+ * @param <T> data type
  */
 public interface Provider<T> {
     /**
-     * 从提供者中读取出来一个buffer，如果读取完毕了，则返回null
+     * Read a buffer from the provider. If the reading is completed, return null
      */
     T dequeueOutputBuffer();
 
     /**
-     * 将buffer返回给提供者，以便重复使用该buffer
+     * Return the buffer to the provider so that the buffer can be reused
      */
     void enqueueOutputBuffer(T buffer);
 }

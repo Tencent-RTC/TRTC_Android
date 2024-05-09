@@ -27,14 +27,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TRTC设置音效页面
- * 具体步骤如下：
- * - 1.获取音效管理类{@link TRTCCloud#getAudioEffectManager()} 返回对象{@link TXAudioEffectManager}
- * - 2.使用音效管理类设置音效{@link TXAudioEffectManager#setVoiceChangerType(TXAudioEffectManager.TXVoiceChangerType)}
- * - 3.使用音效管理类设置混响效果{@link TXAudioEffectManager#setVoiceReverbType(TXAudioEffectManager.TXVoiceReverbType)}
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXAudioEffectManager__android
- * .html#adad5c18fa6883bef2edae8bc343bcec2}
- *
  * Setting Audio Effects
  * The steps are detailed below:
  * - 1. Get the audio effect management class {@link TXAudioEffectManager}: {@link TRTCCloud#getAudioEffectManager()}

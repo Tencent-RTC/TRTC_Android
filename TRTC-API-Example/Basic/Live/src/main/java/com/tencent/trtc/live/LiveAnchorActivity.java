@@ -27,17 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TRTC 主播视角下的RTC视频互动直播房间页面
- *
- * 包含如下简单功能：
- * - 进入直播房间{@link LiveAnchorActivity#enterRoom()}
- * - 退出直播房间{@link LiveAnchorActivity#exitRoom()}
- * - 切换前置/后置摄像头{@link LiveAnchorActivity#switchCamera()}
- * - 打开/关闭摄像头{@link LiveAnchorActivity#muteVideo()}
- * - 关闭/打开麦克风{@link LiveAnchorActivity#muteAudio()}
- *
- * 详见接入文档{https://cloud.tencent.com/document/product/647/43182}
- *
  * Room View of Interactive Live Video Streaming for Anchor
  *
  * Features:
@@ -253,7 +242,7 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
                 if (i < mRemoteUidList.size()) {
                     String remoteUid = mRemoteUidList.get(i);
                     mRemoteViewList.get(i).setVisibility(View.VISIBLE);
-                    // 开始显示用户userId的视频画面
+                    // Start displaying the video screen of user userId
                     mTRTCCloud.startRemoteView(remoteUid, TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG,
                             mRemoteViewList.get(i).getVideoView());
                 } else {

@@ -28,16 +28,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TRTC设置背景音乐页面
- *
- * 包含如下简单功能：
- * - 设置背景音乐{@link TXAudioEffectManager#startPlayMusic(TXAudioEffectManager.AudioMusicParam)}
- * - 设置背景音乐本地播放的音量{@link TXAudioEffectManager#setMusicPlayoutVolume(int, int)}
- * - 设置背景音乐远端播放的音量{@link TXAudioEffectManager#setMusicPublishVolume(int, int)}
- *
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TXAudioEffectManager__android
- * .html#acaf02cbac9aa369c166ce60f600fb246}
- *
  * Setting Background Music
  *
  * Features:

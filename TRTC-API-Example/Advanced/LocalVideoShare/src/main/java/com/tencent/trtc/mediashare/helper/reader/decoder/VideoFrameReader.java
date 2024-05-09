@@ -59,7 +59,7 @@ public class VideoFrameReader extends BaseReader {
             return;
         }
 
-        // 检查当前帧与预期发送的时间差多久，睡眠这段时间，然后再发送
+        // Check how far the current frame is from the expected sending time, sleep for this period, and then send again
         long time = SystemClock.elapsedRealtime() - mStartTimeMs;
         if (textureFrame.timestampMs > time) {
             try {

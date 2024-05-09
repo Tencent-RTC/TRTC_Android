@@ -30,7 +30,7 @@ import java.nio.FloatBuffer;
 import java.util.List;
 
 /**
- * 将解码出来的内容绘制到自己的FrameBuffer上，然后作为输出给到下一个节点
+ * Draw the decoded content to your own FrameBuffer, and then give it as output to the next node
  */
 @TargetApi(17)
 public class VideoFrameToTexture extends ProvidedStage<TextureFrame>
@@ -55,7 +55,7 @@ public class VideoFrameToTexture extends ProvidedStage<TextureFrame>
     private OesInputFilter      mOesInputFilter;
     private GPUImageFilterGroup mGpuImageFilterGroup;
 
-    // 标识FrameBuffer是否被外部使用，当前不可再写
+    // Identifies whether the FrameBuffer is used externally and cannot be written to at the moment.
     private boolean mFrameBufferIsUnusable = false;
     private int     mState                 = STATE_WAIT_INPUT;
 
@@ -83,16 +83,16 @@ public class VideoFrameToTexture extends ProvidedStage<TextureFrame>
 
     @Override
     public void setup() {
-        // 创建一个EGLCore出来，采用的是离屏的Surface
+        // Create an EGLCore, using an off-screen Surface
         mEglCore = new EglCore(mWidth, mHeight);
         mEglCore.makeCurrent();
 
-        // 创建SurfaceTexture，用于给解码器作为输出，该类以texture id作为输入
+        //Create a SurfaceTexture for output to the decoder. This class takes texture id as input.
         mSurfaceTextureId = OpenGlUtils.generateTextureOES();
         mSurfaceTexture = new SurfaceTexture(mSurfaceTextureId);
         mSurfaceTexture.setOnFrameAvailableListener(this);
 
-        // 创建一个FrameBuffer，作为输出给到外面（外面不能异步使用）
+        //Create a FrameBuffer as output to the outside (cannot be used asynchronously outside)
         mFrameBuffer = new FrameBuffer(mWidth, mHeight);
         mFrameBuffer.initialize();
 
@@ -115,7 +115,8 @@ public class VideoFrameToTexture extends ProvidedStage<TextureFrame>
         if (mState == STATE_WAIT_INPUT) {
             Frame frame = mVideoDecoder.dequeueOutputBuffer();
             if (frame != null) {
-                // 将Frame归还给Decoder之后，会触发Decoder释放buffer并渲染到Decoder的Surface上
+                // After returning the Frame to the Decoder,
+                // the Decoder will be triggered to release the buffer and render it to the Decoder's Surface.
                 mVideoDecoder.enqueueOutputBuffer(frame);
                 mState = STATE_WAIT_TEXTURE;
             }
@@ -137,7 +138,7 @@ public class VideoFrameToTexture extends ProvidedStage<TextureFrame>
         mOesInputFilter.setTexutreTransform(mTextureTransform);
         mGpuImageFilterGroup.draw(mSurfaceTextureId, mFrameBuffer.getFrameBufferId(), mGLCubeBuffer, mGLTextureBuffer);
 
-        // 等待绘制完成
+        // Wait for drawing to complete
         GLES20.glFinish();
 
         TextureFrame textureFrame = new TextureFrame();

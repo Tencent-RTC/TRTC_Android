@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
 /**
- * 悬浮球，点击可以弹出菜单
+ * Floating ball, click to pop up the menu
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class FloatingView extends FrameLayout implements GestureDetector.OnGestureListener {
@@ -125,7 +125,7 @@ public class FloatingView extends FrameLayout implements GestureDetector.OnGestu
     }
 
     /**
-     * 设置 PopupWindow，
+     * set PopupWindow，
      *
      * @param id
      */

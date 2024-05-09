@@ -24,13 +24,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TRTC CDN发布主播页面，可以进行推流，CDN发布，混流（需要主播数anchor>=2）
- *
- * - API使用方式见
- * <a href="https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#af7cf5544f9b8027e9526c32319a13838">
- *     setMixTranscodingConfig(TRTCCloudDef.TRTCTranscodingConfig config)</a>
- * - 混流场景及使用介绍见<a href="https://cloud.tencent.com/document/product/647/16827">云端混流转码</a>
- *
  * CDN Publishing (stream pushing, CDN publishing, and stream mixing when there are 2 or more anchors in the room)
  *
  * - For how to use the API, see
@@ -136,8 +129,8 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
     }
 
     /**
-     * 设置全手动排版模式
-     * 具体使用方式见<a href="https://cloud.tencent.com/document/product/647/16827">云端混流转码</a>
+     * Set full manual typesetting mode
+     * For specific usage methods, see <a href="https://cloud.tencent.com/document/product/647/16827">Cloud Mixed Streaming Transcoding</a>
      */
     private void setMixConfigManual(List<String> mRemoteUidList) {
         TRTCCloudDef.TRTCTranscodingConfig config = new TRTCCloudDef.TRTCTranscodingConfig();
@@ -158,7 +151,7 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
         config.mode = TRTCCloudDef.TRTC_TranscodingConfigMode_Manual;
         config.mixUsers = new ArrayList<>();
 
-        //       主播自己
+        // Anchor himself
         TRTCCloudDef.TRTCMixUser mixUser = new TRTCCloudDef.TRTCMixUser();
         mixUser.userId = mUserId;
         mixUser.zOrder = 0;
@@ -187,8 +180,8 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
     }
 
     /**
-     * 设置混流预排版模式
-     * 具体使用方式见<a href="https://cloud.tencent.com/document/product/647/16827">云端混流转码</a>
+     * Set mixed flow pre-composition mode
+     * For specific usage methods, see <a href="https://cloud.tencent.com/document/product/647/16827">Cloud Mixed Streaming Transcoding</a>
      */
     private void setMixConfigLeftRight() {
         TRTCCloudDef.TRTCTranscodingConfig config = new TRTCCloudDef.TRTCTranscodingConfig();
@@ -205,7 +198,7 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
         config.mode = TRTCCloudDef.TRTC_TranscodingConfigMode_Template_PresetLayout;
         config.mixUsers = new ArrayList<>();
 
-        //       主播自己
+        // Anchor himself
         TRTCCloudDef.TRTCMixUser mixUser = new TRTCCloudDef.TRTCMixUser();
         mixUser.userId = "$PLACE_HOLDER_LOCAL_MAIN$";
         mixUser.zOrder = 0;
@@ -217,7 +210,7 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
         config.mixUsers.add(mixUser);
 
 
-        //连麦者画面位置
+        //The position of the continuous wheat person screen
         TRTCCloudDef.TRTCMixUser remote = new TRTCCloudDef.TRTCMixUser();
         remote.userId = "$PLACE_HOLDER_REMOTE$";
         remote.streamType = TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG;
@@ -233,8 +226,8 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
     }
 
     /**
-     * 设置全手动排版模式
-     * 具体使用方式见<a href="https://cloud.tencent.com/document/product/647/16827">云端混流转码</a>
+     *Set full manual typesetting mode
+     * For specific usage methods, see <a href="https://cloud.tencent.com/document/product/647/16827">Cloud Mixed Streaming Transcoding</a>
      */
     private void setMixConfigInPicture() {
         TRTCCloudDef.TRTCTranscodingConfig config = new TRTCCloudDef.TRTCTranscodingConfig();
@@ -251,7 +244,7 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
         config.mode = TRTCCloudDef.TRTC_TranscodingConfigMode_Template_PresetLayout;
         config.mixUsers = new ArrayList<>();
 
-        //       主播自己
+        // Anchor himself
         TRTCCloudDef.TRTCMixUser mixUser = new TRTCCloudDef.TRTCMixUser();
         mixUser.userId = "$PLACE_HOLDER_LOCAL_MAIN$";
         mixUser.zOrder = 0;
@@ -263,7 +256,7 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
         config.mixUsers.add(mixUser);
 
 
-        //连麦者画面位置
+        //The position of the continuous wheat person screen
         TRTCCloudDef.TRTCMixUser remote = new TRTCCloudDef.TRTCMixUser();
         remote.userId = "$PLACE_HOLDER_REMOTE$";
         remote.streamType = TRTCCloudDef.TRTC_VIDEO_STREAM_TYPE_BIG;
@@ -309,9 +302,9 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
         mTRTCCloud.enterRoom(trtcParams, TRTCCloudDef.TRTC_APP_SCENE_VIDEOCALL);
 
         /*
-         * 需要首先开启CDN旁路直播
-         * 地址为：http://播放域名/live/[streamId].flv
-         * 具体可参考：https://cloud.tencent.com/document/product/647/16826
+         * Need to enable CDN bypass live broadcast first
+         * The address is: http://playing domain name/live/[streamId].flv
+         * For details, please refer to: https://cloud.tencent.com/document/product/647/16826
          */
         mTextTitle.setText(getString(R.string.pushcdn_anchor_room_title) + mRoomId);
         mTextStreamUrl.setText(getString(R.string.pushcdn_anchor_cdn_url_guide));

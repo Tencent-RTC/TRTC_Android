@@ -9,12 +9,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * TRTC CDN发布角色选择页
- *
- * - 可以选择：
- * - 1.以主播身份进房进行推流和CDN发布{@link PushCDNAnchorActivity}
- * - 2.以观众身份输入CDN地址直接播放观看{@link PushCDNAudienceActivity}
- *
  * Role Selection for CDN Publish/Playback
  *
  * - A user can:

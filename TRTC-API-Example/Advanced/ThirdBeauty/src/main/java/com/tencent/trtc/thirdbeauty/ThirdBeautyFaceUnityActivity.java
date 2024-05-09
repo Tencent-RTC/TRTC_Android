@@ -25,10 +25,10 @@ import java.util.List;
 //import com.faceunity.nama.FURenderer;
 
 /**
- * TRTC 第三方美颜页面
- * 接入步骤如下：
- * - 下载 https://github.com/Faceunity/FUTRTCDemoDroid 工程，将 faceunity 模块添加到工程中；
- * - 如需指定应用的 so 架构，可以修改当前模块 build.gradle：
+ * TRTC third-party beauty page
+ *The access steps are as follows:
+ * - Download the https://github.com/Faceunity/FUTRTCDemoDroid project and add the faceunity module to the project;
+ * - If you need to specify the so architecture of the application, you can modify the current module build.gradle:
  * android {
  * // ...
  * defaultConfig {
@@ -38,18 +38,19 @@ import java.util.List;
  * }
  * }
  * }
- * - 根据需要初始化美颜模块 {@link FURenderer}:
+ * - Initialize the beauty module {@link FURenderer} as needed:
  * FURenderer.setup(getApplicationContext());
  * mFURenderer = new FURenderer.Builder(getApplicationContext())
  * .setCreateEglContext(false)
- * .setInputTextureType(0)    //TRTC 这里用的0 TEXTURE_2D
+ * .setInputTextureType(0) //TRTC uses 0 TEXTURE_2D here
  * .setCreateFaceBeauty(true)
  * .build();
- * - TRTC 设置 {@link TRTCCloud#setLocalVideoProcessListener} 回调, 详见API说明文档 {https://liteav.sdk.qcloud
- * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
- * - 在 {@link TRTCCloudListener.TRTCVideoFrameListener#onProcessVideoFrame} 回调方法中使用第三方美颜处理视频数据，详见API说明文档 {https
- * ://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
- * Third-Party Beauty Filters
+ * - TRTC sets {@link TRTCCloud#setLocalVideoProcessListener} callback, please see the API documentation for details
+ * {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
+ * - Use third-party beauty to process video data in the {@link TRTCCloudListener.
+ * TRTCVideoFrameListener#onProcessVideoFrame} callback method. For details, see the API documentation {
+ * https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
+ *Third-Party Beauty Filters
  * The steps are detailed below:
  * - Download FaceUnity at https://github.com/Faceunity/FUTRTCDemoDroid and import it to your project.
  * You can modify `build.gradle` of the current module to specify SO architecture for the app:
@@ -99,7 +100,7 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
         //        FURenderer.setup(getApplicationContext());
         //        mFURenderer = new FURenderer.Builder(getApplicationContext())
         //                .setCreateEglContext(false)
-        //                .setInputTextureType(0)   /* TRTC 这里用的0 TEXTURE_2D*/
+        //                .setInputTextureType(0)   /* TRTC uses 0 TEXTURE_2D*/ here
         //                .setCreateFaceBeauty(true)
         //                .build();
 
@@ -172,19 +173,23 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
     }
 
     private void initData() {
-        //                  1. 设置 TRTCVideoFrameListener 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
+        //                  1. Set the TRTCVideoFrameListener callback, see the API documentation for details {
+        //https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
         //        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
         //        TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
         //            @Override
         //            public void onGLContextCreated() {
-        ////                  2. GLContext 创建
+        ////                  2. GLContext creation
         //               mFURenderer.onSurfaceCreated();
         //            }
         //
         //            @Override
         //            public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame srcFrame,
         //            TRTCCloudDef.TRTCVideoFrame dstFrame) {
-        ////                  3. 调用第三方美颜模块处理, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
+        ////                  3. Call the third-party beauty module for processing, please refer to the
+        //               API documentation for details. {
+        //               https://liteav.sdk.qcloud.com/doc/api/zh-cn/
+        //               group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
         //               dstFrame.texture.textureId = mFURenderer
         //               .onDrawFrameSingleInput(srcFrame.texture.textureId, srcFrame.width, srcFrame.height);
         //                return 0;
@@ -192,7 +197,7 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
         //
         //            @Override
         //            public void onGLContextDestory() {
-        ////                   4. GLContext 销毁
+        ////                   4. GLContext destruction
         //                mFURenderer.onSurfaceDestroyed();
         //            }
         //        });
@@ -201,7 +206,7 @@ public class ThirdBeautyFaceUnityActivity extends TRTCBaseActivity implements Vi
         //            @Override
         //            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         //                if (mStartPushFlag && fromUser) {
-        ////                    5. 设置磨皮级别
+        ////                    5. Set the dermabrasion level
         //                    mFURenderer.getFaceBeautyModule().setBlurLevel(seekBar.getProgress() / 9f);
         //                }
         //                mTextBlurLevel.setText(String.valueOf(progress));

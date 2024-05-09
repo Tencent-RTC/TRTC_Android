@@ -26,15 +26,6 @@ import com.tencent.trtc.debug.GenerateTestUserSig;
 
 import java.lang.ref.WeakReference;
 /**
- * TRTC 语音互动聊天模块主播角色页面
- *
- * 包含功能如下：
- * - 静音{@link VoiceChatRoomAnchorActivity#muteAudio()}
- * - 上麦/下麦{@link VoiceChatRoomAudienceActivity#upDownMic()}
- *
- * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#a915a4b3abca0e41f057022a4587faf66}
- *
  * Interactive Live Audio Streaming View for Room Owner
  *
  * Features:
@@ -53,11 +44,11 @@ public class VoiceChatRoomAnchorActivity extends TRTCBaseActivity {
     private TextView  mTextTitle;
     private ImageView mImageBack;
 
-    private TRTCCloud mTRTCCloud;                     // SDK 核心类
-    private String    mRoomId;                        // 房间Id
-    private String    mUserId;                        // 用户Id
-    private boolean   mMuteAudioFlag = true;          // 默认不静音
-    private boolean   mUpMicFlag     = true;              // 默认上麦（主播角色）
+    private TRTCCloud mTRTCCloud;                     // SDK core classes
+    private String    mRoomId;                        //RoomId
+    private String    mUserId;                        // UserId
+    private boolean   mMuteAudioFlag = true;          //Not muted by default
+    private boolean   mUpMicFlag     = true;          // Default on the mic (anchor role)
     private String    mRemoteUserId;
 
     @Override

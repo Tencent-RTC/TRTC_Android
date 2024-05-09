@@ -30,33 +30,33 @@ import com.tencent.trtc.voicechatoom.VoiceChatRoomEnterActivity;
 import com.tencent.trtc.thirdbeauty.ThirdBeautyEnterActivity;
 
 /**
- * TRTC API-Example 主页面
+ * TRTC API-Example main page
  *
- * 其中包含
- * 基础功能模块如下：
- * - 语音通话模块{@link AudioCallingEnterActivity}
- * - 视频通话模块{@link VideoCallingEnterActivity}
- * - 视频互动直播模块{@link LiveEnterActivity}
- * - 语音互动直播模块{@link VoiceChatRoomEnterActivity}
- * - 直播分享模块{@link ScreenEntranceActivity}
+ * Contains
+ *The basic function modules are as follows:
+ * - Voice call module {@link AudioCallingEnterActivity}
+ * - Video call module {@link VideoCallingEnterActivity}
+ * - Video interactive live broadcast module {@link LiveEnterActivity}
+ * - Voice interactive live broadcast module {@link VoiceChatRoomEnterActivity}
+ * - Live sharing module {@link ScreenEntranceActivity}
  *
- * 进阶功能模块如下：
- * - 字符串房间号{@link StringRoomIdActivity}
- * - 画质设定{@link SetVideoQualityActivity}
- * - 音质设定{@link SetAudioQualityActivity}
- * - 渲染控制{@link SetRenderParamsActivity}
- * - 网络测速{@link SpeedTestActivity}
- * - CDN发布{@link PushCDNSelectRoleActivity}
- * - 自定义视频采集&渲染{@link CustomCameraActivity}
- * - 设置音效{@link SetAudioEffectActivity}
- * - 设置背景音乐{@link SetBGMActivity}
- * - 本地视频分享{@link LocalVideoShareActivity}
- * - 本地媒体录制{@link LocalRecordActivity}
- * - 加入多个房间{@link JoinMultipleRoomActivity}
- * - 收发SEI消息{@link SendAndReceiveSEIMessageActivity}
- * - 快速切换房间{@link SwitchRoomActivity}
- * - 跨房PK{@link RoomPKActivity}
- * - 第三方美颜{@link ThirdBeautyEnterActivity}
+ *Advanced function modules are as follows:
+ * - String room number {@link StringRoomIdActivity}
+ * - Video quality setting {@link SetVideoQualityActivity}
+ * - Sound quality setting {@link SetAudioQualityActivity}
+ * - Rendering control {@link SetRenderParamsActivity}
+ * - Network speed test{@link SpeedTestActivity}
+ * - CDN publishes {@link PushCDNSelectRoleActivity}
+ * - Custom video capture & rendering {@link CustomCameraActivity}
+ * - Set sound effects {@link SetAudioEffectActivity}
+ * - Set background music {@link SetBGMActivity}
+ * - Local video sharing {@link LocalVideoShareActivity}
+ * - Local media recording {@link LocalRecordActivity}
+ * - Join multiple rooms {@link JoinMultipleRoomActivity}
+ * - Send and receive SEI messages {@link SendAndReceiveSEIMessageActivity}
+ * - Quickly switch rooms {@link SwitchRoomActivity}
+ * - Cross-room PK{@link RoomPKActivity}
+ * - Third-party beauty {@link ThirdBeautyEnterActivity}
  */
 public class MainActivity extends AppCompatActivity {
 

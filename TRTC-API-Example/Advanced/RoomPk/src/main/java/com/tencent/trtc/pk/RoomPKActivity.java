@@ -30,13 +30,6 @@ import java.lang.ref.WeakReference;
 import java.util.Random;
 
 /**
- * TRTC跨房连麦-PK功能
- *
- * 包含如下简单功能：
- * - A主播跨房连麦B主播{@link TRTCCloud#ConnectOtherRoom(String)}
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#ac1ab7e4a017b99bb91d89ce1b0fac5fd}
- *
  * Cross-room Co-anchoring
  *
  * Features:

@@ -20,10 +20,10 @@ public class RangeExtractorAdvancer extends ExtractorAdvancer {
     }
 
     /**
-     * <p>构造一个Advancer，同时指定该文件只会读取哪个范围的数据。</p>
-     * 注：如果开始时间不是关键帧，则会调整到上一个关键帧
+     * <p>Construct an Advancer and specify which range of data the file will only read. </p>
+     *Note: If the start time is not a keyframe, it will be adjusted to the previous keyframe
      *
-     * @param endUs 结束时间
+     * @param endUs end time
      */
     public RangeExtractorAdvancer(long endUs) {
         mRangeEndUs = endUs;
@@ -41,7 +41,7 @@ public class RangeExtractorAdvancer extends ExtractorAdvancer {
         mFirstFrameTime = mMediaExtractor.getSampleTime();
         Log.i(TAG, "first frame time: " + mFirstFrameTime);
 
-        // seek到指定时间的上一个关键帧
+        // seek to the previous keyframe at the specified time
         mMediaExtractor.seekTo(mFirstFrameTime, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
     }
 

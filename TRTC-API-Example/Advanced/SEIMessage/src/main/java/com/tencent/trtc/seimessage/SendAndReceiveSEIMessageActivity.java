@@ -24,14 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 接收和发送SEI页面
- *
- * 包含如下功能：
- * - 发送SEI消息{@link TRTCCloud#sendSEIMsg}，详见API说明文档 {https://liteav.sdk.qcloud
- * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a034f9e1effbdadf8b9bfb7f3f06486c4}；
- * - 接收SEI消息{@link TRTCCloudListener#onRecvSEIMsg}，详见API说明文档 {https://liteav.sdk.qcloud
- * .com/doc/api/zh-cn/group__TRTCCloudListener__android.html#ad3640e6bf80a1f93991644701e9b0d96}；
- *
  * SEI Message Receiving/Sending
  *
  * Features:

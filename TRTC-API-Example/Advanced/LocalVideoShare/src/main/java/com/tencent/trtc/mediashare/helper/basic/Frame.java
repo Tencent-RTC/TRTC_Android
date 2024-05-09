@@ -7,33 +7,33 @@ import java.nio.ByteBuffer;
 
 public class Frame {
     /**
-     * 该帧所包含的数据，这个buffer有可能是从{@link MediaCodec#getInputBuffers()}返回的，
-     * 需要在使用完成后，返回给MediaCodec。
+     * The data contained in this frame, this buffer may be returned from {@link MediaCodec#getInputBuffers()},
+     * Needs to be returned to MediaCodec after use is completed.
      */
     public ByteBuffer buffer;
 
     /**
-     * 如果{@link Frame#buffer}是从其他模块返回的，则该成员记录它的索引。
+     * If {@link Frame#buffer} is returned from another module, this member records its index.
      */
     public int bufferIndex;
 
     /**
-     * 标识缓存的哪个字节开始是有效数据。
+     * Identifies which byte in the cache starts to be valid data.
      */
     public int offset;
 
     /**
-     * 标识缓存中有效数据的长度。
+     * Identifies the length of valid data in the cache.
      */
     public int size;
 
     /**
-     * 该数据对应的显示时间
+     * The display time corresponding to this data
      */
     public long presentationTimeUs;
 
     /**
-     * 一些标识，具体见{@link BufferInfo#flags}
+     * Some flags, see {@link BufferInfo#flags} for details
      */
     public int flags;
 }

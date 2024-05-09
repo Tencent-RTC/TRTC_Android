@@ -16,14 +16,6 @@ import com.tencent.trtc.TRTCCloudDef;
 import com.tencent.trtc.debug.Constant;
 
 /**
- * TRTC 语音互动直播入口类，可输入房间ID，选择角色进入直播间
- *
- * - 以主播角色进入房间{@link VoiceChatRoomAnchorActivity}
- * - 以观众角色进入房间{@link VoiceChatRoomAudienceActivity}
- *
- * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#a915a4b3abca0e41f057022a4587faf66}
- *
  * Interactive Live Audio Streaming Entrance (enter a room after specifying the room ID and selecting a role)
  *
  * - Enter a room as a room owner: {@link VoiceChatRoomAnchorActivity}
@@ -86,13 +78,13 @@ public class VoiceChatRoomEnterActivity extends AppCompatActivity {
         mButtonEnterRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startEnterRoom(); // 开始进房
+                startEnterRoom(); // Start entering the room
             }
         });
         mImageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();  // 返回结束
+                finish();  // Return to end
             }
         });
         mEditInputRoomId.setText("1256732");

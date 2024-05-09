@@ -24,7 +24,7 @@ public class OpenGlUtils {
     }
 
     /**
-     * 加载 Texture 数据。
+     * Load Texture data.
      *
      * @param format
      * @param data
@@ -96,16 +96,16 @@ public class OpenGlUtils {
     }
 
     /**
-     * 通过输入和输出的宽高，计算顶点数组和纹理数组
+     * Calculate the vertex array and texture array through the width and height of the input and output
      *
-     * @param scaleType          缩放方式，只能是{@link ScaleType#CENTER_CROP}和{@link ScaleType#CENTER}
-     * @param inputRotation      输入纹理的旋转角度
-     * @param needFlipHorizontal 是否进行镜面映射处理
-     * @param inputWith          输入纹理的宽（未经处理的）
-     * @param inputHeight        输入纹理的高（未经处理的）
-     * @param outputWidth        绘制目标的宽
-     * @param outputHeight       绘制目标的高
-     * @return 返回顶点数组和纹理数组
+     * @param scaleType scaling method, can only be {@link ScaleType#CENTER_CROP} and {@link ScaleType#CENTER}
+     * @param inputRotation input texture rotation angle
+     * @param needFlipHorizontal Whether to perform mirror mapping processing
+     * @param inputWith The width of the input texture (unprocessed)
+     * @param inputHeight The height of the input texture (unprocessed)
+     * @param outputWidth The width of the drawing target
+     * @param outputHeight the height of the drawing target
+     * @return Returns the vertex array and texture array
      */
     public static Pair<float[], float[]> calcCubeAndTextureBuffer(ScaleType scaleType, Rotation inputRotation,
                                                                   boolean needFlipHorizontal, int inputWith,

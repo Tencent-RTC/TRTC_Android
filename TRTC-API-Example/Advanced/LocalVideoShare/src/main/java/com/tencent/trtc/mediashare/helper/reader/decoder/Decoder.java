@@ -24,7 +24,7 @@ import java.util.concurrent.Future;
 import static java.util.concurrent.TimeUnit.MICROSECONDS;
 
 /**
- * 解码逻辑
+ * Decoding logic
  */
 public class Decoder extends ProvidedStage<Frame> {
     private static final String TAG = "Decoder";
@@ -37,7 +37,7 @@ public class Decoder extends ProvidedStage<Frame> {
     private boolean    mIsLooping = false;
 
     /**
-     * 这次循环的时候，忽略时间小于该时间的帧（处理Seek的时候，需要使用）
+     * When looping this time, ignore frames whose time is less than this time (need to be used when processing Seek)
      */
     private long mSkipFrameBeforeInThisLoop = 0;
 
@@ -159,7 +159,8 @@ public class Decoder extends ProvidedStage<Frame> {
         }
 
         ByteBuffer buffer;
-        // 如果高版本机器通过getOutputBuffers读取数据，会得到一个inaccessible的ByteBuffer，无法访问其数据。
+        // If a higher version machine reads data through getOutputBuffers,
+        // it will get an inaccessible ByteBuffer and its data cannot be accessed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             buffer = mMediaCodec.getOutputBuffer(decoderStatus);
         } else {
@@ -174,7 +175,7 @@ public class Decoder extends ProvidedStage<Frame> {
         frame.presentationTimeUs = mBufferInfo.presentationTimeUs;
         frame.flags = mBufferInfo.flags;
 
-        // 忽略Seek之前的帧（同时不要忽略EOS帧）
+        // Ignore frames before Seek (also don't ignore EOS frames)
         if (mSkipFrameBeforeInThisLoop > frame.presentationTimeUs && !Utils.hasEosFlag(frame.flags)) {
             mMediaCodec.releaseOutputBuffer(frame.bufferIndex, false);
         } else {

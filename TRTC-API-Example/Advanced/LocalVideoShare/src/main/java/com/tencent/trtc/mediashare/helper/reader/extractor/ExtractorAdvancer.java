@@ -8,38 +8,38 @@ import androidx.annotation.NonNull;
 import java.nio.ByteBuffer;
 
 /**
- * 用来控制Extractor的行为，如正常的往前进，或者只提取关键帧
+ * Used to control the behavior of Extractor, such as moving forward normally, or only extracting key frames
  */
 public abstract class ExtractorAdvancer {
     protected MediaExtractor mMediaExtractor;
 
     /**
-     * 更新MediaExtractor
+     * Update MediaExtractor
      */
     public void updateExtractor(MediaExtractor mediaExtractor) {
         mMediaExtractor = mediaExtractor;
     }
 
     /**
-     * 跳到指定位置来播放
+     * Jump to the specified position to play
      *
-     * @param timeUs         指定的时间
-     * @param isRelativeTime 是否是相对时间
+     * @param timeUs specified time
+     * @param isRelativeTime whether it is relative time
      */
     public abstract void seekTo(long timeUs, boolean isRelativeTime);
 
     /**
-     * 见{@link MediaExtractor#readSampleData(ByteBuffer, int)}
+     * See {@link MediaExtractor#readSampleData(ByteBuffer, int)}
      */
     public abstract void readSampleData(MediaCodec.BufferInfo bufferInfo, @NonNull ByteBuffer byteBuf, int offset);
 
     /**
-     * 下一帧数据
+     *Next frame data
      */
     public abstract boolean advance();
 
     /**
-     * 获取当前帧的时间戳
+     * Get the timestamp of the current frame
      */
     public abstract long getSampleTime();
 }

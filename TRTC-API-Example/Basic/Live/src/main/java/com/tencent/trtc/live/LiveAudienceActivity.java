@@ -24,15 +24,6 @@ import com.tencent.trtc.debug.GenerateTestUserSig;
 import java.lang.ref.WeakReference;
 
 /**
- * TRTC 观众视角下的RTC视频互动直播房间页面
- *
- * 包含如下简单功能：
- * - 进入直播房间{@link LiveAudienceActivity#enterRoom()}
- * - 退出直播房间{@link LiveAudienceActivity#exitRoom()}
- * - 静音{@link LiveAudienceActivity#muteAudio()}
- *
- * - 详见接入文档{https://cloud.tencent.com/document/product/647/43182}
- *
  * Room View of Interactive Live Video Streaming for Audience
  *
  * Features:

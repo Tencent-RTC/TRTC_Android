@@ -24,16 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TRTC 语音通话的主页面
- *
- * 包含如下简单功能：
- * - 进入语音通话房间{@link AudioCallingActivity#enterRoom()}
- * - 退出语音通话房间{@link AudioCallingActivity#exitRoom()}
- * - 关闭/打开麦克风{@link AudioCallingActivity#muteAudio()}
- * - 免提(听筒/扬声器切换){@link AudioCallingActivity#audioRoute()}
- *
- * - 详见接入文档{https://cloud.tencent.com/document/product/647/42047}
- *
  * Audio Call
  *
  * Features:
