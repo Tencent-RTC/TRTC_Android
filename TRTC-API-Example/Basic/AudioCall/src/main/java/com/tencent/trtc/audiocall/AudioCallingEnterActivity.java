@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tencent.trtc.debug.Constant;
 
 /**
- * TRTC语音通话的入口页面（可以设置房间id和用户id）
+ * Entrance page for TRTC voice calls (room id and UserId can be set)
  *
- * TRTC语音通话是基于房间来实现的，通话的双方要进入一个相同的房间id才能进行语音通话
+ * TRTC voice calls are based on rooms. Both parties must enter the same room ID to make voice calls.
  */
 public class AudioCallingEnterActivity extends AppCompatActivity {
 

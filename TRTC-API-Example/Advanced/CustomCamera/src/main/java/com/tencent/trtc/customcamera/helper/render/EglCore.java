@@ -4,67 +4,67 @@ import android.annotation.TargetApi;
 import android.view.Surface;
 
 /**
- * 在eglMakeCurrent时，需要关联Context和窗口（或Surface），因此将两者合在一起。
+ * When eglMakeCurrent, you need to associate the Context and the window (or Surface), so combine the two.
  */
 public class EglCore {
     private EGLHelper mEglHelper;
 
     /**
-     * 创建一个EglCore，其中窗口为离屏Surface，且不共享其他的EGLContext
+     * Create an EglCore, in which the window is an off-screen Surface and does not share other EGLContext
      *
-     * @param width  离屏Surface的宽
-     * @param height 离屏Surface的高
+     * @param width The width of the off-screen Surface
+     * @param height The height of the off-screen Surface
      */
     public EglCore(int width, int height) {
         this((android.opengl.EGLContext) null, width, height);
     }
 
     /**
-     * 创建一个EglCore，窗口为传入的Surface，不共享其他的EGLContext
+     * Create an EglCore, the window is the incoming Surface, and do not share other EGLContext
      *
-     * @param surface 新创建的EGLContext的渲染目标
+     * @param surface The rendering target of the newly created EGLContext
      */
     public EglCore(Surface surface) {
         this((android.opengl.EGLContext) null, surface);
     }
 
     /**
-     * 创建一个EglCore，关联一个离屏surface
+     * Create an EglCore and associate it with an off-screen surface
      *
-     * @param sharedContext 用于共享的OpenGL Context，可为null
-     * @param width         离屏surface的宽
-     * @param height        离屏surface的高
+     * @param sharedContext used for shared OpenGL Context, can be null
+     * @param width The width of the off-screen surface
+     * @param height The height of the off-screen surface
      */
     public EglCore(android.opengl.EGLContext sharedContext, int width, int height) {
         mEglHelper = EGL14Helper.createEGLSurface(null, sharedContext, null, width, height);
     }
 
     /**
-     * 创建一个EglCore，关联一个离屏surface
+     * Create an EglCore and associate it with an off-screen surface
      *
-     * @param sharedContext 用于共享的OpenGL Context，可为null
-     * @param width         离屏surface的宽
-     * @param height        离屏surface的高
+     * @param sharedContext used for shared OpenGL Context, can be null
+     * @param width The width of the off-screen surface
+     * @param height The height of the off-screen surface
      */
     public EglCore(javax.microedition.khronos.egl.EGLContext sharedContext, int width, int height) {
         mEglHelper = EGL10Helper.createEGLSurface(null, sharedContext, null, width, height);
     }
 
     /**
-     * 创建一个EglCore，并关联到传入的surface
+     * Create an EglCore and associate it with the incoming surface
      *
-     * @param sharedContext 用于共享的OpenGL Context，可为null
-     * @param surface       渲染的目标
+     * @param sharedContext used for shared OpenGL Context, can be null
+     * @param surface rendering target
      */
     public EglCore(android.opengl.EGLContext sharedContext, Surface surface) {
         mEglHelper = EGL14Helper.createEGLSurface(null, sharedContext, surface, 0, 0);
     }
 
     /**
-     * 创建一个EglCore，并关联到传入的surface
+     * Create an EglCore and associate it with the incoming surface
      *
-     * @param sharedContext 用于共享的OpenGL Context，可为null
-     * @param surface       渲染的目标
+     * @param sharedContext used for shared OpenGL Context, can be null
+     * @param surface rendering target
      */
     public EglCore(javax.microedition.khronos.egl.EGLContext sharedContext, Surface surface) {
         mEglHelper = EGL10Helper.createEGLSurface(null, sharedContext, surface, 0, 0);

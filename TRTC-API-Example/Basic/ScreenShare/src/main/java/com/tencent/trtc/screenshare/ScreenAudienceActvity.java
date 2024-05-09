@@ -23,17 +23,6 @@ import com.tencent.trtc.debug.GenerateTestUserSig;
 import java.lang.ref.WeakReference;
 
 /**
- * TRTC 屏幕分享的观众页面
- *
- * 包含如下简单功能：
- * - 进入直播共享房间{@link ScreenAudienceActvity#enterRoom()}
- * - 退出直播共享房间{@link ScreenAudienceActvity#exitRoom()}
- * - 监听到分享之后观看分享{@link ScreenAudienceActvity.TRTCCloudImplListener#onUserVideoAvailable(String, boolean) 方法中的
- * {@link TRTCCloud#startRemoteView }}
- *
- * - 详见API文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#aa6671fc587513dad7df580556e43be58}
- *
  * Screen Sharing View for Audience
  *
  * Features:

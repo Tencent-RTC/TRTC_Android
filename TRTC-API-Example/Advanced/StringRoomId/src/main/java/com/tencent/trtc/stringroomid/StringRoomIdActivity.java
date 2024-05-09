@@ -24,14 +24,6 @@ import java.lang.ref.WeakReference;
 import java.util.Random;
 
 /**
- * TRTC 字符串房间号功能
- *
- * 包含如下简单功能：
- * - 进入房间{@link TRTCCloud#enterRoom(TRTCCloudDef.TRTCParams, int)}
- * - 退出房间{@link TRTCCloud#exitRoom()}
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#abfc1841af52e8f6a5f239a846a1e5d5c}
- *
  * String-type Room ID
  *
  * Features:

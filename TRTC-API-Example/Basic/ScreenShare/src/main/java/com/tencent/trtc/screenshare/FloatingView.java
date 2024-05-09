@@ -122,7 +122,7 @@ public class FloatingView extends FrameLayout implements GestureDetector.OnGestu
     }
 
     /**
-     * 设置 popup window。
+     * set popup window。
      * @param id
      */
     public void setPopupWindow(int id) {

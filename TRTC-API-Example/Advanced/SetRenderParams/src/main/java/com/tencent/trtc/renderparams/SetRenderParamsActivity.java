@@ -30,15 +30,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TRTC视频渲染控制页面
- *
- * 包含如下简单功能：
- * - 设置本地视频渲染参数{@link TRTCCloud#setLocalRenderParams(TRTCCloudDef.TRTCRenderParams)}
- * - 设置远端视频渲染参数{@link TRTCCloud#setRemoteRenderParams(String, int, TRTCCloudDef.TRTCRenderParams)}
- *
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#afe6ea1bf7c959722595356a9b7fc2179}
- *
  * Video Rendering Control
  *
  * Features:

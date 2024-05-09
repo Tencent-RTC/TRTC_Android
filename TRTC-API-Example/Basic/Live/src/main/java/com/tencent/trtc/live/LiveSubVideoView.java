@@ -11,28 +11,24 @@ import android.widget.LinearLayout;
 import com.tencent.rtmp.ui.TXCloudVideoView;
 
 /**
- * TRTC 视频互动直播房间内的小视频画面
- *
- * - 用于管理小视频画面上的“关闭声音”、“关闭视频”按钮的状态
- *
  * Small Image in Interactive Live Video Streaming Room
  *
  * - Use the buttons on the small image to enable/disable audio/video
  */
 public class LiveSubVideoView extends FrameLayout {
 
-    private TXCloudVideoView    mSubVideoView;         // 【控件】子画面View
-    private Button              mButtonMuteAudio;            // 【控件】关闭声音
-    private Button              mButtonMuteVideo;            // 【控件】关闭视频
-    private LiveSubViewListener mListener;             //  监听器，比如关闭声音，关闭视频时通知
-    private LinearLayout        mVideoMutedTipsView;   // 【控件】关闭视频时，显示默认头像
+    private TXCloudVideoView    mSubVideoView;               // [Control] Sub-screen View
+    private Button              mButtonMuteAudio;            // [Control] Turn off the sound
+    private Button              mButtonMuteVideo;            // [Control] Close video
+    private LiveSubViewListener mListener;                   // Mute and notify when video off
+    private LinearLayout        mVideoMutedTipsView;         // [Control] Default avatar shown on video close
 
     public LiveSubVideoView(Context context) {
         super(context);
     }
 
     /**
-     * Live 辅路视频的 view。
+     * Live view of auxiliary video.
      *
      * @param context
      * @param attrs

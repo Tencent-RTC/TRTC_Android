@@ -17,11 +17,12 @@ import static java.util.concurrent.TimeUnit.MICROSECONDS;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
- * 本地媒体文件直播分享的帮助类，用来帮助开发者快速实现TRTC 自定义音/视频采集相关功能；
- * 主要包含：
- * - 实现诸如.mp4、.mp3的媒体文件音视频帧的硬解码流程；
- * - 实现音画对齐等操作；
- * - 以回调的方式将解码后的数据返回；
+ * Help class for live sharing of local media files,
+ * used to help developers quickly implement TRTC custom audio/video collection related functions;
+ * Mainly includes:
+ * - Implement the hard decoding process of audio and video frames of media files such as .mp4 and .mp3;
+ * - Implement audio and video alignment and other operations;
+ * - Return the decoded data in the form of callback;
  */
 public class MediaFileSyncReader {
     private static final String TAG = "TestSendCustomData";
@@ -48,7 +49,7 @@ public class MediaFileSyncReader {
     }
 
     /**
-     * 开始视频和音频数据的播放。
+     * Start playback of video and audio data.
      *
      * @param audioListener
      * @param videoListener
@@ -60,7 +61,7 @@ public class MediaFileSyncReader {
 
         long duration;
         try {
-            // 循环的时长按照音频长度，同时按照20ms对齐
+            // The duration of the loop is based on the audio length and aligned with 20ms.
             MediaFormat mediaFormat = Utils.retrieveMediaFormat(mMediaFilePath, false);
             duration = mediaFormat.getLong(MediaFormat.KEY_DURATION);
             duration = (duration / MILLISECONDS.toMicros(20) + 1) * MILLISECONDS.toMicros(20);

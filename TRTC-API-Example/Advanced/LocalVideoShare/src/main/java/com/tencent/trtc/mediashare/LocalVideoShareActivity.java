@@ -36,29 +36,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TRTC 视频文件分享的示例
- * 本文件展示了如何使用TRTC SDK实现视频文件直播分享功能，主要流程如下：
- * - 读取视频文件、对视频文件进行解封装 --> 解码；
- * - 将解码后的音视频帧通过TRTC
- * 的自定义采集接口{@link com.tencent.trtc.TRTCCloud#sendCustomAudioData(com.tencent.trtc.TRTCCloudDef.TRTCAudioFrame)} 和
- * {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}发送给TRTC SDK；
- * -
- * 通过
- * {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(
- * int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
- * 获取处理后的本地视频帧并渲染到屏幕上；
- * -
- * 通过
- * {@link com.tencent.trtc.TRTCCloud#setAudioFrameListener(
- * com.tencent.trtc.TRTCCloudListener.TRTCAudioFrameListener)} )}
- * 获取处理后的音频帧并进行播放；
- * -
- * 如果有远端主播，可以通过
- * {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(
- * String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
- * 获取远端主播的视频帧并渲染到屏幕上，远端主播的音频会在上一步自动混音后播放；
- * - 更多细节，详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html}
- *
  * Video File Sharing
  *
  * This document shows how to share a video file during live streaming. The steps are detailed below:

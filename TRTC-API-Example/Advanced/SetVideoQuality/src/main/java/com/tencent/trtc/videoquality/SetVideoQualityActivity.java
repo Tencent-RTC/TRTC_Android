@@ -32,12 +32,6 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * TRTC 设置视频质量页面
- * 包含如下简单功能：
- * - 设置视频质量{@link TRTCCloud#setVideoEncoderParam(TRTCCloudDef.TRTCVideoEncParam)},详见参数说明
- * - 详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android
- * .html#ae047d96922cb1c19135433fa7908e6ce}
- *
  * Setting Video Quality
  *
  * Features:

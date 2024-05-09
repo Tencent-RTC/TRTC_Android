@@ -7,7 +7,7 @@ import com.tencent.trtc.mediashare.helper.reader.exceptions.SetupException;
 
 
 /**
- * 针对于每一帧进行处理的模块
+ * Module for processing each frame
  */
 public abstract class Stage {
     protected static final int    DEFAULT_FRAME_COUNT = 3;
@@ -15,18 +15,18 @@ public abstract class Stage {
     protected              State  mState              = State.INIT;
 
     /**
-     * 初始化设置
+     * Initialization settings
      */
     public abstract void setup() throws SetupException;
 
     /**
-     * <p>处理一帧</p>
-     * 该方法中不允许等待
+     * <p>Process one frame</p>
+     * Waiting is not allowed in this method
      */
     public abstract void processFrame() throws ProcessException;
 
     /**
-     * 释放持有的资源
+     * Release held resources
      */
     public abstract void release();
 
@@ -50,12 +50,12 @@ public abstract class Stage {
         SETUPED,
 
         /**
-         * 所有数据都准备好了，下一个节点读取完成后就算结束
+         * All data is ready, and it will end when the next node is read.
          */
         ALL_DATA_READY,
 
         /**
-         * 这个Stage处理完成了
+         * This Stage processing is completed
          */
         DONE
     }

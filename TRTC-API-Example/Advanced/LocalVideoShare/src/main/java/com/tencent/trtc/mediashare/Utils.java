@@ -34,7 +34,7 @@ public class Utils {
     }
 
     /**
-     * 从 uri 中获取路径。
+     * Get the path from uri.
      *
      * @param context
      * @param uri

@@ -33,25 +33,35 @@ import java.nio.FloatBuffer;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * 本地媒体文件直播分享的自定义渲染辅助类，可以帮助开发者快速实现TRTC 自定义渲染的相关功能
- * 主要包含：
- * - 本地预览视频帧/远端用户视频帧的自定义渲染；
- * - 本地音频/远端音频混音后的播放；
- * ## 视频帧渲染流程
- * 视频帧渲染采用了 texture，也就是 openGL 纹理的方案，这是 android 系统下性能最好的一种视频处理方案，具体流程如下：
- * 1. 构造函数：会创建一个{@link HandlerThread}线程，所有的OpenGL操作均在该线程进行。
- * 2. start()：传入一个系统TextureView（这个 View 需要加到 activity 的控件树上），用来显示渲染的结果。
- * 3. onSurfaceTextureAvailable(): TextureView 的 SurfaceTexture 已经准备好，将SurfaceTexture与
- * {@link com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame#texture}中的EGLContext（可为null）作为参数，
- * 生成一个新的EGLContext，SurfaceTexture也会作为此EGLContext的渲染目标。
- * 4. onRenderVideoFrame(): SDK 视频帧回调，在回调中可以拿到视频纹理ID和对应的 EGLContext。
- * 用这个 EGLContext 作为参数创建出来的新的 EGLContext，这样新的 EGLContext 就能访问SDK返回的纹理。
- * 然后会向HandlerThread发送一个渲染消息，用来渲染得到的视频纹理。
- * 5. renderInternal(): HandlerThread线程具体的渲染流程，将视频纹理渲染到 TextureView。
- * ## 音频帧播放流程
- * 音频帧的播放采用了AudioTrack的方式，整体流程比较简单：
- * 1. onMixedAllAudioFrame(): SDK 所有音频数据混合后的数据回调（包括采集音频数据和所有播放音频数据）
- * 在这个回调中，可以拿到音频帧的data信息，使用AudioTrack播放即可；
+ * Custom rendering auxiliary class for live sharing of local media files,
+ * which can help developers quickly implement TRTC custom rendering related functions
+ * Mainly includes:
+ * - Customized rendering of local preview video frames/remote user video frames;
+ * - Mixed playback of local audio/remote audio;
+ * ## Video frame rendering process
+ * Video frame rendering uses texture, which is the openGL texture solution.
+ * This is the best-performing video processing solution under the Android system. The specific process is as follows:
+ * 1. Constructor:
+ * A {@link HandlerThread} thread will be created, and all OpenGL operations will be performed in this thread.
+ * 2. start():
+ * Pass in a system TextureView (this View needs to be added to the activity's control tree) to
+ * display the rendering results.
+ * 3. onSurfaceTextureAvailable():
+ * TextureView’s SurfaceTexture is ready, connect SurfaceTexture with* {@link com.tencent.trtc.TRTCCloudDef.
+ * EGLContext (can be null) in TRTCVideoFrame#texture} as parameter,
+ * Generate a new EGLContext, and SurfaceTexture will also be used as the rendering target of this EGLContext.
+ * 4. onRenderVideoFrame():
+ * SDK video frame callback, in which you can get the video texture ID and corresponding EGLContext.
+ * Create a new EGLContext using this EGLContext as a parameter,
+ * so that the new EGLContext can access the texture returned by the SDK.
+ * Then a rendering message will be sent to HandlerThread to render the obtained video texture.
+ * 5. renderInternal():
+ * The specific rendering process of the HandlerThread thread, rendering the video texture to TextureView.
+ * ## Audio frame playback process
+ * Audio frames are played using AudioTrack, and the overall process is relatively simple:
+ * 1. onMixedAllAudioFrame():
+ * SDK data callback after mixing all audio data (including collecting audio data and all playing audio data)
+ * In this callback, you can get the data information of the audio frame and use AudioTrack to play it;
  */
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class CustomFrameRender
@@ -159,9 +169,9 @@ public class CustomFrameRender
     }
 
     /**
-     * 开始 Camera 自定义渲染。
+     * Start Camera custom rendering.
      *
-     * @param videoView 用于显示 Camera 预览画面的 view。
+     * @param videoView The view used to display the Camera preview screen.
      */
     public void start(TextureView videoView) {
         if (videoView == null) {
@@ -170,14 +180,14 @@ public class CustomFrameRender
         }
         Log.i(TAG, "start render");
 
-        // 设置TextureView的SurfaceTexture生命周期回调，用于管理GLThread的创建和销毁
+        //Set the SurfaceTexture life cycle callback of TextureView to manage the creation and destruction of GLThread
         mRenderView = videoView;
         mSurfaceTexture = mRenderView.getSurfaceTexture();
 
         mRenderView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                // 保存surfaceTexture，用于创建OpenGL线程
+                //Save surfaceTexture for creating OpenGL thread
                 mSurfaceTexture = surface;
                 mSurfaceSize = new Size(width, height);
                 Log.i(TAG, String.format("onSurfaceTextureAvailable width: %d, height: %d", width, height));
@@ -191,9 +201,10 @@ public class CustomFrameRender
 
             @Override
             public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-                // surface释放了，需要停止渲染
+                // The surface is released and rendering needs to be stopped.
                 mSurfaceTexture = null;
-                // 等待Runnable执行完，再返回，否则GL线程会使用一个无效的SurfaceTexture
+                // Wait for the Runnable to finish executing before returning,
+                // otherwise the GL thread will use an invalid SurfaceTexture
                 mGLHandler.runAndWaitDone(new Runnable() {
                     @Override
                     public void run() {

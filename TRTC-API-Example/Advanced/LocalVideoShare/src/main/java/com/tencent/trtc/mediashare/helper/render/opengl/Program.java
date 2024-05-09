@@ -18,7 +18,7 @@ public class Program {
     }
 
     /**
-     * 创建 programId。
+     * create programId。
      */
     public void build() {
         int vertexShaderId = loadShader(mVertexShader, GLES20.GL_VERTEX_SHADER);

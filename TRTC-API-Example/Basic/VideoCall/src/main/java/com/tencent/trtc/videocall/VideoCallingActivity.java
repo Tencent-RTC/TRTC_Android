@@ -28,18 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TRTC视频通话的主页面
- *
- * 包含如下简单功能：
- * - 进入视频通话房间{@link VideoCallingActivity#enterRoom()}
- * - 退出视频通话房间{@link VideoCallingActivity#exitRoom()}
- * - 切换前置/后置摄像头{@link VideoCallingActivity#switchCamera()}
- * - 打开/关闭摄像头{@link VideoCallingActivity#muteVideo()}
- * - 打开/关闭麦克风{@link VideoCallingActivity#muteAudio()}
- * - 显示房间内其他用户的视频画面（当前示例最多可显示6个其他用户的视频画面）{@link TRTCCloudImplListener#refreshRemoteVideoViews()}
- *
- * - 详见接入文档{https://cloud.tencent.com/document/product/647/42045}
- *
  * Video Call
  *
  * Features:

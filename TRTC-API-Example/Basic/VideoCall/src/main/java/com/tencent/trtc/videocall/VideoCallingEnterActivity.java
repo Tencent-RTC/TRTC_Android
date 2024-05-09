@@ -13,10 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tencent.trtc.debug.Constant;
 
 /**
- * TRTC视频通话的入口页面（可以设置房间id和用户id）
- *
- * - 可跳转TRTC视频通话页面{@link VideoCallingActivity}
- *
  * Video Call Entrance View (set room ID and user ID)
  *
  * - Direct to the video call view: {@link VideoCallingActivity}

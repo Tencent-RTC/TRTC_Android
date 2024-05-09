@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * 操作相册相册工具类
+ * Operation album album tool class
  */
 public class AlbumUtils {
     private static final String TAG = "AlbumUtils";
@@ -30,10 +30,10 @@ public class AlbumUtils {
     }
 
     /**
-     * 插入视频到本地相册
+     * Insert video into local photo album
      *
-     * @param videoPath 保存到相册的视频路径
-     * @param coverPath 存储相册缩略图的路径
+     * @param videoPath The video path saved to the album
+     * @param coverPath The path to store album thumbnails
      */
     public static void saveVideoToDCIM(Context context, String videoPath, String coverPath) {
         if (Build.VERSION.SDK_INT >= 29) {
@@ -68,7 +68,7 @@ public class AlbumUtils {
     }
 
     /**
-     * Android 10(Q) 保存视频文件到本地的方法
+     * How to save video files locally in Android 10(Q)
      */
     private static void saveVideoToDCIMOnAndroid10(Context context, String videoPath) {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
@@ -85,10 +85,10 @@ public class AlbumUtils {
             values.put(MediaStore.MediaColumns.DATE_ADDED, currentTimeInSeconds);
             values.put(MediaStore.MediaColumns.SIZE, file.length());
             values.put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4");
-            // 时长
+            // duration
             values.put(MediaStore.Video.VideoColumns.DURATION, duration);
             values.put(MediaStore.Video.VideoColumns.DATE_TAKEN, System.currentTimeMillis());
-            // Android 10 插入到图库标志位
+            // Android 10 inserted into the gallery flag
             values.put(MediaStore.MediaColumns.IS_PENDING, 1);
 
             Uri collection = MediaStore.Video.Media.getContentUri("external_primary");
@@ -156,31 +156,31 @@ public class AlbumUtils {
     private static void insertVideoThumb(Context context, String videoPath, String coverPath) {
         Cursor cursor = context.getContentResolver()
                 .query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Video.Thumbnails._ID},
-                        //返回id列表
-                        String.format("%s = ?", MediaStore.Video.Thumbnails.DATA), //根据路径查询数据库
+                        // return id list
+                        String.format("%s = ?", MediaStore.Video.Thumbnails.DATA), //Query database based on path
                         new String[]{videoPath}, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String videoId = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Thumbnails._ID));
-                //查询到了Video的id
+                // Query the Video id
                 ContentValues thumbValues = new ContentValues();
-                thumbValues.put(MediaStore.Video.Thumbnails.DATA, coverPath);//缩略图路径
-                thumbValues.put(MediaStore.Video.Thumbnails.VIDEO_ID, videoId);//video的id 用于绑定
-                //Video的kind一般为1
+                thumbValues.put(MediaStore.Video.Thumbnails.DATA, coverPath);// Thumbnail path
+                thumbValues.put(MediaStore.Video.Thumbnails.VIDEO_ID, videoId);// Video ID used for binding
+                // The kind of Video is generally 1
                 thumbValues.put(MediaStore.Video.Thumbnails.KIND, MediaStore.Video.Thumbnails.MINI_KIND);
-                //只返回图片大小信息，不返回图片具体内容
+                // Only returns the image size information, not the specific content of the image
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
                 Bitmap bitmap = BitmapFactory.decodeFile(coverPath, options);
                 if (bitmap != null) {
-                    thumbValues.put(MediaStore.Video.Thumbnails.WIDTH, bitmap.getWidth());//缩略图宽度
-                    thumbValues.put(MediaStore.Video.Thumbnails.HEIGHT, bitmap.getHeight());//缩略图高度
+                    thumbValues.put(MediaStore.Video.Thumbnails.WIDTH, bitmap.getWidth());// Thumbnail width
+                    thumbValues.put(MediaStore.Video.Thumbnails.HEIGHT, bitmap.getHeight());// Thumbnail height
                     if (!bitmap.isRecycled()) {
                         bitmap.recycle();
                     }
                 }
                 context.getContentResolver()
-                        .insert(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI, thumbValues);//缩略图数据库
+                        .insert(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI, thumbValues);// Thumbnail database
             }
             cursor.close();
         }

@@ -1,33 +1,34 @@
 package com.tencent.trtc.customcamera.helper.render;
 
 /**
- * Android有两套EGL的类，为了方便使用，将它们抽象出来，仅提供以下接口。
+ * Android has two sets of EGL classes.
+ * For convenience of use, they are abstracted and only the following interfaces are provided.
  *
  * @param <T>
  */
 public interface EGLHelper<T> {
     /**
-     * 返回EGLContext，用于创建共享EGLContext等。
+     * Returns EGLContext, used to create shared EGLContext, etc.
      */
     T getContext();
 
     /**
-     * 将EGLContext绑定到当前线程，以及Helper中保存的draw Surface和read Surface。
+     * Bind EGLContext to the current thread, as well as the draw Surface and read Surface saved in Helper.
      */
     void makeCurrent();
 
     /**
-     * 解除当前线程绑定的EGLContext、draw Surface、read Surface。
+     * Unbind the EGLContext, draw Surface, and read Surface bound to the current thread.
      */
     void unmakeCurrent();
 
     /**
-     * 将渲染的内容刷到绑定的绘制目标上。
+     * Brush rendered content onto the bound draw target.
      */
     boolean swapBuffers();
 
     /**
-     * 销毁创建的EGLContext以及相关的资源。
+     * Destroy the created EGLContext and related resources.
      */
     void destroy();
 }

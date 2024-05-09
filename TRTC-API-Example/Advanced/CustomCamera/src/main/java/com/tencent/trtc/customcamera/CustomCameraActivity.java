@@ -31,29 +31,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TRTC 自定义相机采集&渲染的示例
- * 本文件展示了如何使用TRTC SDK 实现相机的自定义采集&渲染功能，主要流程如下：
- * -
- * 调用
- * {@link com.tencent.trtc.customcamera.helper.CustomCameraCapture#startInternal(
- * com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener)}，
- * 启动Camera采集，并传入一个VideoFrameReadListener；
- * - 将{@link com.tencent.trtc.customcamera.helper.CustomCameraCapture.VideoFrameReadListener}
- * 返回的视频帧通过TRTC的自定义视频采集接口
- * {@link com.tencent.trtc.TRTCCloud#sendCustomVideoData(int, com.tencent.trtc.TRTCCloudDef.TRTCVideoFrame)}; 发送给TRTC
- * SDK；
- * -
- * 通过
- * {@link com.tencent.trtc.TRTCCloud#setLocalVideoRenderListener(
- * int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
- * 获取处理后的本地视频帧并渲染到屏幕上；
- * -
- * 如果有远端主播，可以通过
- * {@link com.tencent.trtc.TRTCCloud#setRemoteVideoRenderListener(
- * String, int, int, com.tencent.trtc.TRTCCloudListener.TRTCVideoRenderListener)}
- * 获取远端主播的视频帧并渲染到屏幕上；
- * - 更多细节，详见API说明文档{https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html}
- *
  * Custom Video Capturing & Rendering
  * This document shows how to enable custom video capturing and rendering in the TRTC SDK.
  * - Call

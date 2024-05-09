@@ -24,18 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TRTC 第三方美颜页面
- * 接入步骤：
- * 第一步：集成腾讯特效SDK并拷贝资源（可参考腾讯特效提供的接入文档：https://cloud.tencent.com/document/product/616/65889）
- * 第二步：腾讯特效SDK的鉴权与初始化,详见{@link ThirdBeautyTencentEffectActivity#authXmagic()},License获取请参考 {https://cloud.tencent
- * .com/document/product/616/65878}
- * 第三步：在TRTC中使用腾讯特效美颜，详见{@link ThirdBeautyTencentEffectActivity#initData()} 中的注释说明
- * - TRTC 设置 {@link TRTCCloud#setLocalVideoProcessListener} 回调, 详见API说明文档 {https://liteav.sdk.qcloud
- * .com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
- * - 在 {@link TRTCCloudListener.TRTCVideoFrameListener#onProcessVideoFrame} 回调方法中使用第三方美颜处理视频数据，详见API说明文档 {https
- * ://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
- * 注意：腾讯特效提供的 License 与 applicationId 一一对应的，测试过程中需要修改 applicationId 为 License对应的applicationId
- *
  * TRTC Third-Party Beauty Filter View
  * Access steps：
  * First step：
@@ -72,7 +60,7 @@ public class ThirdBeautyTencentEffectActivity extends TRTCBaseActivity implement
     private boolean      mStartPushFlag = false;
 
     //    private XmagicProperty<XmagicProperty.XmagicPropertyValues> mProperty;
-    //    以下参数根据应用实际替换
+    //    The following parameters are replaced according to the actual application
     //    private final String XMAGIC_LICENSE_URL = "";
     //    private final String XMAGIC_LICENSE_KEY = "";
     //    private final String XMAGIC_RES_PATH    = "";
@@ -99,7 +87,7 @@ public class ThirdBeautyTencentEffectActivity extends TRTCBaseActivity implement
     //                new TELicenseCheck.TELicenseCheckListener() {
     //                    @Override
     //                    public void onLicenseCheckFinish(int errorCode, String msg) {
-    //                        //注意：此回调不一定在调用线程
+    //                        //Note: This callback is not necessarily in the calling thread
     //                        if (errorCode == TELicenseCheck.ERROR_OK) {
     //                            initXmagicApi();
     //                        }
@@ -149,7 +137,7 @@ public class ThirdBeautyTencentEffectActivity extends TRTCBaseActivity implement
     }
 
     private void initData() {
-        //1. 设置 TRTCVideoFrameListener 回调, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
+        //1. Set the TRTCVideoFrameListener callback, see the API documentation for details {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloud__android.html#a0b565dc8c77df7fb826f0c45d8ad2d85}
         //        mTRTCCloud.setLocalVideoProcessListener(TRTCCloudDef.TRTC_VIDEO_PIXEL_FORMAT_Texture_2D,
         //                TRTCCloudDef.TRTC_VIDEO_BUFFER_TYPE_TEXTURE, new TRTCCloudListener.TRTCVideoFrameListener() {
         //                    @Override
@@ -159,7 +147,7 @@ public class ThirdBeautyTencentEffectActivity extends TRTCBaseActivity implement
         //                    @Override
         //                    public int onProcessVideoFrame(TRTCCloudDef.TRTCVideoFrame trtcVideoFrame,
         //                                                   TRTCCloudDef.TRTCVideoFrame trtcVideoFrame1) {
-        //                        //2. 调用第三方美颜模块处理, 详见API说明文档 {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
+        //                        //2. Call the third-party beauty module for processing, please refer to the API documentation for details. {https://liteav.sdk.qcloud.com/doc/api/zh-cn/group__TRTCCloudListener__android.html#a22afb08b2a1a18563c7be28c904b166a}
         //                        if (mXmagicApi != null) {
         //                            trtcVideoFrame1.texture.textureId = mXmagicApi.process(trtcVideoFrame.texture
         //                            .textureId,
@@ -172,7 +160,7 @@ public class ThirdBeautyTencentEffectActivity extends TRTCBaseActivity implement
         //
         //                    @Override
         //                    public void onGLContextDestory() {
-        //                        //3. GLContext 销毁
+        //                        //3. GLContext destroy
         //                        if (mXmagicApi != null) {
         //                            mXmagicApi.onDestroy();
         //                        }
@@ -181,7 +169,7 @@ public class ThirdBeautyTencentEffectActivity extends TRTCBaseActivity implement
         mSeekBlurLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //                //设置美颜磨皮级别
+                //                //Set beauty microdermabrasion level
                 //                if (mStartPushFlag && fromUser && mXmagicApi != null) {
                 //                    mProperty.effValue.setCurrentDisplayValue(progress);
                 //                    mXmagicApi.updateProperty(mProperty);

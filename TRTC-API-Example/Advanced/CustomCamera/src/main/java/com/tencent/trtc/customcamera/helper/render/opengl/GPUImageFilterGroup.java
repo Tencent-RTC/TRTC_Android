@@ -51,7 +51,7 @@ public class GPUImageFilterGroup extends GPUImageFilter {
     }
 
     /**
-     * 更新 GPU 的图像过滤器。
+     * Updated image filters for GPU.
      */
     public void updateMergedFilters() {
         if (mFilters == null) {
@@ -129,12 +129,12 @@ public class GPUImageFilterGroup extends GPUImageFilter {
     }
 
     /**
-     * 绘制当前特效
+     * Draw the current special effect
      *
-     * @param textureId        图像输入
-     * @param outFrameBufferId 需要绘制到哪里,如果为-1,表示需要绘制到屏幕
-     * @param cubeBuffer       绘制的矩阵
-     * @param textureBuffer    需要使用图像输入的哪一部分
+     * @param textureId image input
+     * @param outFrameBufferId Where to draw, if it is -1, it means it needs to be drawn to the screen
+     * @param cubeBuffer matrix drawn
+     * @param textureBuffer Which part of the image input needs to be used
      */
     public void draw(final int textureId, final int outFrameBufferId, final FloatBuffer cubeBuffer,
                      final FloatBuffer textureBuffer) {

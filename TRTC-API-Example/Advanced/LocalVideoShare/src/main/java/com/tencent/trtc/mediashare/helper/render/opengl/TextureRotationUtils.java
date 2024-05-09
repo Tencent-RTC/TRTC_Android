@@ -10,7 +10,7 @@ public class TextureRotationUtils {
     }
 
     /**
-     * 获取对应的旋转参数。
+     * Get the corresponding rotation parameters.
      *
      * @param rotation
      * @param flipHorizontal
