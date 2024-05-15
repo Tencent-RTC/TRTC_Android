@@ -302,13 +302,13 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
     }
 
     public enum NetQuality {
-        UNKNOW(0, "未定义"),
-        EXCELLENT(1, "最好"),
-        GOOD(2, "好"),
-        POOR(3, "一般"),
-        BAD(4, "差"),
-        VBAD(5, "很差"),
-        DOWN(6, "不可用");
+        UNKNOW(0, "unknow"),
+        EXCELLENT(1, "excellent"),
+        GOOD(2, "good"),
+        POOR(3, "poor"),
+        BAD(4, "bad"),
+        VBAD(5, "vbad"),
+        DOWN(6, "down");
 
         private int    code;
         private String msg;
@@ -324,7 +324,7 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
                     return item.msg;
                 }
             }
-            return "未定义";
+            return "unknow";
         }
     }
 
