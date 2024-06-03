@@ -67,7 +67,7 @@ public class MediaFileSyncReader {
             duration = (duration / MILLISECONDS.toMicros(20) + 1) * MILLISECONDS.toMicros(20);
         } catch (SetupException e) {
             Log.e(TAG, "setup failed.", e);
-            Toast.makeText(mContext, "Fail to open the file!", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "打开文件失败!", Toast.LENGTH_LONG).show();
             return;
         }
 

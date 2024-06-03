@@ -44,21 +44,21 @@ public class GenerateTestUserSig {
     /**
      * Domain name for CDN publishing and stream mixing
      */
-    public static final String CDN_DOMAIN_NAME = "3891.liveplay.myqcloud.com";
+    public static final String CDN_DOMAIN_NAME = "PLACEHOLDER";
 
     /**
      * `bizId` for CDN publishing and stream mixing.
      * Replace it with the actual value when using CND,
      * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
-    public static final int BIZID = 3891;
+    public static final int BIZID = PLACEHOLDER;
 
     /**
      * `appId` for CDN publishing and stream mixing.
      * Replace it with the actual value when using CND,
      * and replace it with 0 when not using CDN, so that the compilation can pass.
      */
-    public static final int APPID = 1252463788;
+    public static final int APPID = PLACEHOLDER;
 
     /**
      * Tencent Cloud `SDKAppID`. Set it to the `SDKAppID` of your account.
