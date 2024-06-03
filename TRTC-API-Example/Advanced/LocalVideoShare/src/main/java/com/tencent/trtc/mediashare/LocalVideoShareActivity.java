@@ -360,7 +360,7 @@ public class LocalVideoShareActivity extends TRTCBaseActivity implements View.On
                 int channelCount = mediaFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
             } catch (Exception e) {
                 Log.e(TAG, "Failed to open file " + mVideoFilePath);
-                Toast.makeText(this, "Fail to open the file!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "打开文件失败!", Toast.LENGTH_LONG).show();
                 mVideoFilePath = "";
                 return;
             }

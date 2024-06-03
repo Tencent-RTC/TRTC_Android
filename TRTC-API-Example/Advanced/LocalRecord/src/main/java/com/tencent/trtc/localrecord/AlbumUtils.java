@@ -158,7 +158,7 @@ public class AlbumUtils {
                 .query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Video.Thumbnails._ID},
                         // return id list
                         String.format("%s = ?", MediaStore.Video.Thumbnails.DATA), //Query database based on path
-                        new String[]{videoPath}, null);
+        new String[]{videoPath}, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String videoId = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Thumbnails._ID));
