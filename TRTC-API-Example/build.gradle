@@ -28,10 +28,10 @@ tasks.register('clean', Delete) {
 }
 
 ext {
-    compileSdkVersion = 29
+    compileSdkVersion = 34
     buildToolsVersion = "29.0.3"
     minSdkVersion = 19
-    targetSdkVersion = 26
+    targetSdkVersion = 34
     liteavSdk="com.tencent.liteav:LiteAVSDK_TRTC:latest.release"
     versionCode = 1
     versionName = "v1.0"
