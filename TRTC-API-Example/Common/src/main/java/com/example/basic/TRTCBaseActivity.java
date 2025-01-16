@@ -22,11 +22,6 @@ public abstract class TRTCBaseActivity extends AppCompatActivity {
     protected boolean checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             List<String> permissions = new ArrayList<>();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-                    PackageManager.PERMISSION_GRANTED != ActivityCompat
-                    .checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)) {
-                permissions.add(Manifest.permission.POST_NOTIFICATIONS);
-            }
             if (PackageManager.PERMISSION_GRANTED != ActivityCompat
                     .checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -43,12 +38,10 @@ public abstract class TRTCBaseActivity extends AppCompatActivity {
                     .checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
             }
-            if (!permissions.isEmpty()) {
+            if (permissions.size() != 0) {
                 ActivityCompat.requestPermissions(TRTCBaseActivity.this, permissions.toArray(new String[0]),
                         REQ_PERMISSION_CODE);
                 return false;
-            } else {
-                ToolKitService.startToolKitService(this);
             }
         }
         return true;
@@ -65,7 +58,6 @@ public abstract class TRTCBaseActivity extends AppCompatActivity {
                     }
                 }
                 if (mGrantedCount == permissions.length) {
-                    ToolKitService.startToolKitService(this);
                     onPermissionGranted();
                 } else {
                     Toast.makeText(this, getString(R.string.common_please_input_roomid_and_userid), Toast.LENGTH_SHORT)
@@ -76,11 +68,5 @@ public abstract class TRTCBaseActivity extends AppCompatActivity {
             default:
                 break;
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ToolKitService.stopToolKitService(this);
     }
 }
