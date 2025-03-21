@@ -22,8 +22,8 @@ public abstract class TRTCBaseActivity extends AppCompatActivity {
     protected boolean checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             List<String> permissions = new ArrayList<>();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-                    PackageManager.PERMISSION_GRANTED != ActivityCompat
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                    && PackageManager.PERMISSION_GRANTED != ActivityCompat
                     .checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)) {
                 permissions.add(Manifest.permission.POST_NOTIFICATIONS);
             }

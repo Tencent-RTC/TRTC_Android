@@ -68,8 +68,6 @@ public class ToolKitService extends Service {
 
         String notificationChannelId = "notification_channel_id_01";
         String channelName = "TRTC Foreground Service Notification";
-        Notification notification = null;
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
@@ -98,7 +96,7 @@ public class ToolKitService extends Service {
             builder.setChannelId(notificationChannelId);
         }
 
-        notification = builder.build();
+        Notification notification = builder.build();
         notification.flags |= Notification.FLAG_NO_CLEAR;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
