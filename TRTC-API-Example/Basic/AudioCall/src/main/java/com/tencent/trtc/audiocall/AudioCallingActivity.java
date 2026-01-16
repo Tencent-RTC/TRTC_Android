@@ -145,7 +145,7 @@ public class AudioCallingActivity extends TRTCBaseActivity implements View.OnCli
         TRTCCloudDef.TRTCParams trtcParams = new TRTCCloudDef.TRTCParams();
         trtcParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         trtcParams.userId = mUserId;
-        trtcParams.roomId = Integer.parseInt(mRoomId);
+        trtcParams.strRoomId = mRoomId;
         trtcParams.userSig = GenerateTestUserSig.genTestUserSig(trtcParams.userId);
 
         mTRTCCloud.enableAudioVolumeEvaluation(2000, true);

@@ -129,7 +129,7 @@ public class ScreenAnchorActivity extends TRTCBaseActivity implements View.OnCli
         final TRTCCloudDef.TRTCParams screenParams = new TRTCCloudDef.TRTCParams();
         screenParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         screenParams.userId = mUserId;
-        screenParams.roomId = Integer.parseInt(mRoomId);
+        screenParams.strRoomId = mRoomId;
         screenParams.userSig = GenerateTestUserSig.genTestUserSig(screenParams.userId);
         screenParams.role = TRTCRoleAnchor;
 

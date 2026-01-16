@@ -292,7 +292,7 @@ public class PushCDNAnchorActivity extends TRTCBaseActivity
         TRTCCloudDef.TRTCParams trtcParams = new TRTCCloudDef.TRTCParams();
         trtcParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         trtcParams.userId = mUserId;
-        trtcParams.roomId = Integer.parseInt(mRoomId);
+        trtcParams.strRoomId = mRoomId;
         trtcParams.userSig = GenerateTestUserSig.genTestUserSig(mUserId);
         trtcParams.streamId = mStreamId;
         trtcParams.role = TRTCCloudDef.TRTCRoleAnchor;
