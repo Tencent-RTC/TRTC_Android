@@ -130,7 +130,7 @@ public class LiveAnchorActivity extends TRTCBaseActivity implements View.OnClick
         mTRTCParams = new TRTCCloudDef.TRTCParams();
         mTRTCParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         mTRTCParams.userId = mUserId;
-        mTRTCParams.roomId = Integer.parseInt(mRoomId);
+        mTRTCParams.strRoomId = mRoomId;
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAnchor;
 
