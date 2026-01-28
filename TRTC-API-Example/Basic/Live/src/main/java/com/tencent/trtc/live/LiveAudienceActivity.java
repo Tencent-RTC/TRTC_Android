@@ -103,7 +103,7 @@ public class LiveAudienceActivity extends TRTCBaseActivity implements View.OnCli
         mTRTCParams = new TRTCCloudDef.TRTCParams();
         mTRTCParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         mTRTCParams.userId = mUserId;
-        mTRTCParams.strRoomId = mRoomId;
+        mTRTCParams.roomId = Integer.parseInt(mRoomId);
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAudience;
 

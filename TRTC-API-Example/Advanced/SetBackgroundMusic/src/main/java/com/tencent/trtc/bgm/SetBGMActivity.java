@@ -86,7 +86,7 @@ public class SetBGMActivity extends TRTCBaseActivity implements View.OnClickList
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
         mTRTCParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         mTRTCParams.userId = userId;
-        mTRTCParams.strRoomId = roomId;
+        mTRTCParams.roomId = Integer.parseInt(roomId);
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAnchor;
 

@@ -86,7 +86,7 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
         mTRTCParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         mTRTCParams.userId = userId;
-        mTRTCParams.strRoomId = roomId;
+        mTRTCParams.roomId = Integer.parseInt(roomId);
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAnchor;
 
@@ -159,7 +159,7 @@ public class SwitchRoomActivity extends TRTCBaseActivity implements View.OnClick
 
     private void switchRoom(String roomId) {
         TRTCCloudDef.TRTCSwitchRoomConfig config = new TRTCCloudDef.TRTCSwitchRoomConfig();
-        config.strRoomId = roomId;
+        config.roomId = Integer.parseInt(roomId);
         mTRTCCloud.switchRoom(config);
     }
 

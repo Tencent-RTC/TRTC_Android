@@ -75,7 +75,7 @@ public class VoiceChatRoomAnchorActivity extends TRTCBaseActivity {
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
         mTRTCParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         mTRTCParams.userId = mUserId;
-        mTRTCParams.strRoomId = mRoomId;
+        mTRTCParams.roomId = Integer.parseInt(mRoomId);
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAnchor;
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
 
