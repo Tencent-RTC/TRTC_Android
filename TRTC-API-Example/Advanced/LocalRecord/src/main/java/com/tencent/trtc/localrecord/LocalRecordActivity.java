@@ -85,7 +85,7 @@ public class LocalRecordActivity extends TRTCBaseActivity implements View.OnClic
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
         mTRTCParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         mTRTCParams.userId = new Random().nextInt(100000) + 1000000 + "";
-        mTRTCParams.roomId = Integer.parseInt(roomId);
+        mTRTCParams.strRoomId = roomId;
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAnchor;
 

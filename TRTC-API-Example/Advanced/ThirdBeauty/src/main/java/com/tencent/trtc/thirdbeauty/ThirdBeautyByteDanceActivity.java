@@ -114,7 +114,7 @@ public class ThirdBeautyByteDanceActivity extends TRTCBaseActivity implements Vi
         TRTCCloudDef.TRTCParams mTRTCParams = new TRTCCloudDef.TRTCParams();
         mTRTCParams.sdkAppId = GenerateTestUserSig.SDKAPPID;
         mTRTCParams.userId = userId;
-        mTRTCParams.roomId = Integer.parseInt(roomId);
+        mTRTCParams.strRoomId = roomId;
         mTRTCParams.userSig = GenerateTestUserSig.genTestUserSig(mTRTCParams.userId);
         mTRTCParams.role = TRTCCloudDef.TRTCRoleAnchor;
 
