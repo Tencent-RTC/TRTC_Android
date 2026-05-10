@@ -21,6 +21,7 @@ public class ThirdBeautyEnterActivity extends TRTCBaseActivity implements View.O
         findViewById(R.id.btn_faceunity).setOnClickListener(this);
         findViewById(R.id.btn_bytedance).setOnClickListener(this);
         findViewById(R.id.btn_xmagic).setOnClickListener(this);
+        findViewById(R.id.btn_pixelFree).setOnClickListener(this);
     }
 
     @Override
@@ -37,6 +38,9 @@ public class ThirdBeautyEnterActivity extends TRTCBaseActivity implements View.O
             startActivity(intent);
         } else if (id == R.id.btn_xmagic) {
             Intent intent = new Intent(ThirdBeautyEnterActivity.this, ThirdBeautyTencentEffectActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.btn_pixelFree) {
+            Intent intent = new Intent(ThirdBeautyEnterActivity.this, ThirdBeautyPixelFreeActivity.class);
             startActivity(intent);
         }
     }
